@@ -1,0 +1,174 @@
+﻿@model FareViewModel
+@using LynxProCore.Helpers
+
+<div class="portlet">
+    <div class="portlet-title">
+        <h3 class="page-title">
+            Fares<small> Details</small>
+        </h3>
+    </div>
+    <div class="portlet-body form">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.CityId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.City.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.RideTypeId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.RideType.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.BaseFare)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BaseFare)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BookingFee)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BookingFee)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CostPerDistance) (@ViewData["LengthUnit"])
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CostPerDistance)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CostPerMinute)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CostPerMinute)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MinimumFare)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MinimumFare)
+            </dd>
+
+            <dt>
+                @Html.Raw("Wait Time Charge Per Minute")
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.WaitTimeChargePerMinute)
+            </dd>
+
+            <dt>
+                @Html.Raw("Wait Time After (minutes)")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.WaitTimeThreshold)
+            </dd>
+
+            @if (Model.ExtraCharges != null && Model.ExtraCharges.Count() > 0)
+            {
+                <dt>
+                    @Html.Raw("Extra Charges")
+                </dt>
+                <dd>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td width="20%" class="bg-dark-line"><b>Name</b></td>
+                                <td width="20%" class="bg-dark-line"><b>Fee</b></td>
+                            </tr>
+                            @for (var i = 0; i < Model.ExtraCharges.Length; i++)
+                            {
+                                <tr>
+                                    <td width="30%">@Html.DisplayFor(model => model.ExtraCharges.ElementAt(i).Name)</td>
+                                    <td width="30%">@Html.DisplayFor(model => model.ExtraCharges.ElementAt(i).Fee)</td>
+                                </tr>
+
+
+                            }
+                        </tbody>
+                    </table>
+                </dd>
+            }
+
+            @if (Model.TransitCharges != null && Model.TransitCharges.Count() > 0)
+            {
+                <dt>
+                    @Html.Raw("Transit Charges")
+                </dt>
+                <dd>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td width="20%" class="bg-dark-line"><b>City</b></td>
+                                <td width="20%" class="bg-dark-line"><b>Fee</b></td>
+                            </tr>
+                            @for (var i = 0; i < Model.TransitCharges.Length; i++)
+                            {
+                                <tr>
+                                    <td width="30%">@(Model.TransitCharges.ElementAt(i).CityName ?? "All")</td>
+                                    <td width="30%">@(Model.TransitCharges.ElementAt(i).Fee)</td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </dd>
+            }
+            <dt>
+                @Html.Raw("Created By")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+
+            <dt>
+                @Html.Raw("Creation Date")
+            </dt>
+
+            <dd>
+                @Html.DisplayLocalTimeFor(model => model.CreatedDate, (string)ViewData["CultureName"]!, (string)ViewData["TimeZoneId"])
+            </dd>
+
+            <dt>
+                @Html.Raw("Modified By")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedBy)
+            </dd>
+
+            <dt>
+                @Html.Raw("Modification Date")
+            </dt>
+
+            <dd>
+                @Html.DisplayLocalTimeFor(model => model.ModifiedDate, (string)ViewData["CultureName"], (string)ViewData["TimeZoneId"])
+            </dd>
+        </dl>
+
+        <div class="form-actions noborder">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.CityFareId }, new { @class = "btn primary" })
+            <a asp-action="Index" style="color:white;" class="btn secondary">Back to list</a>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.show-hide-btn').click(function () {
+                $(this).toggleClass('active');
+                $(this).next('.slider-show-top').toggleClass('open');
+            });
+        });
+    </script>
+}

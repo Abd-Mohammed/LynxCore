@@ -1,0 +1,38 @@
+﻿[
+  {
+    "code": "de",
+    "displayName": "Deutsch"
+  },
+  {
+    "code": "de-CH",
+    "displayName": "Deutsch (Schweiz)"
+  },
+  {
+    "code": "en",
+    "displayName": "English"
+  },
+  {
+    "code": "en-GB",
+    "displayName": "English (United Kingdom)"
+  },
+  {
+    "code": "en-US",
+    "displayName": "English (United States)"
+  },
+  {
+    "code": "es",
+    "displayName": "español"
+  },
+  {
+    "code": "es-US",
+    "displayName": "español (Estados Unidos)"
+  },
+  {
+    "code": "fr",
+    "displayName": "français"
+  },
+  {
+    "code": "fr-FR",
+    "displayName": "français (France)"
+  }
+]

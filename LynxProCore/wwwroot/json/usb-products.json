@@ -1,0 +1,14 @@
+[
+  {
+    "key": 0x0C06,
+    "Value": "Numato Lab 2 Channel USB Powered Relay Module"
+  },
+  {
+    "key": 0x0800,
+    "Value": "Numato Lab 8 Channel USB GPIO Module"
+  },
+  {
+    "key": 0x7523,
+    "Value": "ELM327 OBDII V1.5"
+  }
+]

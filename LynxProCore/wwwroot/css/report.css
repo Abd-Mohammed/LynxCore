@@ -1,0 +1,207 @@
+.report-container {
+    border: 1px solid #e4e4e4;
+    background-color: #efeeee;
+}
+
+.report-header {
+    height: 38px;
+    border-bottom: 1px solid #353840;
+}
+
+    .report-header > div {
+        display: table;
+        margin: 0 auto;
+    }
+
+.report-body {
+    position: relative;
+    height: calc(100% - 35px);
+}
+
+.report-header-btn {
+    display: inline-block;
+    height: 33px;
+    line-height: 37px;
+    padding: 0 15px;
+    cursor: pointer;
+    margin: 2px 1px 0 0;
+    border-right: 1px solid #4b4e52;
+}
+
+    .report-header-btn:last-child {
+        border: none
+    }
+
+    .report-header-btn:hover {
+        /* background-color: #32363a; */
+    }
+
+    .report-header-btn:focus, .report-header-btn:visited, .report-header-btn:active {
+        background-color: #d96b00;
+    }
+
+        .report-header-btn:focus i, .report-header-btn:visited i, .report-header-btn:active i {
+            color: #1b1e21;
+        }
+
+    .report-header-btn i {
+        font-size: 19px !important;
+    }
+
+.report-filters {
+    width: 197px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 5px;
+    overflow-y: auto;
+    border-left: 1px solid #e4e4e4;
+}
+
+    .report-filters .control-label {
+        margin: 1px 0 0;
+        padding: 4px;
+        display: block;
+        font-size: 13px;
+        background-color: #484e56;
+    }
+
+    .report-filters .form-control {
+        border-width: 2px;
+        font-size: 13px;
+    }
+
+    .report-filters .form-control {
+        height: 30px;
+    }
+
+    .report-filters .input-group .btn.input-group-addon {
+        padding: 4px 8px;
+        border: 2px solid #484e56;
+        border-width: 2px 2px 2px 0;
+        min-width: 31px;
+        background: #1f2227;
+    }
+
+.report-content > div {
+    min-width: 100%;
+    float: left;
+    min-height: 100%;
+}
+
+.report-content {
+    position: absolute;
+    right: 197px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    padding: 10px;
+    background-color: #fff;
+}
+
+    .report-content .report-title {
+        height: 28px;
+        background-color: #EEECE6;
+        padding: 0 10px 0 5px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+.report-title-text {
+    float: left;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.report-title-date {
+    float: right;
+    font-size: 14px;
+    line-height: 28px;
+    font-weight: 600;
+}
+
+.report-footer {
+    background-color: #EEECE6;
+    height: 15px;
+    line-height: 15px;
+    color: #1c1c1c;
+    font-size: 10px;
+    margin-top: 10px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    padding: 0 10px;
+}
+
+.report-footer-page {
+    font-size: 12px;
+}
+
+.report-filters select.form-control {
+    padding: 4px;
+}
+
+.k-autocomplete .k-input, .k-dropdown-wrap .k-input, .k-numeric-wrap .k-input, .k-picker-wrap .k-input, .k-selectbox .k-input, .k-textbox > input {
+    height: 21px;
+}
+/* ------------------------------------
+             map report and filters rtl 
+----------------------------------------*/
+.k-rtl .report-header-btn {
+    margin: 2px 0 0 1px;
+    border-left: 1px solid #4b4e52;
+    border-right: none;
+}
+
+    .k-rtl .report-header-btn:last-child {
+        border: none
+    }
+
+.k-rtl .report-filters {
+    left: 0;
+    right: unset;
+    border-left: 0;
+    border-right: 1px solid #e4e4e4;
+}
+
+    .k-rtl .report-filters .input-group .btn.input-group-addon {
+        border-width: 2px 0 2px 2px;
+    }
+
+.k-rtl .report-content {
+    left: 197px;
+    right: 0;
+}
+
+    .k-rtl .report-content .report-title {
+        padding: 0 5px 0 10px;
+    }
+
+.k-rtl .report-title-date {
+    float: left;
+}
+
+.k-rtl .report-title-text {
+    float: right;
+}
+
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #1f2327 inset !important;
+    -webkit-text-fill-color: #b5bec7 !important;
+}

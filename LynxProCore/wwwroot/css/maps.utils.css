@@ -1,0 +1,89 @@
+﻿#divDrawingTools {
+    margin: 6px;
+    background-color: #404448;
+}
+
+.color-picker {
+    border-radius: 100% !important;
+    height: 18px;
+    width: 20px;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    background-color: #212529;
+    cursor: pointer;
+}
+
+    .color-picker::-webkit-color-swatch-wrapper {
+        padding: 0;
+    }
+
+    .color-picker::-webkit-color-swatch {
+        border: none;
+        border-radius: 100% !important;
+    }
+
+.btn-dark {
+    color: #fff;
+    background-color: #212529;
+    border-color: #212529;
+}
+
+    .btn-dark:hover {
+        color: #fff;
+        background-color: #1c1f23;
+        border-color: #1a1e21;
+    }
+
+    .btn-check:focus + .btn-dark, .btn-dark:focus {
+        color: #fff;
+        background-color: #1c1f23;
+        border-color: #1a1e21;
+        box-shadow: 0 0 0 0.25rem rgba(66, 70, 73, 0.5);
+    }
+
+    .btn-check:checked + .btn-dark, .btn-check:active + .btn-dark, .btn-dark:active, .btn-dark.active, .show > .btn-dark.dropdown-toggle {
+        color: #fff;
+        background-color: #1a1e21;
+        border-color: #191c1f;
+    }
+
+        .btn-check:checked + .btn-dark:focus, .btn-check:active + .btn-dark:focus, .btn-dark:active:focus, .btn-dark.active:focus, .show > .btn-dark.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.25rem rgba(66, 70, 73, 0.5);
+        }
+
+    .btn-dark:disabled, .btn-dark.disabled {
+        color: #fff;
+        background-color: #212529;
+        border-color: #212529;
+    }
+
+.bg-dark {
+    background-color: #212529;
+}
+
+.bg-light {
+    background-color: #fff;
+}
+
+.modal-open .modal {
+    left: 0 !important;
+    padding-right: 0 !important;
+    top: 30px !important;
+    z-index: 9999999 !important;
+}
+
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #1f2327 inset !important;
+    -webkit-text-fill-color: #b5bec7 !important;
+}

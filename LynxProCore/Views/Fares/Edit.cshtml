@@ -1,0 +1,547 @@
+﻿@using LynxProCore.Helpers
+@model FareViewModel
+
+<div class="portlet">
+    <div class="portlet-title">
+        <h3 class="page-title">
+            Fares <small>Edit</small>
+        </h3>
+    </div>
+    <div class="portlet-body form">
+        <div class="form-body">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.CityFareId)
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <section>
+                    <div class="side-details-title">
+                        <h4 style="color:#CD6B02;">
+                            General
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.DnLabelWithRequiredFor(model => model.CityId, htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.CityId, (SelectList)ViewData["citiesList"]!, "[[[[Select...", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.DnLabelWithRequiredFor(model => model.RideTypeId, htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.RideTypeId, (SelectList)ViewData["rideTypesList"]!, "[[[[Select...", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.RideTypeId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.DnLabelWithRequiredFor(model => model.BookingFee, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.BookingFee, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BookingFee, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DnLabelWithRequiredFor(model => model.MinimumFare, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.MinimumFare, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MinimumFare, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DnLabelWithRequiredFor(model => model.BaseFare, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.BaseFare, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BaseFare, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DnLabelWithRequiredFor(model => model.CostPerMinute, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.CostPerMinute, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CostPerMinute, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DnLabelWithRequiredFor(model => model.CostPerDistance, (string)ViewData["LengthUnit"]!, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.CostPerDistance, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CostPerDistance, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @*<div class="col-md-6">
+                    <div class="form-group">
+                    @Html.DnLabelWithRequiredFor(model => model.CurrencyCode, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.CurrencyCode, (SelectList)ViewData["currenciesList"], "[[[[Select...", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CurrencyCode, "", new { @class = "text-danger" })
+                    </div>
+                    </div>*@
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.ColorPickerFor(model => model.Color, new CustomColorOptions
+                       {
+                           Colors = (List<string>)ViewData["Colors"]!,
+                           Disabled = false,
+                           InputClass = "form-control text-box single-line",
+                           ReadOnly = true,
+                           WithAsterisk = true,
+                           DefaultColor = "#67b7dc"
+                       })
+                                @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="side-details-title">
+                        <h4 style="color:#CD6B02;">
+                            [[[[Waiting Time
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DnLabelWithRequiredFor(model => model.WaitTimeChargePerMinute, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.WaitTimeChargePerMinute, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.WaitTimeChargePerMinute, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DnLabelWithRequiredFor(model => model.WaitTimeThreshold, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.WaitTimeThreshold, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.WaitTimeThreshold, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="side-details-title">
+                        <h4 style="color:#CD6B02;">
+                            [[[[Extra Charges
+                        </h4>
+                    </div>
+                    <button type="button" class="btn primary-alt btn-small pull-right" onclick="addExtraChargesField()">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    <div id="extra-charges-container">
+                        @if (Model.ExtraCharges != null)
+                        {
+                            for (var i = 0; i < Model.ExtraCharges.Length; i++)
+                            {
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input type="hidden" name="ExtraCharges.Index" value="@i" />
+                                            @Html.LabelForModel("[[[[Name", htmlAttributes: new { @class = "control-label" })
+                                            <span class="text-danger">*</span>
+                                            @Html.Editor("ExtraCharges[" + i + "].Name", new
+                                                {
+                                                    htmlAttributes = new
+                                                    {
+                                                        @class = "form-control",
+                                                        data_val = "true",
+                                                        aria_required = "true",
+                                                        data_val_maxlength = "The field Name must be a string type with a maximum length of '10'.",
+                                                        data_val_maxlength_max = "10",
+                                                        data_val_required = "[[[[Field is required",
+                                                        aria_describedby = "ExtraCharges[" + i + "].Name",
+                                                        id = "ExtraCharges[" + i + "].Name",
+                                                        type = "text",
+                                                        @Value = Model.ExtraCharges.ElementAt(i).Name,
+                                                        required = "true"
+                                                    }
+                                                })
+                                            @Html.ValidationMessage("ExtraCharges[" + i + "].Name", new
+                                                {
+                                                    @class = "text-danger",
+                                                    data_valmsg_replace = "true"
+                                                })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            @Html.LabelForModel("[[[[Fee", htmlAttributes: new { @class = "control-label" })
+                                            <span class="text-danger">*</span>
+                                            @Html.Editor("ExtraCharges[" + i + "].Fee", new
+                                                {
+                                                    htmlAttributes = new
+                                                    {
+                                                        @class = "form-control",
+                                                        data_val = "true",
+                                                        aria_required = "true",
+                                                        data_val_required = "[[[[Field is required",
+                                                        aria_describedby = "ExtraCharges[" + i + "].Fee",
+                                                        id = "ExtraCharges[" + i + "].Fee",
+                                                        type = "number",
+                                                        data_val_regex = "[[[[The field Fee must be zero or a positive value with up to three decimal",
+                                                        data_val_regex_pattern = @"^\d+(\.\d{1,3})?$",
+                                                        @Value = Model.ExtraCharges.ElementAt(i).Fee.ToString("0.000"),
+                                                        min = "0",
+                                                        max = "1000"
+                                                    }
+                                                })
+
+                                            @Html.ValidationMessage("ExtraCharges[" + i + "].Fee", new
+                                                {
+                                                    @class = "text-danger",
+                                                    data_valmsg_replace = "true"
+                                                })
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn danger-action btn-small" style="margin-top: 30px;" onclick="removeExtraChargeField(this)"><i class="fa fa-minus"></i></button>
+                                </div>
+                            }
+                        }
+                    </div>
+                </section>
+                <section style="margin-top: 40px;">
+                    <div class="side-details-title">
+                        <h4 style="color:#CD6B02;">
+                            [[[[Transit Charges
+                        </h4>
+                    </div>
+                    <span class="help-block" style="display: block;">[[[[Transit fees only apply between master cities.</span>
+                    <button type="button" class="btn primary-alt btn-small pull-right" onclick="addTransitChargesField()">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    <div id="transit-charges-container">
+                        @if (Model.TransitCharges != null)
+                        {
+                            for (var i = 0; i < Model.TransitCharges.Length; i++)
+                            {
+                                var selectList = new SelectList(((IEnumerable<TransitChargeViewModel>)ViewData["RawMasterCities"]!), "CityId", "CityName", Model.TransitCharges.ElementAt(i).CityId);
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input type="hidden" name="TransitCharges.Index" value="@i" />
+                                            @Html.LabelForModel("[[[[City", htmlAttributes: new { @class = "control-label" })
+                                            @Html.DropDownList("TransitCharges[" + i + "].CityId", selectList, "All", new
+                                                {
+                                                    @class = "form-control",
+                                                    data_val = "true",
+                                                    aria_describedby = "TransitCharges[" + i + "].CityId",
+                                                    id = "TransitCharges[" + i + "].CityId"
+                                                })
+                                            @Html.ValidationMessage("TransitCharges[" + i + "].CityId", new
+                                                {
+                                                    @class = "text-danger",
+                                                    data_valmsg_replace = "true"
+                                                })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            @Html.LabelForModel("[[[[Fee", htmlAttributes: new { @class = "control-label" })
+                                            <span class="text-danger">*</span>
+                                            @Html.Editor("TransitCharges[" + i + "].Fee", new
+                                                {
+                                                    htmlAttributes = new
+                                                    {
+                                                        @class = "form-control",
+                                                        data_val = "true",
+                                                        aria_required = "true",
+                                                        data_val_required = "[[[[Field is required",
+                                                        aria_describedby = "ExtraCharges[" + i + "].Fee",
+                                                        id = "TransitCharges[" + i + "].Fee",
+                                                        type = "number",
+                                                        min = "0",
+                                                        max = "1000",
+                                                        data_val_regex = "[[[[The field Fee must be zero or a positive value with up to three decimal",
+                                                        data_val_regex_pattern = @"^\d+(\.\d{1,3})?$",
+                                                        @Value = Model.TransitCharges.ElementAt(i).Fee.ToString("0.000"),
+                                                    }
+                                                })
+
+                                            @Html.ValidationMessage("TransitCharges[" + i + "].Fee", new
+                                                {
+                                                    @class = "text-danger",
+                                                    data_valmsg_replace = "true"
+                                                })
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn danger-action btn-small" style="margin-top: 30px;" onclick="removeTransitChargeField(this)"><i class="fa fa-minus"></i></button>
+                                </div>
+                            }
+                        }
+                    </div>
+                </section>
+
+                <section style="margin-top: 40px;">
+                    <div class="side-details-title">
+                        <h4 style="color:#CD6B02;">
+                            [[[[Fare Schedules
+                        </h4>
+                    </div>
+                    <div class="clearfix">
+                        <button id="add-attribute" type="button" class="btn primary-alt btn-small pull-right">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                    @{
+                        if (Model.Schedules != null)
+                        {
+                            for (int i = 0; i < Model.Schedules.Count; i++)
+                            {
+                                Model.Schedules[i].Index = i;
+                                @Html.Partial("_Schedules", Model.Schedules[i])
+                            }
+                        }
+                    }
+                    <div id="first-child">
+                    </div>
+
+                </section>
+                <div class="form-actions" style="margin-top: 40px">
+                    <input type="submit" value="[[[[Save" class="btn primary" />
+                    <a asp-action="Index" style="color:white;" class="btn secondary">Back to list</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/lib/dompurify/purify.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery-minicolors/jquery.minicolors.min.js"></script>
+    @Html.Script(TempData["BootstrapAlert"])
+
+    <script type="text/javascript">
+        var extraChargeTemplate = `
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input  type="hidden" name="ExtraCharges.Index" value="$index$" />
+        @Html.LabelForModel("[[[[Name", htmlAttributes: new { @class = "control-label" })
+                                <span class="text-danger">*</span>
+        @Html.Editor("ExtraCharges[$index$].Name", new
+            {
+                htmlAttributes = new
+                {
+                    @class = "form-control",
+                    data_val = "true",
+                    aria_required = "true",
+                    data_val_required = "[[[[Field is required",
+                    aria_describedby = "ExtraCharges[$index$].Name",
+                    id = "ExtraCharges[$index$].Name",
+                    data_val_maxlength = "The field Name must be a string type with a maximum length of '10'.",
+                    data_val_maxlength_max = "10",
+                    type = "text",
+                    required = "true"
+                }
+            })
+        @Html.ValidationMessage("ExtraCharges[$index$].Name", new
+            {
+                @class = "text-danger",
+                data_valmsg_replace = "true"
+            })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+        @Html.LabelForModel("[[[[Fee", htmlAttributes: new { @class = "control-label" })
+                                <span class="text-danger">*</span>
+        @Html.Editor("ExtraCharges[$index$].Fee", new
+            {
+                htmlAttributes = new
+                {
+                    @class = "form-control",
+                    data_val = "true",
+                    aria_required = "true",
+                    data_val_required = "[[[[Field is required",
+                    data_val_regex = "[[[[The field Fee must be zero or a positive value with up to three decimal",
+                    data_val_regex_pattern = @"^\\d+(\\.\\d{1,3})?$",
+                    aria_describedby = "ExtraCharges[$index$].Fee",
+                    id = "ExtraCharges[$index$].Fee",
+                    type = "number",
+                    required = "true",
+                    min = "0",
+                    max = "1000",
+                    @Value = "0.000"
+                }
+            })
+        @Html.ValidationMessage("ExtraCharges[$index$].Fee", new
+            {
+                @class = "text-danger",
+                data_valmsg_replace = "true"
+            })
+                            </div>
+                        </div>
+                        <button type="button" class="btn danger-action btn-small" style="margin-top: 30px;" onclick="removeExtraChargeField(this)"><i class="fa fa-minus"></i></button>
+                    </div>
+                `;
+
+        var transitChargeTemplate = `
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input  type="hidden" name="TransitCharges.Index" value="$index$" />
+        @Html.LabelForModel("[[[[City", htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownList("TransitCharges[$index$].CityId", ((SelectList)ViewData["MasterCities"]), "All", new
+            {
+                @class = "form-control",
+                data_val = "true",
+                aria_describedby = "TransitCharges[$index$].CityId",
+                id = "TransitCharges[$index$].CityId",
+            })
+        @Html.ValidationMessage("TransitCharges[$index$].CityId", new
+            {
+                @class = "text-danger",
+                data_valmsg_replace = "true"
+            })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+        @Html.LabelForModel("[[[[Fee", htmlAttributes: new { @class = "control-label" })
+                                <span class="text-danger">*</span>
+        @Html.Editor("TransitCharges[$index$].Fee", new
+            {
+                htmlAttributes = new
+                {
+                    @class = "form-control",
+                    data_val = "true",
+                    aria_required = "true",
+                    data_val_required = "[[[[Field is required",
+                    aria_describedby = "TransitCharges[$index$].Fee",
+                    id = "TransitCharges[$index$].Fee",
+                    data_val_regex = "[[[[The field Fee must be zero or a positive value with up to three decimal",
+                    data_val_regex_pattern = @"^\\d+(\\.\\d{1,3})?$",
+                    type = "number",
+                    required = "true",
+                    min = "0",
+                    max = "1000",
+                    @Value = "0.000"
+                }
+            })
+        @Html.ValidationMessage("TransitCharges[$index$].Fee", new
+            {
+                @class = "text-danger",
+                data_valmsg_replace = "true"
+            })
+                            </div>
+                        </div>
+                        <button type="button" class="btn danger-action btn-small" style="margin-top: 30px;" onclick="removeTransitChargeField(this)"><i class="fa fa-minus"></i></button>
+                    </div>
+                `;
+
+        $('#add-attribute').on('click', function () {
+            Metronic.blockUI({ animate: true });
+            var val = 0;
+            var attributesIndex = '';
+            if ($(".attributes-index").html() === undefined) {
+                attributesIndex = $("#first-child");
+            } else {
+                attributesIndex = $(".attributes-index").last();
+            }
+
+            if (attributesIndex.data("index") !== undefined) {
+                val = attributesIndex.data("index") + 1;
+            }
+            $.ajax({
+                url: '@Url.Action("GetSchedules")',
+                data: {
+                    index: parseInt(val)
+                },
+                type: 'GET',
+            }).done(function (html) {
+                if ($(".attributes-index").html() === undefined) {
+                    attributesIndex.html(html);
+                } else {
+                    attributesIndex.after(html);
+                }
+
+            }).always(function () {
+                Metronic.unblockUI();
+                reloadValidation();
+            });
+        });
+
+        var index = @(Model.ExtraCharges == null ? 0 : Model.ExtraCharges.Length);
+        var transitIndex = @(Model.TransitCharges == null ? 0 : Model.TransitCharges.Length);
+
+        function addExtraChargesField() {
+            $('#extra-charges-container').append(extraChargeTemplate.replaceAll('$index$', index));
+            $(`#ExtraCharges[${index}].Fare`).rules('add', 'required')
+            reloadValidation();
+            index++;
+        }
+
+        function removeExtraChargeField(button) {
+            $(button).closest(".row").remove();
+        }
+
+        function addTransitChargesField() {
+            $('#transit-charges-container').append(transitChargeTemplate.replaceAll('$index$', transitIndex));
+            $(`#TransitCharges[${index}].Fare`).rules('add', 'required');
+            reloadValidation();
+            transitIndex++;
+        }
+
+        function removeTransitChargeField(button) {
+            $(button).closest(".row").remove();
+        }
+
+        function addFareSchedulesField() {
+            $('#fare-schedules-container').append(fareSchedulesTemplate.replaceAll('$index$', index));
+            $(`#Schedules[${index}].Fare`).rules('add', 'required')
+            index++;
+            reloadValidation();
+
+        }
+
+        function removeScheduleField(button) {
+            $(button).closest(".row").remove();
+        }
+
+        function reloadValidation() {
+            $('#form').removeData('validator');
+            $('#form').removeData('unobtrusiveValidation');
+
+            $.validator.unobtrusive.parse('#form');
+        }
+
+        $(document).ready(() => {
+            reloadValidation();
+        });
+
+        $("#form").submit(() => {
+            reloadValidation();
+            if (!$(this).valid()) {
+                event.preventDefault();
+                return false;
+            }
+
+            reloadValidation();
+        });
+
+        let inputColor = $('input[data-control="minicolors"]');
+        let colorValue = inputColor.val();
+        // Sanitize the color value using DOMPurify
+        let sanitizedColorValue = DOMPurify.sanitize(colorValue);
+        inputColor.val(sanitizedColorValue);
+        inputColor.minicolors({
+            theme: 'bootstrap',
+            dataUris: false, // Force the plugin to load an external image instead of using dataURIs.
+        });
+
+        function removeItem(index) {
+            $(".attributes-index").filter('[data-index=' + index + ']').remove();
+        }
+    </script>
+}

@@ -1,0 +1,294 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+#map-canvas {
+    width: 100%;
+}
+
+.map-container {
+    position: relative;
+    height: 100%;
+}
+
+.bottom-content {
+    background: url(../../wwwroot/images/maps-customer/client-footer-logo-tr.png) no-repeat center bottom;
+    height: 132px;
+    background-color: #333333;
+    border-top: 2px solid #ef3741;
+    padding: 0 20px;
+    font-family: verdana;
+}
+
+.bottom-content-inner {
+    width: 80%;
+    max-width: 1024px;
+    margin: 0 auto;
+    display: table;
+    margin-top: 15px;
+}
+
+    .bottom-content-inner .t-row {
+        display: table-row;
+    }
+
+        .bottom-content-inner .t-row > div {
+            display: table-cell;
+            position: relative;
+        }
+
+.details-client-marker {
+    background: url(../../wwwroot/images/maps-customer/details-cleint-logo-marker.png) no-repeat center;
+    width: 45px;
+}
+
+.details-location-marker {
+    background: url(../../wwwroot/images/maps-customer/details-location-marker.png) no-repeat center;
+    width: 45px;
+}
+
+.details-time-center > div {
+    width: 78px;
+    background: url(../../wwwroot/images/maps-customer/client-timer-bg.png) no-repeat center;
+    border-radius: 50%;
+    padding: 6px;
+}
+
+.details-time-center {
+    width: 78px;
+}
+
+    .details-time-center .remaining-time {
+        width: 66px;
+        height: 66px;
+        border-radius: 50%;
+        text-align: center;
+        color: #363636;
+        font-size: 18px;
+        padding-top: 11px;
+        font-weight: 600;
+    }
+
+.t-row.checked .details-time-center .remaining-time {
+    background: url(../../wwwroot/images/maps-customer/check.png) no-repeat center;
+}
+
+.chain-line-left {
+    overflow: hidden;
+}
+
+    .chain-line-left:before {
+        content: " ";
+        position: absolute;
+        height: 11px;
+        width: 11px;
+        background-color: #ef3741;
+        border-radius: 50%;
+        top: 50%;
+        left: 8px;
+        margin-top: -5px;
+    }
+
+    .chain-line-left:after {
+        content: " ";
+        position: absolute;
+        height: 0;
+        width: 100%;
+        left: 1px;
+        top: 38px;
+        border-top: 3px solid #ef3741;
+        margin: 0px 12px;
+    }
+
+.chain-line-right {
+    overflow: hidden;
+}
+
+    .chain-line-right:before {
+        content: " ";
+        position: absolute;
+        top: 50%;
+        right: 8px;
+        margin-top: -12px;
+        border-top: 12px solid transparent;
+        border-left: 12px solid #ef3741;
+        border-bottom: 12px solid transparent;
+    }
+
+    .chain-line-right:after {
+        content: " ";
+        position: absolute;
+        height: 0;
+        width: 100%;
+        right: 1px;
+        top: 38px;
+        border-top: 3px solid #ef3741;
+        margin: 0px 12px;
+    }
+
+.map-location-marker {
+    background: url(../../wwwroot/images/maps-customer/map-cleint-logo-marker.png) no-repeat center;
+    width: 44px;
+    height: 70px;
+}
+
+.map-client-marker {
+    background: url(../../wwwroot/images/maps-customer/map-location-marker.png) no-repeat center;
+    width: 44px;
+    height: 58px;
+}
+
+.details-label {
+    position: absolute;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.details-client-marker .details-label {
+    bottom: -14px;
+    left: -54px;
+    width: 160px;
+}
+
+.details-location-marker .details-label {
+    bottom: -14px;
+    left: -57px;
+    width: 160px;
+}
+
+.details-time-center .details-label {
+    bottom: -21px;
+    left: -38px;
+    width: 160px;
+}
+
+@media (max-width: 1023px) {
+    .bottom-content {
+        height: 260px;
+        padding: 0 20px;
+        font-family: verdana;
+        background-color: #333333;
+        border-top: 2px solid #ef3741;
+    }
+
+    .details-client-marker {
+        background: url(../../wwwroot/images/maps-customer/x2/details-cleint-logo-marker-2x.png) no-repeat center;
+        width: 88px;
+    }
+
+    .chain-line-left:before {
+        content: " ";
+        position: absolute;
+        height: 21px;
+        width: 21px;
+        background-color: #ef3741;
+        border-radius: 50%;
+        top: 50%;
+        left: 8px;
+        margin-top: -9px;
+    }
+
+    .chain-line-left:after {
+        content: " ";
+        position: absolute;
+        height: 0;
+        width: 100%;
+        left: 1px;
+        top: 76px;
+        border-top: 4px solid #ef3741;
+        margin: 0px 12px;
+    }
+
+    .details-time-center {
+        width: 152px;
+    }
+
+        .details-time-center > div {
+            width: 152px;
+            border-radius: 50%;
+            padding: 6px;
+            background: url(../../wwwroot/images/maps-customer/x2/client-timer-bg-2x.png) no-repeat center;
+        }
+
+    .t-row.checked .details-time-center .remaining-time {
+        background: url(../../wwwroot/images/maps-customer/x2/check-2x.png) no-repeat center;
+    }
+
+    .details-time-center .remaining-time {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        text-align: center;
+        color: #363636;
+        font-size: 40px;
+        padding-top: 16px;
+    }
+
+    .chain-line-right:before {
+        content: " ";
+        position: absolute;
+        margin-top: -13px;
+        top: 50%;
+        right: 6px;
+        display: inline-block !important;
+        border-top: 15px solid transparent;
+        border-left: 15px solid #ef3741;
+        border-bottom: 15px solid transparent;
+        width: auto;
+        height: auto;
+        background-color: rgba(45, 49, 55, 0);
+        border-radius: initial;
+    }
+
+    .chain-line-right:after {
+        content: " ";
+        position: absolute;
+        height: 0;
+        width: 100%;
+        right: 1px;
+        top: 76px;
+        border-top: 4px solid #ef3741;
+        margin: 0px 12px;
+    }
+
+    .details-location-marker {
+        background: url(../../wwwroot/images/maps-customer/x2/details-location-marker-2x.png) no-repeat center;
+        width: 90px;
+    }
+
+    .map-client-marker {
+        background: url(../../wwwroot/images/maps-customer/x2/map-location-marker-2x.png) no-repeat center;
+        width: 88px;
+        height: 115px;
+    }
+
+    .map-location-marker {
+        background: url(../../wwwroot/images/maps-customer/x2/map-cleint-logo-marker-2x.png) no-repeat center;
+        width: 88px;
+        height: 141px;
+    }
+
+    .bottom-content-inner {
+        margin-top: 51px;
+    }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #1f2327 inset !important;
+    -webkit-text-fill-color: #b5bec7 !important;
+}

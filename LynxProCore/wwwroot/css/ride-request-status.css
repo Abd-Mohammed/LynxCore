@@ -1,0 +1,1000 @@
+﻿.ride-status-outer {
+    height: 170px;
+    background-color: #1d1f22;
+}
+
+.ride-status.circle-dots.step-two .search-icon {
+    display: block;
+    margin-top: 15px;
+}
+
+.ride-status .search-icon i {
+    font-size: 18px;
+}
+
+.ride-status.circle-dots {
+    margin: 10px auto;
+    width: 161px;
+    height: 161px;
+    text-align: center;
+    color: #d5d7db;
+    position: relative;
+}
+
+    .ride-status.circle-dots .main-circle {
+        width: 160px;
+        height: 160px;
+        border-radius: 100% !important;
+        position: relative;
+    }
+
+    .ride-status.circle-dots.step-one .main-circle {
+        border: 2px solid #000;
+    }
+
+    .ride-status.circle-dots.step-one .vehicle-lg-icon {
+        background: url(../images/ride-request-status/ride-lg-off.svg) no-repeat center;
+        width: 80px;
+        height: 71px;
+        margin: 33px auto 0;
+    }
+
+    .ride-status.circle-dots.step-two .main-circle, .ride-status.circle-dots.step-three .main-circle, .ride-status.circle-dots.step-four .main-circle, .ride-status.circle-dots.step-five .main-circle, .ride-status.circle-dots.step-six .main-circle, .ride-status.circle-dots.step-seven .main-circle, .ride-status.circle-dots.step-eight .main-circle {
+        border: 2px solid #58595d;
+    }
+
+    .ride-status.circle-dots.step-two .vehicle-lg-icon {
+        background: url(../images/ride-request-status/ride-lg.svg) no-repeat center;
+        width: 80px;
+        height: 71px;
+        margin: 0px auto;
+        opacity: .3;
+    }
+
+    .ride-status.circle-dots.step-three .vehicle-lg-icon, .ride-status.circles.step-three .vehicle-lg-icon {
+        background: url(../images/ride-request-status/ride-lg.svg) no-repeat center;
+        width: 62px;
+        height: 30px
+    }
+
+    .ride-status.circle-dots.step-three .check-lg-icon, .ride-status.circles.step-three .check-lg-icon {
+        background: url(../images/ride-request-status/check-lg-green.svg) no-repeat center;
+        width: 43px;
+        height: 30px;
+    }
+
+    .ride-status.circle-dots.step-three .status-title-upper, .ride-status.circles.step-three .status-title-upper {
+        margin-top: 10px;
+        font-size: 16px;
+    }
+
+    .ride-status.circle-dots.step-three .ride-status-icons, .ride-status.circles.step-three .ride-status-icons {
+        margin: 13px 0;
+        justify-content: space-evenly;
+    }
+
+    .ride-status.circle-dots.step-one [class^="dot-size-"] {
+        display: none;
+    }
+
+    .ride-status.circle-dots.step-two [class^="dot-size-"], .ride-status.circle-dots.step-three [class^="dot-size-"], .ride-status.circle-dots.step-four [class^="dot-size-"], .ride-status.circle-dots.step-five [class^="dot-size-"], .ride-status.circle-dots.step-six [class^="dot-size-"], .ride-status.circle-dots.step-seven [class^="dot-size-"], .ride-status.circle-dots.step-eight [class^="dot-size-"] {
+        display: block;
+        position: absolute;
+        height: 100%;
+        margin-top: -1px;
+    }
+
+.dot-size-1:before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #74767b
+}
+
+.dot-size-1:after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #74767b
+}
+
+.ride-status.circle-dots.step-three [class^="dot-size-"], .ride-status.circle-dots.step-four [class^="dot-size-"], .ride-status.circle-dots.step-five [class^="dot-size-"], .ride-status.circle-dots.step-six [class^="dot-size-"], .ride-status.circle-dots.step-seven [class^="dot-size-"], .ride-status.circle-dots.step-eight [class^="dot-size-"] {
+    animation: none;
+}
+
+.dot-size-1 {
+    width: 10px;
+    top: 0px;
+    left: 50%;
+    /*transform: translateX(-50%) rotate(0deg);*/
+    transform: translateX(-50%);
+    animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.02, 1.06) infinite;
+    -o-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.02, 1.06) infinite;
+    -ms-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.02, 1.06) infinite;
+    -webkit-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.02, 1.06) infinite;
+    -moz-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.02, 1.06) infinite;
+}
+
+.dot-size-2:before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -11px;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background-color: #74767b
+}
+
+.dot-size-2:after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 11px;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background-color: #74767b
+}
+
+.dot-size-2 {
+    width: 8px;
+    top: 0px;
+    left: 50%;
+    /*transform: translateX(-50%) rotate(-8deg);*/
+    transform: translateX(-50%);
+    animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 1.0) infinite;
+    -o-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 1.0) infinite;
+    -ms-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 1.0) infinite;
+    -webkit-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 1.0) infinite;
+    -moz-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 1.0) infinite;
+}
+
+.dot-size-3:before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: -20px;
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    background-color: #74767b
+}
+
+.dot-size-3:after {
+    content: "";
+    position: absolute;
+    bottom: 1px;
+    left: 20px;
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    background-color: #74767b
+}
+
+.dot-size-3 {
+    width: 6px;
+    top: 0px;
+    left: 50%;
+    /*transform: translateX(-50%) rotate(-15deg);*/
+    transform: translateX(-50%);
+    animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 0.9) infinite;
+    -o-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 0.9) infinite;
+    -ms-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 0.9) infinite;
+    -webkit-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 0.9) infinite;
+    -moz-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 0.9) infinite;
+}
+
+.dot-size-4:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: -29px;
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+    background-color: #74767b
+}
+
+.dot-size-4:after {
+    content: "";
+    position: absolute;
+    bottom: 5px;
+    left: 29px;
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+    background-color: #74767b
+}
+
+.dot-size-4 {
+    width: 4px;
+    top: 0px;
+    left: 50%;
+    /*transform: translateX(-50%) rotate(-21deg);*/
+    transform: translateX(-50%);
+    animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 0.7) infinite;
+    -o-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 0.7) infinite;
+    -ms-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 0.7) infinite;
+    -webkit-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 0.7) infinite;
+    -moz-animation: rotation 2.5s cubic-bezier(0.88, 0.04, 0.2, 0.7) infinite;
+}
+
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes rotation {
+    0% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-ms-keyframes rotation {
+    0% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rotation {
+    0% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes rotation {
+    0% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.ride-status.circle-dots.step-three .complete-stamp, .ride-status.circles.step-three .complete-stamp {
+    width: 100%;
+    height: 100%;
+    background-color: #3a3d44;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 100% !important;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    animation: opa 900ms;
+    -o-animation: opa 900ms;
+    -ms-animation: opa 900ms;
+    -webkit-animation: opa 900ms;
+    -moz-animation: opa 900ms;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+}
+
+.ride-status.circles.step-four .complete-stamp,
+.ride-status.circles.step-five .complete-stamp,
+.ride-status.circles.step-six .complete-stamp,
+.ride-status.circles.step-seven .complete-stamp,
+.ride-status.circles.step-eight .complete-stamp,
+.ride-status.circles.step-suspended .complete-stamp,
+.ride-status.circles.step-default .complete-stamp,
+.ride-status.circles.step-busy .complete-stamp,
+.ride-status.circles.step-completed .complete-stamp,
+.ride-status.circles.step-customerNoAnswer .complete-stamp,
+.ride-status.circles.step-customerNoShow .complete-stamp,
+.ride-status.circles.step-onWay .complete-stamp,
+.ride-status.circles.step-reachedCustomer .complete-stamp,
+.ride-status.circles.step-started .complete-stamp,
+.ride-status.circles.step-upcoming .complete-stamp,
+.ride-status.circle-dots.step-four .complete-stamp,
+.ride-status.circle-dots.step-five .complete-stamp,
+.ride-status.circle-dots.step-six .complete-stamp,
+.ride-status.circle-dots.step-seven .complete-stamp,
+.ride-status.circle-dots.step-eight .complete-stamp {
+    width: 100%;
+    height: 100%;
+    background-color: #3a3d44;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 100% !important;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+@keyframes opa {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-o-keyframes opa {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-ms-keyframes opa {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes opa {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes opa {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.ride-status.circle-dots.step-three .complete-stamp-text, .ride-status.circles.step-three .complete-stamp-text {
+    color: #fff;
+    font-size: 15px;
+}
+
+.ride-status.circle-dots.step-four .complete-stamp-text, .ride-status.circles.step-four .complete-stamp-text {
+    color: #d8ffc6;
+    font-size: 15px;
+}
+
+.ride-status.circles.step-five .complete-stamp-text,
+.ride-status.circles.step-six .complete-stamp-text,
+.ride-status.circles.step-seven .complete-stamp-text,
+.ride-status.circles.step-eight .complete-stamp-text,
+.ride-status.circles.step-suspended .complete-stamp-text,
+.ride-status.circles.step-default .complete-stamp-text,
+.ride-status.circles.step-busy .complete-stamp-text,
+.ride-status.circle-dots.step-five .complete-stamp-text,
+.ride-status.circle-dots.step-six .complete-stamp-text,
+.ride-status.circle-dots.step-seven .complete-stamp-text,
+.ride-status.circle-dots.step-eight .complete-stamp-text,
+.ride-status.circles.step-completed .complete-stamp-text,
+.ride-status.circles.step-customerNoAnswer .complete-stamp-text,
+.ride-status.circles.step-customerNoShow .complete-stamp-text,
+.ride-status.circles.step-reachedCustomer .complete-stamp-text,
+.ride-status.circles.step-onWay .complete-stamp-text,
+.ride-status.circles.step-started .complete-stamp-text,
+.ride-status.circles.step-upcoming .complete-stamp-text {
+    color: #ff9fab;
+    font-size: 15px;
+}
+.ride-status.circles.step-suspended .complete-stamp-check {
+    background: url(../images/ride-request-status/ban-lg-red.svg) no-repeat center;
+    width: 47px;
+    height: 30px;
+}
+.ride-status.circles.step-default .complete-stamp-check {
+    background: url(../images/ride-request-status/warning-lg-red.svg) no-repeat center;
+    width: 47px;
+    height: 30px;
+}
+
+.ride-status.circles.step-busy .complete-stamp-check {
+    background: url(../images/ride-request-status/hourglas-lg-red.svg) no-repeat center;
+    width: 47px;
+    height: 30px;
+}
+
+/*********************NEW***********************/
+.ride-status.circles.step-completed .complete-stamp-check {
+    background: url(../images/ride-request-status/Completed.svg) no-repeat center;
+    width: 55px;
+    height: 38px;
+}
+
+.ride-status.circles.step-customerNoAnswer .complete-stamp-check {
+    background: url(../images/ride-request-status/CustomerNoAnswer.svg) no-repeat center;
+    width: 70px;
+    height: 50px;
+}
+
+.ride-status.circles.step-customerNoShow .complete-stamp-check {
+    background: url(../images/ride-request-status/CustomerNoShow.svg) no-repeat center;
+    width: 70px;
+    height: 50px;
+}
+
+.ride-status.circles.step-onWay .complete-stamp-check {
+    background: url(../images/ride-request-status/OnWay.svg) no-repeat center;
+    width: 70px;
+    height: 50px;
+}
+
+.ride-status.circles.step-reachedCustomer .complete-stamp-check {
+    background: url(../images/ride-request-status/ReachedCustomer.svg) no-repeat center;
+    width: 70px;
+    height: 50px;
+}
+
+.ride-status.circles.step-started .complete-stamp-check {
+    background: url(../images/ride-request-status/Started.svg) no-repeat center;
+    width: 55px;
+    height: 38px;
+}
+
+.ride-status.circles.step-upcoming .complete-stamp-check {
+    background: url(../images/ride-request-status/Upcoming.svg) no-repeat center;
+    width: 70px;
+    height: 50px;
+}
+/******************************************/
+.ride-status.circle-dots.step-three .complete-stamp-check, .ride-status.circle-dots.step-four .complete-stamp-check, .ride-status.circles.step-three .complete-stamp-check, .ride-status.circles.step-four .complete-stamp-check {
+    background: url(../images/ride-request-status/check-lg-green.svg) no-repeat center;
+    width: 47px;
+    height: 30px;
+}
+
+.ride-status.circles.step-five .complete-stamp-check, .ride-status.circles.step-six .complete-stamp-check, .ride-status.circles.step-eight .complete-stamp-check, .ride-status.circle-dots.step-five .complete-stamp-check, .ride-status.circle-dots.step-six .complete-stamp-check, .ride-status.circle-dots.step-eight .complete-stamp-check {
+    background: url(../images/ride-request-status/x-lg-red.svg) no-repeat center;
+    width: 47px;
+    height: 30px;
+}
+
+.ride-status.circle-dots.step-seven .complete-stamp-check, .ride-status.circles.step-seven .complete-stamp-check {
+    background: url(../images/ride-request-status/time-issue-lg-red.svg) no-repeat center;
+    width: 47px;
+    height: 30px;
+}
+
+.ride-status.circle-dots.step-three .complete-stamp-icon,
+.ride-status.circle-dots.step-eight .complete-stamp-icon,
+.ride-status.circles.step-three .complete-stamp-icon,
+.ride-status.circles.step-eight .complete-stamp-icon,
+.ride-status.circles.step-suspended .complete-stamp-icon,
+.ride-status.circles.step-default .complete-stamp-icon,
+.ride-status.circles.step-busy .complete-stamp-icon,
+.ride-status.circles.step-completed .complete-stamp-icon,
+.ride-status.circles.step-started .complete-stamp-icon,
+.ride-status.circles.step-reachedCustomer .complete-stamp-icon,
+.ride-status.circle-dots.step-onWay .complete-stamp-icon {
+    background: url(../images/ride-request-status/ride-lg.svg) no-repeat center;
+    width: 65px;
+    height: 43px;
+    margin-bottom: 5px;
+}
+
+.ride-status.circles.step-four .complete-stamp-icon, 
+.ride-status.circles.step-five .complete-stamp-icon, 
+.ride-status.circles.step-six .complete-stamp-icon, 
+.ride-status.circles.step-seven .complete-stamp-icon, 
+.ride-status.circle-dots.step-four .complete-stamp-icon, 
+.ride-status.circle-dots.step-five .complete-stamp-icon, 
+.ride-status.circle-dots.step-six .complete-stamp-icon, 
+.ride-status.circle-dots.step-seven .complete-stamp-icon {
+    background: url(../images/ride-request-status/driver-lg.svg) no-repeat center;
+    width: 65px;
+    height: 43px;
+    margin-bottom: 5px;
+}
+
+.ride-status.circles {
+    margin: 1px auto;
+    width: 169px;
+    height: 169px;
+    text-align: center;
+    color: #d5d7db;
+    position: relative;
+    padding: 1px;
+}
+
+    .ride-status.circles .main-circle {
+        width: 167px;
+        height: 167px;
+        padding: 1px;
+        position: relative;
+    }
+
+    .ride-status.circles.step-one .ride-status-icons {
+        width: 100%;
+        height: 100%;
+    }
+
+    .ride-status.circles.step-two .ride-status-icons {
+        width: 167px;
+        height: 66px;
+    }
+
+    .ride-status.circles.step-one .vehicle-lg-icon {
+        background: url(../images/ride-request-status/ride-lg-off.svg) no-repeat center;
+        width: 53%;
+        height: 96%;
+        margin: 0 auto 0;
+    }
+
+.circle-lg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 165px;
+    height: 165px;
+    border-radius: 100% !important;
+}
+
+.step-one .circle-lg {
+    border: 2px solid #000;
+    margin: 2px 0 0 0px;
+}
+
+.step-three .circle-lg,
+.step-four .circle-lg,
+.step-five .circle-lg,
+.step-six .circle-lg,
+.step-seven .circle-lg,
+.step-eight .circle-lg,
+.step-suspended .circle-lg,
+.step-default .circle-lg,
+.step-busy .circle-lg ,
+.step-completed .circle-lg ,
+.step-started .circle-lg ,
+.step-customerNoAnswer .circle-lg ,
+.step-customerNoShow .circle-lg ,
+.step-reachedCustomer .circle-lg ,
+.step-onWay .circle-lg ,
+.step-upcoming .circle-lg {
+    border: 2px solid #d96b00;
+    margin: 2px 0 0 0px;
+}
+
+.step-two .circle-lg {
+    border: 2px solid #d96b00;
+    margin: 1px 0 0 2px;
+    animation: rotation-2 1s linear infinite;
+    -o-animation: rotation-2 1s linear infinite;
+    -ms-animation: rotation-2 1s linear infinite;
+    -webkit-animation: rotation-2 1s linear infinite;
+    -moz-animation: rotation-2 1s linear infinite;
+    transform-origin: 49% 50%;
+    margin: 1px 0 0 2px;
+    border: 2px solid #d96b00;
+}
+
+.circle-md {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 157px;
+    height: 157px;
+    border-radius: 100% !important;
+}
+
+.step-one .circle-md {
+    border: 4px solid #000;
+    margin: 6px 0 0 4px;
+}
+
+.step-two .circle-md {
+    border: 4px solid #fff;
+    margin: 5px 0 0 5px;
+}
+
+.step-three .circle-md,
+.step-four .circle-md,
+.step-five .circle-md,
+.step-six .circle-md,
+.step-seven .circle-md,
+.step-eight .circle-md,
+.step-suspended .circle-md,
+.step-default .circle-md,
+.step-busy .circle-md,
+.step-completed .circle-md,
+.step-started .circle-md,
+.step-customerNoAnswer .circle-md,
+.step-customerNoShow .circle-md,
+.step-reachedCustomer .circle-md,
+.step-onWay .circle-md,
+.step-upcoming .circle-md {
+    border: 4px solid #fff;
+    margin: 6px 0 0 4px;
+}
+
+.circle-sm {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 143px;
+    height: 143px;
+    border-radius: 100% !important;
+}
+
+.step-one .circle-sm {
+    border: 2px solid #000;
+    margin: 13px 0 0 11px;
+}
+
+.step-three .circle-sm,
+.step-four .circle-sm,
+.step-five .circle-sm,
+.step-six .circle-sm,
+.step-seven .circle-sm,
+.step-eight .circle-sm,
+.step-suspended .circle-sm,
+.step-default .circle-sm,
+.step-busy .circle-sm,
+.step-completed .circle-sm,
+.step-started .circle-sm,
+.step-customerNoAnswer .circle-sm,
+.step-customerNoShow .circle-sm,
+.step-reachedCustomer .circle-sm,
+.step-onWay .circle-sm,
+.step-upcoming .circle-sm {
+    border: 2px solid #d96b00;
+    margin: 13px 0 0 11px;
+}
+
+.step-two .circle-sm {
+    border: 2px solid #d96b00;
+    margin: 11px 0 0 10px;
+    animation: rotation-2 1s linear infinite;
+    -o-animation: rotation-2 1s linear infinite;
+    -ms-animation: rotation-2 1s linear infinite;
+    -webkit-animation: rotation-2 1s linear infinite;
+    -moz-animation: rotation-2 1s linear infinite;
+    transform-origin: 51% 50%;
+    width: 145px;
+    height: 145px;
+}
+
+.ride-status.circles.step-two .vehicle-lg-icon {
+    background: url(../images/ride-request-status/ride-lg.svg) no-repeat center;
+    width: 80px;
+    height: 71px;
+    margin: 0px auto;
+    opacity: .3;
+}
+
+.ride-status.circles.step-two .search-icon {
+    /*display: block;*/
+    margin-top: 18px;
+}
+
+.ride-status .search-icon i {
+    font-size: 18px;
+}
+
+@keyframes rotation-2 {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes rotation-2 {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-ms-keyframes rotation-2 {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rotation-2 {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes rotation-2 {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.ride-status.circles.step-four .complete-stamp,
+.ride-status.circles.step-five .complete-stamp,
+.ride-status.circles.step-six .complete-stamp,
+.ride-status.circles.step-seven .complete-stamp,
+.ride-status.circles.step-eight .complete-stamp,
+.ride-status.circles.step-suspended .complete-stamp,
+.ride-status.circles.step-default .complete-stamp,
+.ride-status.circles.step-busy .complete-stamp,
+.ride-status.circles.step-completed .complete-stamp,
+.ride-status.circles.step-started .complete-stamp,
+.ride-status.circles.step-upcoming .complete-stamp,
+.ride-status.circles.step-customerNoAnswer .complete-stamp,
+.ride-status.circles.step-customerNoShow .complete-stamp,
+.ride-status.circles.step-reachedCustomer .complete-stamp ,
+.ride-status.circles.step-onWay .complete-stamp {
+    width: 143px;
+    height: 143px;
+    margin: 10px 0 0 10px;
+}
+
+/*-----------------------------------------------------------------------------------------*/
+.lds-ellipsis-side {
+    display: inline-block;
+    position: relative;
+    width: 39px;
+    height: 8px;
+    margin-left: 5px;
+}
+
+    .lds-ellipsis-side div {
+        position: absolute;
+        top: 0px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50% !important;
+        background: #7e7e7e;
+        animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+
+        .lds-ellipsis-side div:nth-child(1) {
+            left: 0px;
+            animation: lds-ellipsis-side1 0.6s infinite;
+        }
+
+        .lds-ellipsis-side div:nth-child(2) {
+            left: 0px;
+            animation: lds-ellipsis-side2 0.6s infinite;
+        }
+
+        .lds-ellipsis-side div:nth-child(3) {
+            left: 15px;
+            animation: lds-ellipsis-side2 0.6s infinite;
+        }
+
+        .lds-ellipsis-side div:nth-child(4) {
+            left: 30px;
+            animation: lds-ellipsis-side3 0.6s infinite;
+        }
+
+@keyframes lds-ellipsis-side1 {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@-o-keyframes lds-ellipsis-side1 {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@-ms-keyframes lds-ellipsis-side1 {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes lds-ellipsis-side1 {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@-moz-keyframes lds-ellipsis-side1 {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes lds-ellipsis-side3 {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+
+@-o-keyframes lds-ellipsis-side3 {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+
+@-ms-keyframes lds-ellipsis-side3 {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+
+@-webkit-keyframes lds-ellipsis-side3 {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+
+@-moz-keyframes lds-ellipsis-side3 {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes lds-ellipsis-side2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(15px, 0);
+    }
+}
+
+@-o-keyframes lds-ellipsis-side2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(15px, 0);
+    }
+}
+
+@-ms-keyframes lds-ellipsis-side2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(15px, 0);
+    }
+}
+
+@-webkit-keyframes lds-ellipsis-side2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(15px, 0);
+    }
+}
+
+@-moz-keyframes lds-ellipsis-side2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(15px, 0);
+    }
+}
+
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #1f2327 inset !important;
+    -webkit-text-fill-color: #b5bec7 !important;
+}

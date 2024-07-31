@@ -1,0 +1,110 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@using Kendo.Mvc.UI
+
+<div class="portlet">
+    <div class="portlet-title">
+        <h3 class="page-title">
+            Maintenance Services  <small>Index </small>
+        </h3>
+        <div class="table-tools clearfix">
+            <div class="f-right">
+                <a href="@Url.Action("Create")" class="grid_icon_btn-add tooltips" data-original-title="Add"><span></span></a>
+                <div class="buttons-slider-container">
+                    <a class="grid_icon_btn-export tooltips" data-original-title="Export"><span></span></a>
+                    <div class="f-right buttons-slider">
+                        <a class="grid_icon_btn-sm-pdf" onclick="kendoExport.toPdf('#gridMaintenanceServices');"><span></span></a>
+                        <a class="grid_icon_btn-sm-excl" onclick="kendoExport.toExcel('#gridMaintenanceServices');"><span></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="portlet-body">
+        @(Html.Kendo().Grid<MaintenanceServiceViewModel>()
+            .Name("gridMaintenanceServices")
+            .Columns(columns =>
+            {
+                columns.Bound(d => d.InvoiceReferenceNo).Visible(true).Title("Invoice Reference No.");
+                columns.Bound(d => d.Date).Visible(true).Title("Date").Filterable(false);
+                columns.Bound(d => d.Vehicle.Name).Visible(true).Title("Vehicle ");
+                columns.Bound(d => d.MaintenanceServiceType.Name).Visible(true).Title("Type ");
+                columns.Bound(d => d.Odometer).Visible(true).Title("Odometer").Filterable(false);
+                columns.Bound(d => d.Driver.StaffId).Visible(true).Title("Staff ID");
+                columns.Bound(d => d.Cost).Visible(true).Title("Cost").Filterable(false);
+                columns.Bound(d => d.CreatedDate).Visible(true).ClientTemplate("#= toActionTemplate(MaintenanceServiceId) # ").Title("Actions").Width(100);
+            })
+            .Scrollable(scrollable => scrollable.Height("61vh"))
+            .Sortable(sortable => sortable
+            .AllowUnsort(false))
+            .Excel(excel => excel
+            .FileName("MaintenanceServices.xlsx")
+            .AllPages(true)
+            .Filterable(true))
+            .Pdf(pdf => pdf
+            .FileName("MaintenanceServices.pdf")
+            .AllPages()
+            .AvoidLinks(true))
+            .Events(e => e.FilterMenuInit("filterMenuInit"))
+            .DataSource(datasource => datasource
+            .Ajax()
+            .Sort(sort => sort.Add("Date").Descending())
+            .PageSize(50)
+            .Read(read => read.Action("Read", "Maintenance")))
+            .Filterable(filterable => filterable.Mode(GridFilterMode.Menu).Extra(false).Messages(messages => messages.Info("").Clear("Clear").Filter("Filter")))
+            .Pageable(pageable => pageable.PageSizes(true).Messages(s => s.ItemsPerPage("items per page").Empty("No items to display").Display("{0}-{1} of {2} items").Previous("Go to the previous page").Next("Go to the next page").First("Go to the first page").Last("Go to the last page")).PageSizes(new int[] { 50, 100, 150 }).ButtonCount(5))
+            )
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/kendo/js/jszip.min.js"></script>
+    <script src="~/lib/kendo/js/pako_deflate.min.js"></script>
+    <script src="~/js/kendo-export.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".k-grid-content").height(($('.page-footer').offset().top - $('.k-grid-content').offset().top) - 38);
+            $(".menu-side-bar-scroll").css("max-height", $('.page-container').height() + 2)
+        });
+
+        function columnMenuInit(e) {
+            var firstDropDown = e.container.find('select:eq(0)').data('kendoDropDownList');
+
+            // Checks whether filtering is enabled or not
+            if (typeof firstDropDown !== 'undefined') {
+                setTimeout(function () {
+                    firstDropDown.wrapper.hide();
+                });
+            }
+        }
+
+        function filterMenuInit(e) {
+            var firstValueDropDown = e.container.find('select:eq(0)').data('kendoDropDownList');
+            setTimeout(function () {
+                firstValueDropDown.wrapper.hide();
+            });
+        }
+
+        function toActionTemplate(driverId) {
+            var actionTemplate = kendo.template($('#actionList').html());
+            return actionTemplate({
+                id: driverId
+            });
+        }
+
+
+    </script>
+    <script id="actionList" type="text/x-kendo-template">
+        <a href="@Url.Action("Details")/#= id #" class="small_icon tooltips" data-placement="bottom" data-original-title="[[[[Details ">
+            <span class="icon-list"></span>
+        </a>
+        <a href="@Url.Action("Delete")/#= id #" class="small_icon tooltips" data-placement="bottom" data-original-title="[[[[Delete " data-target="\\#delete" data-toggle="modal">
+            <span class="icon-trash text-danger"></span>
+        </a>
+    </script>
+}

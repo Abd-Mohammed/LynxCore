@@ -1,0 +1,22 @@
+﻿[
+  {
+    "name": "Default",
+    "value": "default"
+  },
+  {
+    "name": "Roadmap",
+    "value": "roadmap"
+  },
+  {
+    "name": "Day",
+    "value": "daymap"
+  },
+  {
+    "name": "Night",
+    "value": "nightmap"
+  },
+  {
+    "name": "Satellite",
+    "value": "hybrid"
+  }
+]

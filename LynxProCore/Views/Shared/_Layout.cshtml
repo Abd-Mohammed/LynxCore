@@ -1,0 +1,1080 @@
+﻿@{
+    const string cultureName = "en-US";
+    const string headerImageName = "NotImplementYey";
+    const bool rightToLeft = false;
+    const string theme = "dark";
+    const string amChartLicense = "123435";
+}
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <link href="~/Fonts/FontStyle.css" rel="stylesheet" type="text/css" />
+    <title>Abd | Fleet Management System</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="~/lib/kendo-ui/styles/default-main-dark.css" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <script src="https://kendo.cdn.telerik.com/2023.2.829/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.2.829/js/kendo.aspnetmvc.min.js"></script>
+
+    <script src="~/lib/kendo-ui/js/kendo.all.min.js" asp-fallback-test="window.kendo"></script>
+    <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js" asp-fallback-test="kendo.data.transports['aspnetmvc-ajax']"></script>
+
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <style>
+        i.icon.search:before {
+            font-family: FontAwesome !important;
+        }
+
+        .inset-0 {
+            inset: 0 !important;
+        }
+
+        #skip a {
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 0px;
+            height: 0px;
+            overflow: hidden;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,300,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <style>
+        .loading span {
+            position: relative;
+            opacity: .5;
+        }
+
+            .loading span:before {
+                position: absolute;
+                content: '';
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 18px;
+                height: 18px;
+                border-radius: 100%;
+                border: .2em solid #eeeeee;
+            }
+
+            .loading span:after {
+                position: absolute;
+                content: '';
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 18px;
+                height: 18px;
+                -webkit-animation: tiny-circular-spinner .6s linear;
+                animation: tiny-circular-spinner .6s linear;
+                -webkit-animation-iteration-count: infinite;
+                animation-iteration-count: infinite;
+                border-radius: 500rem;
+                border-color: #767676 transparent transparent;
+                border-style: solid;
+                border-width: .2em;
+                -webkit-box-shadow: 0 0 0 1px transparent;
+                box-shadow: 0 0 0 1px transparent;
+            }
+
+        @@-webkit-keyframes tiny-circular-spinner {
+            from {
+                -webkit-transform: translate(-50%, -50%) rotate(0);
+                transform: translate(-50%, -50%) rotate(0)
+            }
+
+            to {
+                -webkit-transform: translate(-50%, -50%) rotate(360deg);
+                transform: translate(-50%, -50%) rotate(360deg)
+            }
+        }
+
+        @@keyframes tiny-circular-spinner {
+            from {
+                -webkit-transform: translate(-50%, -50%) rotate(0);
+                transform: translate(-50%, -50%) rotate(0)
+            }
+
+            to {
+                -webkit-transform: translate(-50%, -50%) rotate(360deg);
+                transform: translate(-50%, -50%) rotate(360deg)
+            }
+        }
+    </style>
+
+    @if (!string.IsNullOrEmpty(ViewBag.CultureName))
+    {
+        <script src="~/lib/kendo/js/cultures/kendo.culture.en-US.min.js"></script>
+        <script>
+            kendo.culture('en-US');
+        </script>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.IconName))
+    {
+        <link rel="shortcut icon" href="~/favicon.ico" />
+    }
+    else
+    {
+        <link rel="shortcut icon" href="~/favicon.ico" />
+    }
+
+    @await RenderSectionAsync("styles", required: false)
+</head>
+
+<body class="@SetBodyClass(rightToLeft)">
+    <div class="page-header navbar">
+        <div class="page-logo">
+            <div class="logo-default"></div>
+        </div>
+
+        @await Component.InvokeAsync("QuickAccessMenu", new { controllerName = ViewContext.RouteData.Values["controller"]?.ToString() })
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+        </a>
+
+        <div class="page-top">
+            <div class="clearfix">
+                <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
+                <!-- END HEADER SEARCH BOX -->
+            </div>
+
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="nav-item margin-right-10">
+                        <div class="ui category search">
+                            <div class="ui icon input">
+                                <input class="prompt" type="text" placeholder="Search...">
+                                <i class="search icon" style="color: white"></i>
+                            </div>
+                            <div class="results"></div>
+                        </div>
+                    </li>
+                    <li class="separator hide"></li>
+                    <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+                        <a href="#" class="dropdown-toggle clearfix" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <i class="icon-bell"></i>
+                            <span class="badge badge-succscriptess" id="header_notification_span">0</span>
+                        </a>
+                        <ul class="dropdown-menu" id="header_notification_list">
+                            <li class="external">
+                                <h3><span class="bold">[[[[Loading...]]]]</span></h3>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="separator hide"></li>
+                    <li class="dropdown dropdown-user dropdown-dark">
+                        <a href="#" class="dropdown-toggle avatar-user" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+
+                            <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
+                            <div class="img-circle"></div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li style="overflow-y: auto; max-height: 50vh;">
+                                <a class="username">
+                                    <span>
+                                        abd
+                                    </span>
+                                </a>
+
+                                @await Component.InvokeAsync("UserTenantMenu", new { controllerName = ViewContext.RouteData.Values["controller"]?.ToString() })
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Profile","Account",new { area="" })">
+                                    <i class="icon-user"></i>My Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ChangePassword","Manage",new { area="" })">
+                                    <i class="icon-key"></i>Change Password
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ChangeSettings","Manage",new { area=""})">
+                                    <i class="icon-settings"></i>Preferences
+                                </a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Logout", "Account", new { area = "" })">
+                                    <i class="icon-key"></i> Log Out
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="page-wrap">
+        <div class="page-container ">
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar-wrapper">
+                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                <div class="page-sidebar navbar-collapse collapse">
+                    <!-- BEGIN SIDEBAR MENU -->
+                    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+                    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+                    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+                    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+                    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                    @await Component.InvokeAsync("SidebarMenu", new { controllerName = ViewContext.RouteData.Values["controller"]?.ToString() })
+                    <!-- END SIDEBAR MENU -->
+                </div>
+            </div>
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <div id="content" class="page-content">
+
+                    <!-- BEGIN PAGE CONTENT-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            @RenderBody()
+                        </div>
+                    </div>
+                    <!-- END PAGE CONTENT-->
+                </div>
+            </div>
+            <!-- END CONTENT -->
+        </div>
+    </div>
+    <div class="page-footer">
+        <div class="page-footer-inner">
+            @DateTime.UtcNow.Year.ToString() © <a class="page-footer-link" href="~/ReleaseNotes">Lynx</a> by Acacus
+        </div>
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div>
+
+    <script src="~/js/color-picker.js"></script>
+    <script src="~/lib/jquery-migration/jquery-migrate.min.js"></script>
+    <script src="~/lib/jquery-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/reporting/telemetry-markers-selector.js"></script>
+    <script src="~/js/semantic.js"></script>
+    <script src="~/js/map-loader/map-themes.js"></script>
+    <script src="~/js/map-loader/loader.js"></script>
+    <script src="~/lib/axios/axios.js"></script>
+    <script src="~/lib/sortable/sortable.js"></script>
+    <script src="~/lib/vuedraggable/vuedraggable.js"></script>
+    <script src="~/lib/ion-range-slider/js/ion.rangeSlider.min.js"></script>
+    <script src="~/js/range-slider.js"></script>
+    <script src="~/js/range-slider-period.js"></script>
+    <script src="~/lib/modernizr/modernizr-2.8.3.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/respond/respond.min.js"></script>
+    <script src="~/lib/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script src="~/lib/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/lib/jquery-blockui/jquery.blockui.min.js"></script>
+    <script src="~/lib/uniform/dist/jquery.uniform.min.js"></script>
+    <script src="~/js/metronic.js"></script>
+    <script src="~/js/layout.js"></script>
+    <script src="~/lib/jquery-minicolors/jquery.minicolors.min.js"></script>
+    <script src="~/lib/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script src="~/lib/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables/extensions/FixedColumns/js/dataTables.fixedColumns.min.js"></script>
+    <script src="~/lib/toastr/build/toastr.min.js"></script>
+    <script src="~/js/toast-box.js"></script>
+    <script src="~/js/form-wizard.js"></script>
+    <script src="~/js/maps/overlay.io.js"></script>
+    <script src="~/js/maps/overlappingmarkerspiderfier.min.js"></script>
+    <script src="~/lib/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+    <script src="~/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/js/maps/searchbox.js"></script>
+    <script src="~/js/maps/geocoder.js"></script>
+    <script src="~/js/maps/directions-service.js"></script>
+    <script src="~/lib/marker-clusterer/markerclusterer_compiled.js"></script>
+    <script src="~/js/alert-box.js"></script>
+    <script src="~/js/unit-converter.js"></script>
+    <script src="~/js/date-formatter.js"></script>
+    <script src="~/js/webrtc-recorder.js"></script>
+    <script src="~/lib/owl-carousel/js/owl.carousel.min.js"></script>
+    <script src="~/lib/amcharts/js/core.js"></script>
+    <script src="~/lib/amcharts/js/charts.js"></script>
+    <script src="~/lib/amcharts/themes/dark.js"></script>
+    <script src="~/lib/amcharts4/core.js"></script>
+    <script src="~/lib/amcharts4/charts.js"></script>
+    <script src="~/lib/amcharts4/themes/dark.js"></script>
+    <script src="~/lib/amcharts/js/amcharts.js"></script>
+    <script src="~/lib/amcharts/js/serial.js"></script>
+    <script src="~/lib/amcharts/js/gantt.js"></script>
+    <script src="~/lib/select2/js/select2.min.js"></script>
+    <script src="~/lib/vue/vue.js"></script>
+    <script src="~/js/newmaps/newmaps.js"></script>
+    <script src="~/js/newmaps/alerts-marquee.js"></script>
+    <script src="~/js/newmaps/timeknots.js"></script>
+    <script src="~/js/newmaps/d3.v2.min.js"></script>
+    <script src="~/js/newmaps/commands.js"></script>
+    <script src="~/js/newmaps/map-scheduler.js"></script>
+    <script src="~/js/newmaps/historical-routes.js"></script>
+    <script src="~/js/newmaps/draw-routes.js"></script>
+    <script src="~/js/newmaps/track.js"></script>
+    <script src="~/lib/dashboard/d3.min.js"></script>
+    <script src="~/lib/dashboard/d3_tooltip.js"></script>
+    <script src="~/lib/dashboard/echarts.min.js"></script>
+    <script src="~/js/dashboard/echarts/pie_levels.js"></script>
+    <script src="~/js/dashboard/echarts/bars_stacked.js"></script>
+    <script src="~/js/dashboard/d3-charts/stackedareachart.js"></script>
+    <script src="~/js/dashboard/d3-charts/bars.js"></script>
+    <script src="~/js/dashboard/d3-charts/progress.js"></script>
+    <script src="~/js/dashboard/d3-charts/lines.js"></script>
+    <script src="~/js/dashboard/d3-charts/heatmaps.js"></script>
+
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/uniform/themes/default/css/uniform.default.css">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="~/lib/uniform/themes/default/css/uniform.default.css">
+    <link rel="stylesheet" href="~/lib/uniform/themes/dark/css/uniform.dark.min.css">
+    <link rel="stylesheet" href="~/css/components.css">
+    <link rel="stylesheet" href="~/css/plugins.css">
+    <link rel="stylesheet" href="~/css/layout.css">
+    <link rel="stylesheet" href="~/css/custom.css">
+    <link rel="stylesheet" href="~/css/color-picker.css">
+    <link rel="stylesheet" href="~/css/components.css">
+    <link rel="stylesheet" href="~/css/plugins.css">
+    <link rel="stylesheet" href="~/css/layout.css">
+    <link rel="stylesheet" href="~/css/custom.css">
+    <link rel="stylesheet" href="~/css/dark.css">
+    <link rel="stylesheet" href="~/css/color-picker.css">
+    <link rel="stylesheet" href="~/css/semantic.min.css">
+    <link rel="stylesheet" href="~/css/searchbox.css">
+    <link rel="stylesheet" href="~/lib/owl-carousel/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap-multiselect/css/bootstrap-multiselect.css">
+    <link rel="stylesheet" href="~/lib/bootstrap-select/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="~/lib/select2/css/select2.css">
+    <link rel="stylesheet" href="~/css/dashboard.css">
+    <link rel="stylesheet" href="~/lib/jquery-minicolors/jquery.minicolors.css">
+    <link rel="stylesheet" href="~/lib/bootstrap-switch/css/bootstrap-switch.min.css">
+    <link rel="stylesheet" href="~/css/dark.css">
+
+    @await RenderSectionAsync("scripts", required: false)
+    <script>
+        $('.ui.search').search({
+            apiSettings: {
+                url: '@Url.Action("Index", "Search", new { area = "" })?search={query}',
+                beforeSend: function (settings) {
+                    if (settings.urlData.query.trim().length < 3) {
+                        return false;
+                    }
+
+                    return settings;
+                }
+            },
+            fields: {
+                results: 'results',
+                title: 'title',
+                url: 'link',
+
+            },
+            type: 'category',
+            minCharacters: 3
+        });
+
+        $('#header_notification_list').on('mousewheel DOMMouseScroll', function (e) {
+            var e0 = e.originalEvent;
+            var delta = e0.wheelDelta || -e0.detail;
+
+            this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+            e.preventDefault();
+        });
+
+        function preventScrolling(event) {
+            let scrollTo = null;
+
+            if (event.type == 'mousewheel') {
+                scrollTo = (event.wheelDelta * -1);
+            } else if (event.type == 'DOMMouseScroll') {
+                scrollTo = 40 * event.detail;
+            }
+
+            if (scrollTo) {
+                event.preventDefault();
+                $(this).scrollTop(scrollTo + $(this).scrollTop());
+            }
+        }
+
+        function preventGlobalScrollOnGrid(element) {
+            element.addEventListener('mousewheel', preventScrolling, { passive: false });
+            element.addEventListener('DOMMouseScroll', preventScrolling, { passive: false });
+        }
+
+        var gridLoadingMask = $('.k-grid > .k-grid-content > .k-virtual-scrollable-wrap')[0];
+
+        let lastRequestTime = new Date();
+        let intervalId;
+
+        function isSlidingExpirationEnabled() {
+            return "@ViewData["SlidingExpiration"]" === "True";
+        }
+
+        function startSlidingExpiration() {
+
+            intervalId = setInterval(function () {
+
+                const timeDiff = getTimeDiffFromLastRequest();
+
+                if (timeDiff >= 300000) {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                } else {
+                    renderNotificationBar();
+                }
+            }, 60000);
+        }
+
+        function getTimeDiffFromLastRequest() {
+            const currentTime = new Date();
+            return currentTime.getTime() - lastRequestTime.getTime();
+        }
+
+        function isNotificationRequest(url) {
+            return !url.includes('Layout/NotificationBar');
+        }
+
+        if (isSlidingExpirationEnabled()) {
+            $(document).ajaxComplete(function (event, xhr, settings) {
+                if (isNotificationRequest(settings.url)) {
+                    lastRequestTime = new Date();
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            Metronic.init();
+            Layout.init();
+
+            if (isSlidingExpirationEnabled()) {
+                startSlidingExpiration();
+            } else {
+                renderNotificationBar();
+                setInterval(renderNotificationBar, 60000);
+            }
+
+            var kendoGrid = $('.k-grid').data('kendoGrid');
+            if (typeof kendoGrid !== 'undefined') {
+                // Check if grid is lazy loaded
+                gridLoadingMask = $('.k-grid > .k-grid-content > .k-virtual-scrollable-wrap')[0];
+                if (gridLoadingMask) {
+                    preventGlobalScrollOnGrid($('.k-grid')[0]);
+                }
+                // Workaround for last item tooltip in telerik grids
+                $(document).ajaxSuccess(function () {
+                    $('.k-grid table tr td a.tooltips').tooltip('destroy');
+                    $('.k-grid table tr td a.tooltips').tooltip({ placement: 'top', container: 'body' });
+                });
+
+                //  Workaround for header title in telerik grids
+                $('.k-grid-header th.k-header>.k-link').css("white-space", "normal")
+                $('.k-grid-header th.k-header>.k-link').css("text-overflow", "unset");
+                $('.k-grid-header th.k-header').css("vertical-align", "top");
+
+            }
+            //For fillters
+            //if (typeof kendoGrid !== 'undefined') {
+            //    kendoGrid.bind("dataBinding", globaldataBinding);
+            //    if (CheckIfSameController()) {
+            //        ApplyFilters(kendoGrid)
+            //    }
+            //    else {
+            //        ClearSessionFilters(kendoGrid);
+            //        kendoGrid.dataSource.read();
+            //    }
+            //}
+            //else {
+            //        sessionStorage.setItem("PreviousPage", window.location.pathname);
+            //}
+
+            $("input[data-role='datepicker']").each(function (index) {
+                var pickerDateViewPopup = $(this).data("kendoDatePicker");
+                if (typeof pickerDateViewPopup !== "undefined") {
+                    pickerDateViewPopup = pickerDateViewPopup.dateView.popup
+                    if ($('body').css('direction') == "rtl") {
+                        pickerDateViewPopup.options.origin = "bottom left";
+                        pickerDateViewPopup.options.position = "top left";
+                    }
+                    else {
+                        pickerDateViewPopup.options.origin = "bottom right";
+                        pickerDateViewPopup.options.position = "top right";
+                    }
+                }
+            });
+
+            // Trim kendo dropdown 'search key' client side field
+            var kendoDropDown = $('.k-dropdown > input').data('kendoDropDownList');
+            if (typeof kendoDropDown !== 'undefined') {
+                kendoDropDown.bind('filtering', function (e) {
+                    var filter = e.filter;
+
+                    if (filter != null && filter.value) {
+                        filter.value = $.trim(filter.value);
+                    }
+                });
+            }
+
+            // Refresh the page to trigger full redirect to Login Page in case of unauhtorized request from ajax calls
+            $(document).ajaxError(function (event, jqxhr, settings, exception) {
+                if (jqxhr.status === 403) {
+                    location.reload(true);
+                }
+            });
+        });
+
+        function AddLicence() {
+            window.am4core.addLicense("@amChartLicense");
+        }
+
+        function CheckIfSameController() {
+            var pathname = window.location.pathname;
+            var previousPagePath = sessionStorage.getItem("PreviousPage");
+            if (previousPagePath === null || pathname === previousPagePath) {
+                sessionStorage.setItem("PreviousPage", pathname);
+                return false;
+            }
+
+            var CurrentPageSplitted = pathname.split('/');
+            var previousPagePathSplited = previousPagePath.split('/');
+
+            if (previousPagePathSplited[2] === CurrentPageSplitted[2]) {
+                sessionStorage.setItem("PreviousPage", pathname);
+                return true;
+            }
+
+            sessionStorage.setItem("PreviousPage", pathname);
+            return false;
+        }
+
+        function clearSessionFilters(kendoGrid) {
+            var gridId = kendoGrid.element[0].id.toString().trim();
+            var sessionName = "GridFiltersContainer " + gridId;
+            sessionStorage.removeItem(sessionName);
+        }
+
+        function clearAllFilters(kendoGrid, callback = null) {
+
+            var key = "FiltersInitialState";
+
+            kendoGrid.dataSource.bind('requestStart', (e) => {
+                e.preventDefault();
+            });
+
+            var gridId = kendoGrid.element[0].id.toString().trim();
+            var sessionData = JSON.parse(sessionStorage.getItem(key));
+            var requireTrigger = false;
+
+            // Apply the filters.
+            if (sessionData !== null && sessionData.gridId == gridId) {
+
+                $('span.multiselect-native-select select').each(function () {
+                    var selectId = $('#' + $(this).attr('id'));
+
+                    selectId.multiselect('deselect', selectId.val());
+                });
+
+                ////Populate multiselect filters.
+                //if (typeof sessionData.filters.multiselect !== 'undefined') {
+                //    if (sessionData.gridId === gridId) {
+                //        var arrOfFilters = sessionData.filters.multiselect;
+
+                //        for (var chc of arrOfFilters) {
+                //            var selectElementId = $('#' + chc.multiSelectId);
+                //            var selectedValuesArr = chc.value;
+                //            for (var value of selectedValuesArr) {
+                //                requireTrigger = true;
+                //                selectElementId.multiselect('select', value);
+                //            }
+                //        }
+                //        $('input[type="checkbox"]').uniform();
+                //    }
+                //}
+
+                //Populate Kendo multiselect filters.
+                if (typeof sessionData.filters.kendoMultiselect !== 'undefined') {
+                    if (sessionData.gridId === gridId) {
+                        var filters = sessionData.filters.kendoMultiselect;
+                        var multiSelectId = filters.multiSelectId;
+                        var multiselect = $("#" + multiSelectId).data("kendoMultiSelect");
+                        multiselect.value(filters.value);
+                        $("#" + multiSelectId).val(filters.value.toString().split(','));
+                        requireTrigger = true;
+                        //multiselect.trigger("change");
+                    }
+                }
+
+                //Populate dropdown filters.
+                if (typeof sessionData.filters.toolbarDropdownList !== 'undefined') {
+                    // Check if there are any dropdown related to this grid.
+                    if (sessionData.gridId === gridId) {
+                        // If yes get value from session then fill in the dropdown..
+                        var arrOfFilters = sessionData.filters.toolbarDropdownList;
+                        for (var ddl of arrOfFilters) {
+                            var dropDownList = $("#" + ddl.inputFiledId).data("kendoDropDownList");
+                            //dropDownList.select(parseInt(ddl.selectedLiIndex));
+                            dropDownList.value(ddl.selectedLiVal);
+                            requireTrigger = true;
+                            //dropDownList.trigger("change");
+                        }
+                    }
+                }
+
+                if (typeof sessionData.filters.switchFilter !== 'undefined') {
+                    $('.switch-filter').removeClass("active");
+                }
+
+                //Populate dropdownSngInTbl filters.
+                if (typeof sessionData.filters.tableDropdownList !== 'undefined') {
+                    // Check if there are any dropdown related to this grid.
+                    if (sessionData.gridId === gridId) {
+                        // If yes get value from session then fill in the dropdown..
+                        var arrOfFilters = sessionData.filters.tableDropdownList;
+                        for (var ddl of arrOfFilters) {
+                            var dropDownList = $("#" + ddl.inputFiledId).data("kendoDropDownList");
+                            dropDownList.value(ddl.selectedLiVal);
+                            requireTrigger = true;
+                            //dropDownList.trigger("change");
+                        }
+                    }
+                }
+
+                // Populate datepicker filters.
+                if (typeof sessionData.filters.datePickers !== 'undefined') {
+                    // Check if there are any datepicker related to this grid.
+                    if (sessionData.gridId === gridId) {
+                        // If yes get value from session then fill in the datepickers..
+                        var arrOfFilters = sessionData.filters.datePickers;
+                        for (var date of arrOfFilters) {
+                            var datepicker = $("#" + date.inputId).data("kendoDatePicker");
+                            datepicker.value(date.inputValue);
+                        }
+                    }
+                }
+
+                // Populate datetimepicker filters.
+                if (typeof sessionData.filters.dateTimePkrs !== 'undefined') {
+                    // Check if there are any datepicker related to this grid.
+                    if (sessionData.gridId === gridId) {
+                        // If yes get value from session then fill in the datepickers..
+                        var arrOfFilters = sessionData.filters.dateTimePkrs;
+                        for (var dateTms of arrOfFilters) {
+                            var datetimepicker = $("#" + dateTms.inputId).data("kendoDateTimePicker");
+                            datetimepicker.value(dateTms.inputValue);
+                        }
+                    }
+                }
+
+                //// Populate inner grid filters
+                if (typeof sessionData.filters.innerGridFilters !== 'undefined') {
+                    var arrOfFilters = sessionData.filters.innerGridFilters;
+                    //This steatemnt will make a request.
+
+                    $('#' + sessionData.gridId).data('kendoGrid').dataSource.filter({});
+                }
+
+                $('.franchise select').each(function () {
+                    var selectId = $(this).attr('id');
+                    var selectedVal = $('#' + selectId).val();
+                    $("#" + selectId).data("kendoMultiSelect").value([]);
+
+                });
+            }
+
+            kendoGrid.dataSource.unbind('requestStart');
+            $('#' + sessionData.gridId).data('kendoGrid').dataSource.filter({});
+
+            if (callback != null) {
+                callback();
+            }
+        }
+
+        function applyFilters(kendoGrid, refresh = true, callback = null, key = "FilterCache") {
+
+
+            // Save the initial state of filters before modifying anyone in order to be used for reset.
+            saveFilters(kendoGrid, "FiltersInitialState");
+
+            if (!buttonEventRegistered) {
+                buttonEventRegistered = true;
+                $('.clear-all-filters').click(e => {
+                    if ($('.clear-all-filters').hasClass('disabled')) {
+                        e.preventDefault();
+                        return;
+                    }
+
+                    clearAllFilters(kendoGrid, callback);
+                });
+            }
+
+            kendoGrid.dataSource.bind('requestStart', (e) => {
+                e.preventDefault();
+            });
+
+            var gridId = kendoGrid.element[0].id.toString().trim();
+            var sessionData = JSON.parse(sessionStorage.getItem(key));
+            var requireTrigger = false;
+
+            // Apply the filters.
+            if (sessionData !== null && sessionData.gridId == gridId && sessionData.path == window.location.pathname) {
+
+                //Populate multiselect filters.
+                if (typeof sessionData.filters.multiselect !== 'undefined') {
+                    if (sessionData.gridId === gridId) {
+                        var arrOfFilters = sessionData.filters.multiselect;
+
+                        for (var chc of arrOfFilters) {
+                            var selectElementId = $('#' + chc.multiSelectId);
+                            var selectedValuesArr = chc.value;
+                            for (var value of selectedValuesArr) {
+                                requireTrigger = true;
+                                selectElementId.multiselect('select', value);
+                            }
+                        }
+                        $('input[type="checkbox"]').uniform();
+                    }
+                }
+
+                //Populate Kendo multiselect filters.
+                if (typeof sessionData.filters.kendoMultiselect !== 'undefined') {
+                    if (sessionData.gridId === gridId) {
+                        var filters = sessionData.filters.kendoMultiselect;
+                        var multiSelectId = filters.multiSelectId;
+                        var multiselect = $("#" + multiSelectId).data("kendoMultiSelect");
+                        multiselect.value(filters.value);
+                        $("#" + multiSelectId).val(filters.value.toString().split(','));
+                        requireTrigger = true;
+                        //multiselect.trigger("change");
+                    }
+                }
+
+                //Populate dropdown filters.
+                if (typeof sessionData.filters.toolbarDropdownList !== 'undefined') {
+                    // Check if there are any dropdown related to this grid.
+                    if (sessionData.gridId === gridId) {
+                        // If yes get value from session then fill in the dropdown..
+                        var arrOfFilters = sessionData.filters.toolbarDropdownList;
+                        for (var ddl of arrOfFilters) {
+                            var dropDownList = $("#" + ddl.inputFiledId).data("kendoDropDownList");
+                            //dropDownList.select(parseInt(ddl.selectedLiIndex));
+                            dropDownList.value(ddl.selectedLiVal);
+                            requireTrigger = true;
+                            //dropDownList.trigger("change");
+                        }
+                    }
+                }
+
+                //Populate dropdownSngInTbl filters.
+                if (typeof sessionData.filters.tableDropdownList !== 'undefined') {
+                    // Check if there are any dropdown related to this grid.
+                    if (sessionData.gridId === gridId) {
+                        // If yes get value from session then fill in the dropdown..
+                        var arrOfFilters = sessionData.filters.tableDropdownList;
+                        for (var ddl of arrOfFilters) {
+                            var dropDownList = $("#" + ddl.inputFiledId).data("kendoDropDownList");
+                            dropDownList.value(ddl.selectedLiVal);
+                            requireTrigger = true;
+                            //dropDownList.trigger("change");
+                        }
+                    }
+                }
+
+                // Populate datepicker filters.
+                if (typeof sessionData.filters.datePickers !== 'undefined') {
+                    // Check if there are any datepicker related to this grid.
+                    if (sessionData.gridId === gridId) {
+                        // If yes get value from session then fill in the datepickers..
+                        var arrOfFilters = sessionData.filters.datePickers;
+                        for (var date of arrOfFilters) {
+                            var datepicker = $("#" + date.inputId).data("kendoDatePicker");
+                            datepicker.value(date.inputValue);
+                        }
+                    }
+                }
+
+                // Populate datetimepicker filters.
+                if (typeof sessionData.filters.dateTimePkrs !== 'undefined' && '@cultureName' === sessionStorage.getItem("Culture")) {
+                    // Check if there are any datepicker related to this grid.
+                    if (sessionData.gridId === gridId) {
+                        // If yes get value from session then fill in the datepickers..
+                        var arrOfFilters = sessionData.filters.dateTimePkrs;
+                        for (var dateTms of arrOfFilters) {
+                            var datetimepicker = $("#" + dateTms.inputId).data("kendoDateTimePicker");
+                            datetimepicker.value(dateTms.inputValue);
+                        }
+                    }
+                }
+
+                //// Populate inner grid filters
+                if (typeof sessionData.filters.innerGridFilters !== 'undefined') {
+                    var arrOfFilters = sessionData.filters.innerGridFilters;
+                    //This steatemnt will make a request.
+
+                    $('#' + sessionData.gridId).data('kendoGrid').dataSource.filter(arrOfFilters);
+                }
+            }
+
+            kendoGrid.dataSource.unbind('requestStart');
+
+            if (refresh) {
+                kendoGrid.dataSource.read();
+            }
+
+            if (callback != null) {
+                callback();
+            }
+
+            if (key == "FilterCache") {
+                kendoGrid.bind('dataBinding', () => { saveFilters(kendoGrid, key) });
+            }
+
+            sessionStorage.setItem("Culture", '@cultureName');
+        }
+
+        var buttonEventRegistered = false;
+
+        function saveFilters(grid, key) {
+            var filterObj = grid.getOptions().dataSource.filter;
+            var gridId = grid.element[0].id.toString().trim();
+            var Pathname = window.location.pathname;
+
+            var filtersObj = {};
+            // If filter button is hitten.
+            if ((typeof filterObj !== 'undefined')) {
+                if (filterObj !== null && filterObj.filters.length > 0) { // To handle clear button.
+                    filtersObj.innerGridFilters = filterObj.filters
+                }
+            }
+
+            // **** Start Check for datepickers ****
+            var arrOfDtPkrs = [];
+            $('.k-grid .k-grid-toolbar .k-datepicker .k-picker-wrap input').each(function () {
+                var InputValue = $(this).val();
+                var InputId = $(this).attr('id');
+                var obj = {
+                    inputId: InputId,
+                    inputValue: InputValue
+                }
+                arrOfDtPkrs.push(obj);
+            });
+
+            if (arrOfDtPkrs.length !== 0) {
+                filtersObj.datePickers = arrOfDtPkrs;
+            }
+
+            // *** Start Datetime pickers ****
+            var arrOfDtTmPkrs = [];
+            $('.k-grid .k-grid-toolbar .k-datetimepicker .k-picker-wrap input').each(function () {
+                var InputValue = $(this).val();
+                var InputId = $(this).attr('id');
+
+                var obj = {
+                    inputId: InputId,
+                    inputValue: InputValue
+                };
+                arrOfDtTmPkrs.push(obj);
+            });
+            if (arrOfDtTmPkrs.length !== 0) {
+                filtersObj.dateTimePkrs = arrOfDtTmPkrs;
+
+            }
+            // *** End Datetime pickers ****
+
+            // **** Start Check for dropDowns ****
+
+            var arrOfDDLs = [];
+            if ($('div.k-grid-toolbar').find('div.grid-filters-group').length === 0) {
+                $('div.k-grid-toolbar .k-dropdown[role="listbox"] input').each(function () {
+                    var inputFiled = $(this);
+                    var inputFieldId = inputFiled[0].id;
+                    if (inputFiled !== 'undefined' || inputFiled !== null) {
+                        var dropDownList = $("#" + inputFieldId).data("kendoDropDownList");
+                        var ddlValue = dropDownList.value();
+                        if (ddlValue !== '') {
+                            var obj = {
+                                inputFiledId: inputFieldId,
+                                selectedLiVal: ddlValue
+                            }
+                            arrOfDDLs.push(obj);
+                        }
+                    }
+                });
+                if (arrOfDDLs.length !== 0) {
+                    filtersObj.toolbarDropdownList = arrOfDDLs;
+
+                }
+            }
+            // Dropdown inside table
+            else {
+                // Below to handle single select
+                var arrOfSngDdlInTbl = [];
+                $('div.k-grid-toolbar .grid-filters-group table.filterGrid tbody tr:not([style="display: none;"]) td input').each(function () {
+                    var inputFiled = $(this);
+                    if (inputFiled !== 'undefined' || inputFiled !== null) {
+                        if (inputFiled[0].previousElementSibling !== null) {
+                            if (inputFiled[0].previousElementSibling.className.includes('k-dropdown-wrap k-state-default')) {
+                                var inputFieldId = inputFiled[0].id;
+                                var dropDownList = $("#" + inputFieldId).data("kendoDropDownList");
+                                var ddlValue = dropDownList.value().trim();
+                                if (ddlValue !== '') {
+                                    var selectedLiValue = ddlValue
+                                    var obj = {
+                                        inputFiledId: inputFieldId,
+                                        selectedLiVal: selectedLiValue
+                                    };
+                                    arrOfSngDdlInTbl.push(obj);
+                                }
+                            }
+                        }
+                    }
+                });
+                if (arrOfSngDdlInTbl.length !== 0) {
+                    filtersObj.tableDropdownList = arrOfSngDdlInTbl;
+                }
+            }
+            // **** End Check for dropDowns ****
+
+            // **** Start Check for multiselect ****
+            var arrOfChkBx = [];
+            $('span.multiselect-native-select select').each(function () {
+                var selectId = $(this).attr('id');
+                var selectedVal = $('#' + selectId).val();
+
+                // Check if selected value isn't null
+                if (selectedVal !== null) {
+                    // Store selected values
+                    var obj = {
+                        multiSelectId: selectId,
+                        value: selectedVal
+                    };
+                    arrOfChkBx.push(obj);
+                }
+            });
+            if (arrOfChkBx.length !== 0) {
+                filtersObj.multiselect = arrOfChkBx;
+            }
+
+            // **** Start Check for KENDO multiselect ****
+            var arrOfkednoMultiSlct = [];
+            var obj = {};
+            $('.k-grid-toolbar .k-multiselect select').each(function () {
+                var selectId = $(this).attr('id');
+                var selectedVal = $('#' + selectId).val();
+                var multiselect = $("#" + selectId).data("kendoMultiSelect");
+                // Check if selected value isn't null
+                if (selectedVal !== null) {
+                    // Store selected values
+                    obj = {
+                        multiSelectId: selectId,
+                        value: multiselect.value()
+                    };
+                    //arrOfkednoMultiSlct.push(obj);
+                }
+            });
+
+            $('.franchise select').each(function () {
+                var selectId = $(this).attr('id');
+                var selectedVal = $('#' + selectId).val();
+                var multiselect = $("#" + selectId).data("kendoMultiSelect");
+                // Check if selected value isn't null
+                if (selectedVal !== null) {
+                    // Store selected values
+                    obj = {
+                        multiSelectId: selectId,
+                        value: multiselect.value()
+                    };
+                    arrOfkednoMultiSlct.push(obj);
+                }
+            });
+
+            if (arrOfkednoMultiSlct.length > 0) {
+                filtersObj.kendoMultiselect = obj;
+
+            }
+
+            if ($('.switch-filter').hasClass("active")) {
+                filtersObj.switchFilter = true;
+            }
+
+            //if (arrOfkednoMultiSlct.length !== 0) {
+            //    filtersObj.kendoMultiselect = arrOfkednoMultiSlct;
+            //}
+
+            var container = {
+                gridId: gridId,
+                path: Pathname,
+                filters: filtersObj
+            };
+            sessionStorage.setItem(key, JSON.stringify(container));
+
+            if (sessionStorage.getItem("FiltersInitialState") === sessionStorage.getItem("FilterCache")) {
+                $('.clear-all-filters').addClass('disabled');
+            } else {
+                $('.clear-all-filters').removeClass('disabled');
+            }
+        }
+
+        function renderNotificationBar() {
+            $.ajax({
+                url: '@Url.Action("NotificationBar", "Layout", new { area = "" })',
+                type: 'GET',
+                cache: false,
+            }).done(function (result) {
+
+                var prevCount = parseInt($('#header_notification_span').text());
+                if (prevCount !== 0 && result.Count > prevCount) {
+                    toastBox.enqueue('info', (result.Count - prevCount) + ' [[[[new notifications added.]]]]');
+                }
+
+                $('#header_notification_span').text(result.Count);
+                $('#header_notification_list').html(result.Html);
+
+                $(".dropdown-menu-list.scroller").slimScroll({
+                    height: 250,
+                });
+            });
+        }
+
+        function setActiveTab(selector, deactivated) {
+            deactivated.forEach(function (element) {
+                $(`#${element}`).removeClass("active"),
+                    $(`#tab_${element}`).removeClass("active")
+            });
+
+            $(`#tab_${selector}`).addClass("active");
+            $("#" + selector).addClass("active");
+            location.hash = `#tab_${selector}`;
+        }
+
+        $(document).ready(function () {
+            $(document).on('submit', 'form', function () {
+                $(this).find(':submit').prop('disabled', true).css('cursor', 'default');
+                return true;
+            });
+        });
+    </script>
+</body>
+</html>
+
+@functions {
+    public string SetBodyClass(bool rightToLeft)
+    {
+        return rightToLeft ? "page-sidebar-closed-hide-logo k-rtl" : "page-sidebar-closed-hide-logo";
+    }
+}

@@ -1,0 +1,153 @@
+﻿@model MenuViewModel
+@using Lynx.Models
+
+@{
+    var sysAdmin = true;
+}
+
+<style>
+    .page-sidebar .page-sidebar-menu .sub-menu, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu {
+        max-height: 200px;
+    }
+
+    .menu-side-bar-scroll {
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+
+    .page-sidebar-menu-closed {
+        overflow-y: visible;
+        overflow-x: hidden;
+        padding-right: 360px !important;
+        scrollbar-width: none;
+    }
+
+        .page-sidebar-menu-closed li .sub-menu {
+            width: 287px !important;
+        }
+
+
+        /* Styles for the scrollbar */
+        .page-sidebar-menu-closed::-webkit-scrollbar {
+            width: 0; /* Set the width of the scrollbar to zero */
+        }
+
+    .page-sidebar-closed .page-sidebar .page-sidebar-menu.page-sidebar-menu-closed > li > a {
+        margin-right: -54px !important;
+    }
+
+
+    .page-sidebar .page-sidebar-menu {
+        margin: 0px;
+    }
+</style>
+
+<ul class="page-sidebar-menu  menu-side-bar-scroll @SetClosedClass(Model.IsClosed)" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+    <li class="menu-pre-heading heading">
+        <div class="menu-toggler sidebar-toggler">
+            <i class="fa fa-reorder"></i>
+        </div>
+    </li>
+    <li class="start @SetActiveClass("Dashboard", Model.ControllerName)">
+        <a href="~/Dashboard">
+            <i class="fa fa-dashboard"></i>
+            <span class="title">Dashboard </span>
+        </a>
+    </li>
+
+    @foreach (var permissionArea in Model.AvailablePermissionAreas)
+    {
+        var permissionCodes = string.Join(",", permissionArea.Permissions.Where(pr => pr.Link != null).Select(p => p.Code));
+        if (sysAdmin)
+        {
+            <li class="@SetOpenClass(permissionArea.Code, Model.AreaName) @SetActiveClass(permissionArea.Code, Model.AreaName)">
+                @if (permissionArea.Permissions.Any(x => !string.IsNullOrEmpty(x.Link)))
+                {
+                    <a href="javascript:;">
+                        <i class="@permissionArea.Icon"></i>
+                        <span class="title">@permissionArea.Description</span>
+                        <span class="arrow @SetOpenClass(permissionArea.Code, Model.AreaName)"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        @foreach (var permission in permissionArea.Permissions)
+                        {
+                            if ((sysAdmin || true) && !string.IsNullOrEmpty(permission.Link))
+                            {
+                                <li class="@SetActiveClass(permission.Code, Model.ControllerName)">
+                                    <a href="@Url.Content("~" + permissionArea.Link + permission.Link)">
+                                        <i class="@permission.Icon"></i>
+                                        @permission.Description
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    }
+
+    @if (Model.CustomAddons.Any())
+    {
+        <li class="@SetOpenClass("CustomAddons", Model.ControllerName) @SetActiveClass("CustomAddons", Model.ControllerName)">
+            <a href="javascript:;">
+                <i class="fa fa-cubes"></i>
+                <span class="title">Custom Add-ons </span>
+                <span class="arrow @SetOpenClass("CustomAddons", Model.ControllerName)"></span>
+            </a>
+            <ul class="sub-menu">
+                @foreach (var addon in Model.CustomAddons)
+                {
+                    <li class="@SetActiveClass(addon.Code, Model.ControllerName)">
+                        <a href="@Url.Content("~/CustomAddons/" + addon.Code)">
+                            <i class="fa fa-puzzle-piece"></i>
+                            @addon.Name
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+
+    <li class="start @SetActiveClass("DownloadCenter", Model.ControllerName)">
+        <a href="~/DownloadCenter">
+            <i class="fa fa-globe"></i>
+            <span class="title">Download Center </span>
+        </a>
+    </li>
+
+    @if (sysAdmin)
+    {
+        <li class="start @SetActiveClass("Resources", Model.ControllerName)">
+            <a href="~/Resources">
+                <i class="fa fa-file-text-o"></i>
+                <span class="title">Resources </span>
+            </a>
+        </li>
+
+        <li class="start @SetActiveClass("TenantSettings", Model.ControllerName)">
+            <a href="~/TenantSettings">
+                <i class="fa fa-cogs"></i>
+                <span class="title">Settings </span>
+            </a>
+        </li>
+    }
+</ul>
+
+@functions
+{
+    public string SetActiveClass(string code, string activeName)
+    {
+        return code.ToLower().Equals(activeName) ? "active" : string.Empty;
+    }
+
+    public string SetOpenClass(string code, string activeName)
+    {
+        return code.ToLower().Equals(activeName) ? "open" : string.Empty;
+    }
+
+    public string SetClosedClass(bool closed)
+    {
+        return closed ? "page-sidebar-menu-closed" : string.Empty;
+    }
+}

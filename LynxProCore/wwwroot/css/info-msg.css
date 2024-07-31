@@ -1,0 +1,110 @@
+.info-msg {
+    display: inline;
+    vertical-align: super;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    padding: 0 6px 0px;
+    border-radius: 50%;
+    margin: 10px;
+    border: 1px solid #417bff;
+    background: #2764bf url(../images/info-small.png) no-repeat center center;
+}
+
+.info-msg:before {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    display: inline-block !important;
+    border: 4px solid transparent;
+    border-top: 6px solid #5d8fff;
+    content: '';
+    transform: translateX(-50%);
+}
+
+.info-msg:after {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    display: inline-block !important;
+    border: 5px solid transparent;
+    border-top: 7px solid #2764bf;
+    content: '';
+    transform: translate(-50%, -2px);
+}
+
+.info-msg-content {
+    position: absolute;
+    min-width: 300px;
+    left: 100%;
+    background: #202125;
+    padding: 5px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    top: 10px;
+    margin-right: 10px;
+    border: 1px solid #3e3e41;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 1s ease-out;
+    -webkit-transition: all 1s ease-out;
+    -moz-transition: all 1s ease-out;
+    -o-transition: all 1s ease-out;
+    -ms-transition: all 1s cubic-bezier;
+    z-index: 9;
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, .16);
+}
+
+.info-msg.active {
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, .76);
+}
+
+.info-msg.active .info-msg-content {
+    visibility: visible;
+    opacity: 1;
+    transition: all 1s ease-out;
+    -webkit-transition: all 1s ease-out;
+    -moz-transition: all 1s ease-out;
+    -o-transition: all 1s ease-out;
+    -ms-transition: all 1s cubic-bezier;
+}
+
+.info-msg-content blockquote {
+    padding: 2px 7px;
+    margin: 0 0 8px;
+    font-size: 14.5px;
+    border-left: 0;
+    border-bottom: 1px solid #34363c;
+}
+
+.info-msg-content > span {
+    display: inline-block;
+}
+
+.info-msg-content > p {
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.info-msg-content .list-bullet {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    border-radius: 50% !important;
+    margin: 0px 7px 0px 5px;
+    flex-shrink: 0;
+}
+
+.info-msg-content li {
+    margin-bottom: 12px;
+}
+
+.info-msg-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-msg-content .flex-container {
+    display: flex;
+}

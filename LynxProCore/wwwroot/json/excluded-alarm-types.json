@@ -1,0 +1,10 @@
+﻿[
+  100, // AI driver distraction
+  101, // AI illegal passenger
+  102, // AI video loss
+  103, // AI camera tampering
+  200, // Fatigue
+  201, // Yawning
+  202, // Smoking
+  203 // Phoning
+]

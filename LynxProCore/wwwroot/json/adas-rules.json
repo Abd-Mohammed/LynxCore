@@ -1,0 +1,18 @@
+[
+  {
+    "value": "_AdasWarning",
+    "text": "Warning"
+  },
+  {
+    "value": "_AdasFatigueAlert",
+    "text": "Fatigue Alert"
+  },
+  {
+    "value": "_NumberOfWarningsInTime",
+    "text": "Number Of Warnings In Time"
+  },
+  {
+    "value": "_NumberOfFatiguesInTime",
+    "text": "Number Of Fatigues In Time"
+  }
+]

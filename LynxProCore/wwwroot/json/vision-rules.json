@@ -1,0 +1,42 @@
+﻿[
+  {
+    "text": "Advanced Driver Behavior",
+    "value": "_AdvancedDriverBehavior"
+  },
+  {
+    "text": "Advanced Driver Emotion",
+    "value": "_AdvancedDriverEmotion"
+  },
+  {
+    "text": "Camera Disturbance",
+    "value": "_CameraDisturbance"
+  },
+  {
+    "text": "Capture Time",
+    "value": "_CaptureTime"
+  },
+  {
+    "text": "Detectable Objects",
+    "value": "_DetectableObjects"
+  },
+  {
+    "text": "Driver Behavior",
+    "value": "_DriverBehavior"
+  },
+  {
+    "text": "Driver Emotion",
+    "value": "_DriverEmotion"
+  },
+  {
+    "text": "People Count",
+    "value": "_VisionPeopleCount"
+  },
+  {
+    "text": "Last Updated Time",
+    "value": "_VisionLastUpdatedTime"
+  },
+  {
+    "text": "Number Of Driver Behaviors In Time",
+    "value": "_NumberOfDriverBehaviorsInTime"
+  }
+]

@@ -1,0 +1,45 @@
+	<svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 50">
+				<defs>
+					<style>
+            svg [class*=marker-tag]{opacity:0;}
+
+            svg[class*=tag-] .marker-tag-circlebg, svg[class*=tag-] .marker-tag-border, svg[class*=tag-] .marker-tag-point{opacity:1;fill:#fff;}
+            svg.tag-red .marker-tag-border, svg.tag-red .marker-tag-point{fill:#ed1c24;}
+            svg.tag-green .marker-tag-border, svg.tag-green .marker-tag-point{fill:#12ad58;}
+            svg.tag-blue .marker-tag-border, svg.tag-blue .marker-tag-point{fill:#29abe2;}
+            svg.tag-gray .marker-tag-border, svg.tag-gray .marker-tag-point{fill:#fff;}
+            svg.tag-gray .marker-tag-circlebg{fill:#999999;}
+            svg.tag-x-red .marker-tag-x{opacity:1;fill:#ed1c24;}
+            svg.tag-x-red .marker-tag-point{opacity:0;}
+            svg.tag-x-gray .marker-tag-x{opacity:1;fill:#808080;}
+            svg.tag-x-gray .marker-tag-point{opacity:0;}
+            svg.tag-battery-low .marker-tag-battery, svg.tag-battery-low .marker-tag-border{opacity:1;fill:#ed1c24;}
+            svg.tag-battery-low .marker-tag-point{opacity:0;}
+            svg.tag-battery-low .marker-tag-circlebg{fill:#010101;}
+            /*for marker tags*/
+            .cls-1{fill:#adadad;}
+            .marker-bg{fill:{{ color }};}
+            .cls-8{fill:#fff;}
+            .cls-4{fill:#fff;}
+            .cls-5{fill:red;}
+            .cls-6{fill:#006837;}
+            .cls-7{fill:gray;}
+            .cls-9{fill:#754c24;}
+          </style>
+				</defs>
+				<title>Marker</title>
+				<g id="Layer_2" data-name="Layer 2">
+						<path class="cls-1" d="M32.5,23.78a16.29,16.29,0,0,0,1.5-7A16.87,16.87,0,0,0,17,0,16.87,16.87,0,0,0,0,16.78a18.29,18.29,0,0,0,1.5,7L15.2,49a2,2,0,0,0,3.5,0Z"/>
+						<path class="cls-2 marker-bg" d="M30.7,23.81A15.21,15.21,0,0,0,32,17.43,15.19,15.19,0,0,0,17,2,15.19,15.19,0,0,0,2,17.43a16.94,16.94,0,0,0,1.3,6.38l13,23.49c.7,1.3.5,1.3,1.1,0Z"/>
+						<circle class="cls-4 marker-tag-circlebg" cx="27.5" cy="6.5" r="6.5"/>
+						<path class="cls-5 marker-tag-border" d="M27.5,1A5.5,5.5,0,1,1,22,6.5,5.51,5.51,0,0,1,27.5,1m0-1A6.5,6.5,0,1,0,34,6.5,6.5,6.5,0,0,0,27.5,0Z"/>
+						<path class="cls-6 marker-tag-battery" d="M30.42,5.33a.35.35,0,0,0-.28-.15H27.83V1.55a.33.33,0,0,0-.63-.13L24.56,7.36a.31.31,0,0,0,0,.31.35.35,0,0,0,.28.15h2.31v3.63a.33.33,0,0,0,.26.32h.07a.33.33,0,0,0,.3-.2l2.64-5.94A.31.31,0,0,0,30.42,5.33Z"/>
+						<path class="cls-7 marker-tag-x" d="M27.5,0A6.5,6.5,0,1,0,34,6.5,6.5,6.5,0,0,0,27.5,0Zm3.41,2.2-3.5,3.5L24,2.28a5.46,5.46,0,0,1,6.93-.08ZM22,6.5A5.47,5.47,0,0,1,23.28,3L26.7,6.41l-3.5,3.5A5.42,5.42,0,0,1,22,6.5Zm1.89,4.14,3.52-3.52L31,10.72a5.48,5.48,0,0,1-7.13-.08ZM31.72,10l-3.6-3.61,3.52-3.52A5.48,5.48,0,0,1,31.72,10Z"/>
+						<circle class="cls-9 marker-tag-point" cx="27.5" cy="6.5" r="2.5"/>
+						<g class="insert-icon">
+
+               {{ icon }}
+              
+						</g>
+				</g>
+			</svg>

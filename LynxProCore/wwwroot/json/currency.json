@@ -1,0 +1,26 @@
+﻿[
+  {
+    "code": "CNY",
+    "displayName": "Chinese Yuan (CNY)"
+  },
+  {
+    "code": "EUR",
+    "displayName": "Euro (EUR)"
+  },
+  {
+    "code": "GBP",
+    "displayName": "Pound Sterling (GBP)"
+  },
+  {
+    "code": "JPY",
+    "displayName": "Yen (JPY)"
+  },
+  {
+    "code": "AED",
+    "displayName": "UAE Dirham (AED)"
+  },
+  {
+    "code": "USD",
+    "displayName": "US Dollar (USD)"
+  }
+]

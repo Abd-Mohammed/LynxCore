@@ -1,0 +1,138 @@
+{
+  "default": "alert-default.svg",
+  "imageMappings": [
+    {
+      "image": "alert-speed.svg",
+      "mappings": [
+        "threshold_speed"
+      ]
+    },
+    {
+      "image": "alert-speed.svg",
+      "mappings": [
+        "equality_alarm_type_code_8"
+      ]
+    },
+    {
+      "image": "alert-speed-120.svg",
+      "mappings": [
+        "threshold_speed_greater_than_120",
+        "threshold_speed_greater_than_or_equal_120",
+        "threshold_speed_equal_120"
+      ]
+    },
+    {
+      "image": "alert-harsh-driving.svg",
+      "mappings": [
+        "equality_alarm_type_code_18"
+      ]
+    },
+    {
+      "image": "alert-idling.svg",
+      "mappings": [
+        "aggregate_threshold_distance_greater_than_1000_30min",
+        "aggregate_threshold_distance_greater_than_or_equal_1000_30min",
+        "aggregate_threshold_distance_equal_1000_30min"
+      ]
+    },
+    {
+      "image": "alert-towing.svg",
+      "mappings": [
+        "equality_engine_on_false",
+        "thershold_speed_greater_than_20",
+        "thershold_speed_greater_than_or_equal_20",
+        "thershold_speed_equal_20"
+      ]
+    },
+    {
+      "image": "alert-disconnection.svg",
+      "mappings": [
+        "time_threshold_last_time_updated_greater_than_",
+        "equality_condition_code_1"
+      ]
+    },
+    {
+      "image": "alert-disconnection.svg",
+      "mappings": [
+        "geometry_location_",
+        "equality_movement_true"
+      ]
+    },
+    {
+      "image": "alert-video-loss.svg",
+      "mappings": [
+        "equality_alarm_type_code_0"
+      ]
+    },
+    {
+      "image": "alert-video-cover.svg",
+      "mappings": [
+        "equality_alarm_type_code_1"
+      ]
+    },
+    {
+      "image": "alert-road-speed-limit.svg",
+      "mappings": [
+        "diff_threshold_speed_road_limit_15"
+      ]
+    },
+    {
+      "image": "alert-external-power-source.svg",
+      "mappings": [
+        "threshold_ain01"
+      ]
+    },
+    {
+      "image": "alert-vision.svg",
+      "mappings": [
+        "equality_condition_code_1"
+      ]
+    },
+    {
+      "image": "alert-vision.svg",
+      "mappings": [
+        "threshold_vision_detection_people_count"
+      ]
+    },
+    {
+      "image": "alert-internal-geofence.svg",
+      "mappings": [
+        "geometry_location"
+      ]
+    },
+    {
+      "image": "alert-external-geofence.svg",
+      "mappings": [
+        "aggregate_geometry_location",
+        "equality_has_active_driver_shift_false",
+        "equality_has_active_route_false"
+      ]
+    },
+    {
+      "image": "alert-video.svg",
+      "mappings": [
+        "equality_condition_code_0",
+        "equality_condition_code_102"
+      ]
+    },
+    {
+      "image": "alert-illegal-passenger.svg",
+      "mappings": [
+        "equality_movement_true",
+        "threshold_vision_detection_people_count_greater_than_1",
+        "equality_has_active_route_false",
+        "diff_threshold_timestamp_telemetry_document_last_route_event_time",
+        "threshold_speed_greater_than_"
+      ]
+    },
+    {
+      "image": "alert-video-cover.svg",
+      "mappings": [
+        "equality_movement_true",
+        "threshold_vision_detection_people_count_greater_than_1",
+        "threshold_speed_greater_than_25",
+        "abs_diff_threshold_timestamp"
+      ]
+    }
+  ]
+}

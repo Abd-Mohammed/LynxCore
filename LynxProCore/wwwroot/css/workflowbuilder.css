@@ -1,0 +1,219 @@
+.workflow-editor {
+    position: relative;
+
+    .workflow-toolbar {
+        top: 1px;
+        left: 50%;
+        z-index: 99999999;
+        padding: 0.5em 0;
+        position: absolute;
+        background-color: #33363c;
+        border: 1px solid #535865;
+        transform: translateX(-50%);
+
+        & button.btn {
+            background: transparent;
+            color: #ffffff;
+            font-size: 13px;
+            padding: 2px 14px;
+            align-items: center;
+            display: inline-flex;
+            justify-content: center;
+            border-right: 1px solid #5e6167;
+            box-shadow: none;
+            text-shadow: none;
+            filter: none;
+
+            & + .btn {
+                margin-left: 0;
+            }
+
+            &:hover:not(.disabled) * {
+                color: #9c9c9c;
+            }
+
+            &:last-child {
+                margin-right: 0;
+                border-right: none;
+            }
+        }
+    }
+}
+
+.workflow-activity:not(:has(.jsp-shape)) {
+    background-color: #33363c;
+    border: 1px solid #535865;
+    max-width: 250px;
+
+    /* Activity is being dragged outside of the container */
+
+    &.jsp-dragging:not(:is(.workflow-container .workflow-activity)) {
+        opacity: 0.3;
+    }
+
+    &.jsp-draggable:hover {
+        /* Hover style is applied only to draggable elements */
+        background-color: #3b3e46;
+        cursor: grab;
+    }
+}
+
+.workflow-activity:has(.jsp-shape) {
+    background-color: transparent;
+    border: none;
+
+    .jsp-shape {
+        pointer-events: none;
+        fill: #33363c;
+        stroke: #535865;
+        stroke-width: 1px;
+        color: #d5d7db;
+        max-width: 250px;
+    }
+
+    /* Hover style is applied only to draggable elements */
+
+    &.jsp-draggable:hover {
+        cursor: grab;
+
+        .jsp-shape {
+            fill: #3b3e46;
+        }
+    }
+}
+
+.workflow-container {
+    background-color: #2a2d33;
+    border: 1px solid #3c4048;
+    height: 60vh;
+    width: 100%;
+
+    /* External activity is being dragged over a container or activity */
+
+    &.jsp-container.jsp-drag-target:not(:has(.jsp-dragging)),
+    &.jsp-container:not(:has(.jsp-dragging)) .jsp-activity.jsp-drag-target {
+        /* External activity is being dragged over a container or non-shaped activity */
+        &.jsp-container, &.jsp-activity:not(:has(.jsp-shape)) {
+            border: 1px dashed #72798b;
+
+            &.jsp-drag-over {
+                border-color: #d96b00 !important;
+            }
+
+            &.jsp-drag-invalid {
+                border-color: #ca0a0a !important;
+            }
+        }
+
+        /* External activity is being dragged over a shaped activity */
+        &.jsp-activity:has(.jsp-shape) {
+            & .jsp-shape {
+                stroke: #7e869a;
+                stroke-dasharray: 5 2;
+            }
+
+            &.jsp-drag-over .jsp-shape {
+                stroke: #d96b00;
+            }
+
+            &.jsp-drag-invalid .jsp-shape {
+                stroke: #ca0a0a;
+            }
+        }
+    }
+
+    .connector-label {
+        color: #d5d7db;
+        text-shadow: 1px 1px 2px black;
+        font-weight: bold;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .workflow-activity.jsp-draggable.jsp-focused {
+        &:not(:has(.jsp-shape)) {
+            background-color: #3e4149;
+        }
+
+        & .jsp-shape {
+            fill: #3e4149;
+        }
+
+        .activity-header {
+            color: #fba34e;
+        }
+    }
+}
+
+.activity-builder-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &:not(:empty) {
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+}
+
+.jsp-content .activity-header {
+    display: flex;
+    width: 100%;
+    font-size: 0.8em;
+    color: #b5b7b9;
+    font-weight: 600;
+
+    & span {
+        margin-right: 0.5em;
+    }
+
+    /* header is inside an svg*/
+
+    &:is(svg *) {
+        justify-content: center;
+    }
+}
+
+.jsp-content .activity-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .title {
+        margin: 0.1em 0.5em;
+        max-width: 100%;
+        max-height: 4.5em;
+        color: #d5d7db;
+        font-weight: 600;
+        font-size: 1.1em;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        user-select: none;
+        text-wrap: pretty;
+        text-align: center;
+    }
+
+    .dl-horizontal {
+        margin-bottom: 0 !important;
+
+        & dt {
+            width: 80px !important;
+            background-color: #2c2f35;
+        }
+
+        & dd {
+            margin-left: 80px !important;
+            overflow: hidden;
+            width: 130px;
+            min-height: 1.5em;
+
+            &.no-wrap {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}

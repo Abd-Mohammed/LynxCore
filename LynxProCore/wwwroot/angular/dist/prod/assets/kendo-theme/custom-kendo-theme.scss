@@ -1,0 +1,88 @@
+$border-radius: 2px;
+$primary: #bb6e1a;
+$secondary: #272727;
+$info: #3e80ed;
+$success: #5ec232;
+$warning: #fdce3e;
+$error: #d51923;
+$body-text: #f6f6f6;
+$body-bg: #393a3c;
+$headings-text: #272727;
+$subtle-text: #666;
+$disabled-text: #8f8f8f;
+$component-text: #afafaf;
+$component-bg: #2f3135;
+$base-text: #f6f6f6;
+$base-bg: #424448;
+$hovered-text: #424242;
+$hovered-bg: #ececec;
+$selected-text: #fff;
+$selected-bg: #bb6e1a;
+$button-text: #bdbcbc;
+$button-bg: #1f2327;
+$link-text: #ff6358;
+$link-hover-text: #d6534a;
+$series-a: #ff6358;
+$series-b: #ffd246;
+$series-c: #78d237;
+$series-d: #28b4c8;
+$series-e: #2d73f5;
+$series-f: #aa46be;
+
+.k-checkbox {
+  border-color: rgba(0, 0, 0, 0.08);
+  color: transparent;
+  background-color: #1f2327 !important;
+}
+.k-checkbox:focus {
+  border: 1px solid #d28026 !important;
+}
+
+.k-popup .k-calendar {
+  display: flex;
+  width: 354px;
+}
+.k-filterable > .k-cell-inner {
+  margin: 0 !important;
+}
+.k-grid-header th.k-header {
+  vertical-align: inherit !important;
+}
+.k-grid-filter-popup {
+  overflow: hidden !important;
+}
+.k-filter-menu-container {
+  overflow: hidden;
+  padding: 0.2em;
+  input {
+    background: #1e2125;
+    padding: 0.5em;
+    width: 94%;
+    margin-bottom: 0;
+  }
+  .k-action-buttons {
+    margin-top: 0;
+    button {
+      padding: 0.3em;
+    }
+  }
+}
+kendo-grid-filter-menu-input-wrapper {
+  kendo-dropdownlist {
+    display: none !important;
+  }
+}
+@import "~@progress/kendo-theme-default/dist/all.scss";
+.k-i-filter:before {
+  content: "\e129";
+}
+
+kendo-grid {
+  height: 450px;
+  border: 0 !important;
+  background: #2b2e33;
+}
+
+.k-grid-content {
+  background-color: #292c31;
+}

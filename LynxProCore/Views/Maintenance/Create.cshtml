@@ -1,0 +1,232 @@
+﻿@model LynxProCore.Models.MaintenanceServiceViewModel
+@using Kendo.Mvc.UI
+@using LynxProCore.Helpers
+
+<style type="text/css">
+    .maintenancePartsTable {
+        width: 100%;
+    }
+
+        .maintenancePartsTable tr td {
+            vertical-align: top;
+            height: 67px;
+        }
+
+        .maintenancePartsTable tr {
+            height: 67px;
+            vertical-align: top;
+        }
+</style>
+
+<div class="portlet">
+    <div class="portlet-title">
+        <h3 class="page-title">
+            Maintenance Service  <small>Create </small>
+        </h3>
+    </div>
+    <div class="portlet-body form">
+        <div class="form-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.DnLabelWithRequiredFor(model => model.MaintenanceServiceTypeId, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.MaintenanceServiceTypeId, (SelectList)ViewData["MaintenanceServiceTypesList"], "Select...", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MaintenanceServiceTypeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.DnLabelWithRequiredFor(model => model.Date, htmlAttributes: new { @class = "control-label" })
+                            @(Html.Kendo().DateTimePicker().Name("Date").Format("G").Max((DateTime)ViewData["MaxDate"]).HtmlAttributes(new { style = "width: 100%" }))
+                            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.DnLabelWithRequiredFor(model => model.VehicleId, htmlAttributes: new { @class = "control-label" })
+                            @(Html.Kendo().DropDownListFor(model => model.VehicleId)
+                                .DataTextField("Name")
+                                .DataValueField("VehicleId")
+                                .OptionLabel("Select... ")
+                                .Filter("contains")
+                                .DataSource(source =>
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetVehicles", ViewContext.RouteData.Values["controller"].ToString());
+                                    })
+                                    .ServerFiltering(true);
+                                })
+                                .HtmlAttributes(new { style = "width: 100%" })
+                                )
+                            @Html.ValidationMessageFor(model => model.VehicleId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.DnLabelFor(model => model.DriverId, htmlAttributes: new { @class = "control-label" })
+                            @(Html.Kendo().DropDownListFor(model => model.DriverId)
+                                .DataTextField("Name")
+                                .DataValueField("DriverId")
+                                .OptionLabel("Select... ")
+                                .Filter("contains")
+                                .DataSource(source =>
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetDrivers", ViewContext.RouteData.Values["controller"].ToString());
+                                    })
+                                    .ServerFiltering(true);
+                                })
+                                .HtmlAttributes(new { style = "width: 100%" })
+                                )
+                            @Html.ValidationMessageFor(model => model.DriverId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.DnLabelWithRequiredFor(model => model.InvoiceReferenceNo, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.InvoiceReferenceNo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.InvoiceReferenceNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.DnLabelWithRequiredFor(model => model.Provider, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Provider, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Provider, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+
+                            @Html.DnLabelFor(model => model.InitialInspection, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.InitialInspection, htmlAttributes: new { @class = "form-control", @style = "resize: none", @rows = "5" })
+                            @Html.ValidationMessageFor(model => model.InitialInspection, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.DnLabelFor(model => model.FinalInspection, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.FinalInspection, htmlAttributes: new { @class = "form-control", @style = "resize: none", @rows = "5" })
+                            @Html.ValidationMessageFor(model => model.FinalInspection, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.DnLabelWithRequiredFor(model => model.Cost, (string)ViewData["CurrencySymbol"], htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Cost, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Cost, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.DnLabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.Notes, htmlAttributes: new { @class = "form-control", @style = "resize: none", @rows = "5" })
+                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                </div>
+                <table class="maintenancePartsTable">
+                    @for (var i = 1; i <= 5; i++)
+                    {
+                        if (i == 1)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        Parts 
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.LabelForModel("Name ", htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.LabelForModel("Quantity ", htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.LabelForModel("Cost  (" + (string)ViewData["CurrencySymbol"] + ")", htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>
+                                @Html.LabelForModel("Part  " + i, htmlAttributes: new { @class = "control-label" })
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.MaintenanceServiceParts[i - 1].Name, new { htmlAttributes = new { @class = "form-control", @style = "width:70%;" } })
+                                    @Html.ValidationMessageFor(model => model.MaintenanceServiceParts[i - 1].Name, "", new { @class = "text-danger" })
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.MaintenanceServiceParts[i - 1].Quantity, new { htmlAttributes = new { @class = "form-control", @style = "width:70%;" } })
+                                    @Html.ValidationMessageFor(model => model.MaintenanceServiceParts[i - 1].Quantity, "", new { @class = "text-danger" })
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.MaintenanceServiceParts[i - 1].Cost, new { htmlAttributes = new { @class = "form-control", @style = "width:70%;" } })
+                                    @Html.ValidationMessageFor(model => model.MaintenanceServiceParts[i - 1].Cost, "", new { @class = "text-danger" })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+                <div class="form-actions">
+                    <input type="submit" value="Create " class="btn primary" />
+                    <a asp-action="Index" style="color:white;" class="btn secondary">Back to list</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+     @Html.Script(TempData["BootstrapAlert"])
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Date').attr('readonly', true);
+            reInitFormValidation();
+            $("form").data("validator").settings.rules.Date.date = false;
+        });
+
+        function reInitFormValidation() {
+            $('form').removeData('validator');
+            $('form').removeData('unobtrusiveValidation');
+            $.validator.unobtrusive.parse('form');
+        }
+        $.validator.setDefaults({
+            ignore: ''
+        });
+    </script>
+}

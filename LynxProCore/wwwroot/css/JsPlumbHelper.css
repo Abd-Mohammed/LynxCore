@@ -1,0 +1,54 @@
+.jsp-container {
+    overflow: auto;
+    position: relative;
+
+    .jtk-overlay {
+        z-index: 9999;
+    }
+
+    .jtk-endpoint {
+        z-index: 9998;
+        cursor: pointer;
+    }
+
+    .jsp-activity {
+        position: absolute;
+        text-wrap: nowrap;
+        z-index: 9997;
+    }
+
+    .jtk-connector {
+        z-index: 9996;
+    }
+
+    &.jsp-read-only {
+        * {
+            cursor: default !important;
+        }
+
+        .jtk-endpoint {
+            pointer-events: none;
+        }
+    }
+
+    .jsp-read-only {
+        cursor: default !important;
+    }
+}
+
+.jsp-activity {
+    min-width: 120px;
+    min-height: 40px;
+    padding: 5px;
+}
+
+svg .jsp-content {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

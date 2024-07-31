@@ -1,0 +1,24 @@
+﻿[
+  {
+    "code": "AFRICA",
+    "displayName": "Africa"
+  },
+  {
+    "code": "ASIA",
+    "displayName": "Asia"
+  },
+  {
+    "code": "EUROPE",
+    "displayName": "Europe"
+  },
+  {
+    "code": "NORTH_AMERICA",
+    "displayName": "North America"
+  },
+
+  {
+    "code": "SOUTH_AMERICA",
+    "displayName": "South America"
+  }
+
+]

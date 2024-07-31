@@ -1,0 +1,123 @@
+﻿@model FareScheduleRequest
+@using LynxProCore.Helpers
+@using Kendo.Mvc.UI
+<style>
+    .k-timepicker .k-picker-wrap .k-input {
+        pointer-events: none;
+    }
+</style>
+<div class="row attributes-index" data-index="@Model.Index">
+
+    @Html.Hidden($"Schedules[{Model.Index}].Index", Model.Index)
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <input type="hidden" name="Schedules.Index" value="@Model.Index" />
+            @Html.LabelForModel($"DayOfWeek", htmlAttributes: new { @class = "control-label" })
+            <span class="text-danger">*</span>
+            <select asp-for="DayOfWeek" asp-items="Html.GetEnumSelectList<Lynx.Models.DayOfWeek>()" class="form-control" id="Schedules_@(Model.Index)__DayOfWeek" name="DayOfWeek">
+                <option value="">[[[[Select...]]]]</option>
+            </select>
+            @Html.ValidationMessage($"Schedules[{Model.Index}].DayOfWeek", new
+                {
+                    @class = "text-danger",
+
+                })
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <input type="hidden" name="ExtraCharges.Index" value="$index$" />
+
+            @Html.LabelForModel("Start Time", htmlAttributes: new { @class = "control-label" })
+            <span class="text-danger">*</span>
+
+            @(Html.Kendo().TimePicker()
+                .Name($"Schedules[{Model.Index}].From")
+                .Value(Model.From)
+                .HtmlAttributes(new { @style = "width:100%", autocomplete = "off" }))
+
+
+            @Html.ValidationMessage($"Schedules[{Model.Index}].From", new
+                {
+                    @class = "text-danger",
+
+                })
+
+            <span class="text-danger field-validation-error" data-valmsg-for="Schedules[@Model.Index].To" data-valmsg-replace="true">
+                <span id="Schedules_{@Model.Index}__To-error" style="display:none" class="">The Start Time field should be less than  End Time .</span>
+            </span>
+
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <input type="hidden" name="ExtraCharges.Index" value="$index$" />
+
+            @Html.LabelForModel("End Time", htmlAttributes: new { @class = "control-label" })
+            <span class="text-danger">*</span>
+
+            @(Html.Kendo().TimePicker()
+                .Name($"Schedules[{Model.Index}].To")
+                .Value(Model.To)
+                .HtmlAttributes(new { @style = "width:100%", autocomplete = "off" }))
+
+            @Html.ValidationMessage($"Schedules[{Model.Index}].To", new
+                {
+                    @class = "text-danger",
+
+                })
+        </div>
+    </div>
+
+    <button type="button" class="btn danger-action btn-small" style="margin-top: 30px;" onclick="removeItem(@Model.Index)">
+        <i class="fa fa-minus"></i>
+    </button>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(() => {
+        let dayOfWeeks = {
+            Monday: 1,
+            Tuesday: 2,
+            Wednesday: 3,
+            Thursday: 4,
+            Friday: 5,
+            Saturday: 6,
+            Sunday: 7
+        }
+        let index = Number("@Model.Index")
+        let selectedDay = $("#Schedules_" + index + "__DayOfWeek");
+
+        if (dayOfWeeks[`@Model.DayOfWeek`] != undefined) {
+            selectedDay.val(dayOfWeeks[`@Model.DayOfWeek`]);
+        }
+        let startTime = $("#Schedules_" + index + "__From");
+        let endTime = $("#Schedules_" + index + "__To");
+
+        startTime.change(onChange);
+        endTime.change(onChange);
+    });
+
+    function onChange() {
+        let index = Number("@Model.Index")
+        let selectedStartTime = $("#Schedules_" + index + "__From");
+        let selectedEndTime = $("#Schedules_" + index + "__To");
+        let errorSpan = document.getElementById("Schedules_{" + index + "}__To-error");
+        let startTime = new Date("December 18, 1998 " + selectedStartTime.val());
+        let endTime = new Date("December 18, 1998 " + selectedEndTime.val());
+
+        if (selectedStartTime.val() == selectedEndTime.val()) {
+            errorSpan.style.display = "block"
+        }
+        else if (startTime > endTime) {
+            errorSpan.style.display = "block"
+
+        } else {
+            errorSpan.style.display = "none"
+        }
+    }
+
+</script>

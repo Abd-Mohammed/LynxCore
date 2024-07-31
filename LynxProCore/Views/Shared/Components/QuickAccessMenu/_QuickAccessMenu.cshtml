@@ -1,0 +1,90 @@
+﻿@model QuickMenuViewModel
+
+@using Lynx.Models
+
+@{
+    var sysAdmin = true;
+}
+
+<div class="additional-nav-outer" style="z-index:2 !important">
+    <div class="additional-nav clearfix">
+        <ul>
+            @if (Model.ShowDashboardShortcutLink)
+            {
+                <li class="skew">
+                    <a class="unskew tooltips" data-container="body" data-placement="left" data-original-title="[[[[Dashboard " href="@Url.Action("Index", "Dashboard", new { area="" })">
+                        Dashboard 
+                    </a>
+                </li>
+            }
+            @foreach (var shortcutLink in Model.ShortcutLinks)
+            {
+                if (shortcutLink.IsSubMenu)
+                {
+                    var submenuPermissionCodes = string.Join(",", shortcutLink.SubMenuPermissions.Select(p => p.Code));
+                    if (!string.IsNullOrEmpty(submenuPermissionCodes))
+                    {
+                        <li class="skew">
+                            <div class="btn-group unskew">
+                                <a href="javascript:;" type="button" class="btn dropdown-toggle tooltips" data-container="body" data-placement="left" data-original-title="@shortcutLink.Name" data-toggle="dropdown" data-hover="dropdown" data-delay="500" data-close-others="true">
+                                    <i class="fa fa-angle-down"></i>  @shortcutLink.Name
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    @foreach (var perm in shortcutLink.SubMenuPermissions)
+                                    {
+                                        if (sysAdmin)
+                                        {
+                                            <li>
+                                                <a href="@Url.Content("~" + perm.PermissionArea.Link + perm.Link)">
+                                                    @perm.Description
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                }
+                else if (sysAdmin)
+                {
+                    <li class="skew">
+                        <a class="unskew tooltips" data-container="body" data-placement="left" data-original-title="@shortcutLink.Permission.Description" href="@Url.Content("~" + shortcutLink.Permission.PermissionArea.Link + shortcutLink.Permission.Link)">
+                            @shortcutLink.Permission.Description
+                        </a>
+                    </li>
+                }
+            }
+
+            @if (Model.Addons.Any(a => (a.ShortcutLink?.Grouped ?? false) == true))
+            {
+                <li class="skew">
+                    <div class="btn-group unskew">
+                        <a href="javascript:;" type="button" class="btn dropdown-toggle tooltips" data-container="body" data-placement="left" data-original-title="[[[[Custom Add-ons " data-toggle="dropdown" data-hover="dropdown" data-delay="500" data-close-others="true">
+                            <i class="fa fa-angle-down"></i>  [[[[Custom Add-ons 
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            @foreach (var addon in Model.Addons.Where(a => (a.ShortcutLink?.Grouped ?? false) == true))
+                            {
+                                <li>
+                                    <a href="@Url.Content("~/CustomAddons/" + addon.Code)">
+                                        @addon.Name
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </li>
+            }
+
+            @foreach(var addon in Model.Addons.Where(a => (a.ShortcutLink?.Grouped ?? false) == false && a.ShortcutLink?.Enabled == true))
+            {
+                <li class="skew">
+                    <a class="unskew tooltips" data-container="body" data-placement="left" data-original-title="@addon.Name" href="@Url.Content("~/CustomAddons/" + addon.Code)">
+                        @addon.Name
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

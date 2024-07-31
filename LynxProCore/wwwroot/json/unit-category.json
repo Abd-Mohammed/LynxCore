@@ -1,0 +1,82 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "array",
+    "default": [],
+    "examples": [
+        [
+            {
+                "name": "Origin Country",
+                "type": "Text",
+                "required": false
+            },
+            {
+                "name": "Cake Type",
+                "type": "Text",
+                "required": false
+            }
+        ]
+    ],
+    "additionalItems": true,
+    "items": {
+        "anyOf": [
+            {
+                "$id": "#/items/anyOf/0",
+                "type": "object",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                    {
+                        "name": "Origin Country",
+                        "type": "Text",
+                        "required": false
+                    }
+                ],
+                "required": [
+                    "name",
+                    "type",
+                    "required"
+                ],
+                "additionalProperties": true,
+                "properties": {
+                    "name": {
+                        "$id": "#/items/anyOf/0/properties/name",
+                        "type": "string",
+                        "title": "Property Name",
+                        "description": "The name of the property item.",
+                        "default": "",
+                        "examples": [
+                            "Origin Country"
+                        ]
+                    },
+                    "type": {
+                        "$id": "#/items/anyOf/0/properties/type",
+                        "type": "string",
+                        "title": "Property Type",
+                        "default": "text",
+                        "examples": [
+                            "text"
+                        ],
+                        "enum": [
+                            "text"
+                        ]
+                    },
+                    "required": {
+                        "$id": "#/items/anyOf/0/properties/required",
+                        "type": "boolean",
+                        "title": "Is the property required",
+                        "default": false,
+                        "examples": [
+                            false
+                        ]
+                    }
+                }
+            }
+        ],
+        "$id": "#/items",
+        "minItems": 1,
+        "title": "Properties List",
+        "description": "The list of metadata properties"
+    }
+}

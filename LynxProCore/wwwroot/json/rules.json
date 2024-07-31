@@ -1,0 +1,446 @@
+﻿{
+  "factCrumb": [
+    {
+      "value": "_Accelerometer",
+      "text": "Accelerometer"
+    },
+    {
+      "value": "_Ain01",
+      "text": "AIN 01"
+    },
+    {
+      "value": "_Ain02",
+      "text": "AIN 02"
+    },
+    {
+      "value": "_AinChange",
+      "text": "AIN Change"
+    },
+    {
+      "value": "_AlarmType",
+      "text": "Alarm Type"
+    },
+    {
+      "value": "_AlarmTypeWithinTime",
+      "text": "Alarm Type Within Time"
+    },
+    {
+      "value": "_AmbientAirTemperature",
+      "text": "Ambient Air Temperature"
+    },
+    {
+      "value": "_Area",
+      "text": "Area"
+    },
+    {
+      "value": "_AreaGroup",
+      "text": "Area Group"
+    },
+    {
+      "value": "_AreaOverTime",
+      "text": "Area Over Time"
+    },
+    {
+      "value": "_AreaGroupOverTime",
+      "text": "Area Group Over Time"
+    },
+    {
+      "value": "_AxleWeight",
+      "text": "Axle Weight"
+    },
+    {
+      "value": "_Adas",
+      "text": "ADAS"
+    },
+    {
+      "value": "_BarometricPressure",
+      "text": "Barometric Pressure"
+    },
+    {
+      "value": "_BrakePedalLevel",
+      "text": "Brake Pedal Level"
+    },
+    {
+      "value": "_BleBeacon",
+      "text": "BLE Beacons"
+    },
+    {
+      "value": "_CommandedEGR",
+      "text": "Commanded EGR"
+    },
+    {
+      "value": "_CruiseStatus",
+      "text": "Cruise Status"
+    },
+    {
+      "value": "_Vision",
+      "text": "Computer Vision"
+    },
+    {
+      "value": "_ContinuousAlarmType",
+      "text": "Continuous Alarm Type"
+    },
+    {
+      "value": "_DriverDoorStatus",
+      "text": "Driver Door Status"
+    },
+    {
+      "value": "_DeviceUnplug",
+      "text": "Device Unplug"
+    },
+    {
+      "value": "_DeviceHealth",
+      "text": "Device Health"
+    },
+    {
+      "value": "_Odometer",
+      "text": "Odometer"
+    },
+    {
+      "value": "_DistanceOverTime",
+      "text": "Distance Over Time"
+    },
+    {
+      "value": "_DriverShift",
+      "text": "Driver Shift"
+    },
+    {
+      "value": "_DTC",
+      "text": "DTC"
+    },
+    {
+      "value": "_Din",
+      "text": "Din"
+    },
+    {
+      "value": "_DinChange",
+      "text": "Din Change"
+    },
+    {
+      "value": "_DTCCount",
+      "text": "DTC Count"
+    },
+    {
+      "value": "_DistanceSinceLastTrip",
+      "text": "Distance Since Last Completed Trip"
+    },
+    {
+      "value": "_EngineCoolantTemperature",
+      "text": "Engine Coolant Temperature"
+    },
+    {
+      "value": "_EngineFuelRate",
+      "text": "Engine Fuel Rate"
+    },
+    {
+      "value": "_EngineLoad",
+      "text": "Engine Load"
+    },
+    {
+      "value": "_EngineMotorHours",
+      "text": "Engine Motor Hours"
+    },
+    {
+      "value": "_EngineOilTemperature",
+      "text": "Engine Oil Temperature"
+    },
+    {
+      "value": "_EngineRpm",
+      "text": "Engine Rpm"
+    },
+    {
+      "value": "_EngineRuntimeSinceStart",
+      "text": "Engine Runtime Since Start"
+    },
+    {
+      "value": "_EngineStatus",
+      "text": "Engine Status"
+    },
+    {
+      "value": "_EngineTemperature",
+      "text": "Engine Temperature"
+    },
+    {
+      "value": "_EngineStatusDuration",
+      "text": "Engine Status Duration"
+    },
+    {
+      "value": "_EventType",
+      "text": "Event Type"
+    },
+    {
+      "value": "_EventTime",
+      "text": "Event Time"
+    },
+    {
+      "value": "_External",
+      "text": "External Data"
+    },
+    {
+      "value": "_ExcessiveIdlingDuration",
+      "text": "Excessive Idling Duration"
+    },
+    {
+      "value": "_FuelConsumed",
+      "text": "Fuel Consumed"
+    },
+    {
+      "value": "_FuelInjectionTiming",
+      "text": "Fuel Injection Timing"
+    },
+    {
+      "value": "_FuelLevel",
+      "text": "Fuel Level"
+    },
+    {
+      "value": "_FuelPressure",
+      "text": "Fuel Pressure"
+    },
+    {
+      "value": "_FuelRateGPS",
+      "text": "Fuel Rate GPS"
+    },
+    {
+      "value": "_FuelUsedGPS",
+      "text": "Fuel Used GPS"
+    },
+    {
+      "value": "_HarshDriving",
+      "text": "Harsh Driving"
+    },
+    {
+      "value": "_MovementStatus",
+      "text": "Movement Status"
+    },
+    {
+      "value": "_TelemetrySource",
+      "text": "Telemetry Source"
+    },
+    {
+      "value": "_Pdop",
+      "text": "GNSS PDOP"
+    },
+    {
+      "value": "_Hdop",
+      "text": "HDOP"
+    },
+    {
+      "value": "_HdopOverTime",
+      "text": "HDOP Over Time"
+    },
+    {
+      "value": "_IntakeAirTemperature",
+      "text": "Intake Air Temperature"
+    },
+    {
+      "value": "_DiffThreshold",
+      "text": "Route"
+    },
+    {
+      "value": "_VehicleSchedule",
+      "text": "Vehicle Schedule"
+    },
+    {
+      "value": "_DriverShiftStatus",
+      "text": "Driver Shift Status"
+    },
+    {
+      "value": "_LastRouteEventTime",
+      "text": "Last Route Event Time"
+    },
+    {
+      "value": "_MAFAirFlowRate",
+      "text": "MAF Air Flow Rate"
+    },
+    {
+      "value": "_NumberOfAlarmTypesInTime",
+      "text": "Number of Alarm Types in Time"
+    },
+    {
+      "value": "_NumberOfEngineSwitchesInTime",
+      "text": "Number Of Engine Switches in Time"
+    },
+    {
+      "value": "_Poi",
+      "text": "POI"
+    },
+    {
+      "value": "_PoiGroup",
+      "text": "POI Group"
+    },
+    {
+      "value": "_RecurringDistance",
+      "text": "Recurring Distance"
+    },
+    {
+      "value": "_RecurringEngine",
+      "text": "Recurring Engine"
+    },
+    {
+      "value": "_RecurringMonths",
+      "text": "Recurring Months"
+    },
+    {
+      "value": "_Speed",
+      "text": "Speed"
+    },
+    {
+      "value": "_SatellitesNo",
+      "text": "Satellites NO."
+    },
+    {
+      "value": "_ContinuousRoadSpeedLimit",
+      "text": "Continuous Road Speed Limit"
+    },
+    {
+      "value": "_RoadSpeedLimit",
+      "text": "Road Speed Limit"
+    },
+    {
+      "value": "_NumberOfRoadSpeedLimitExceedsInTime",
+      "text": "Number of Road Speed Limit Exceed Times"
+    },
+    {
+      "value": "_StationaryOverTime",
+      "text": "Stationary Over Time"
+    },
+    {
+      "value": "_GetOffRouteSchedule",
+      "text": "Get Off Route Schedule"
+    },
+    {
+      "value": "_DriverBreakExceed",
+      "text": "Driver Break Exceed"
+    },
+    {
+      "value": "_TimeSegment",
+      "text": "Time Segment"
+    },
+    {
+      "value": "_Temperature",
+      "text": "Temperature"
+    },
+    {
+      "value": "_DeviceTemperature",
+      "text": "Device Temperature"
+    },
+    {
+      "value": "_ThrottlePosition",
+      "text": "Throttle Position"
+    },
+    {
+      "value": "_TowingStatus",
+      "text": "Towing Status"
+    },
+    {
+      "value": "_TrunkStatus",
+      "text": "Trunk Status"
+    },
+    {
+      "value": "_TrackingDeviceVoltage",
+      "text": "Tracking Device Voltage"
+    },
+    {
+      "value": "_TripStatus",
+      "text": "Trip Status"
+    },
+    {
+      "value": "_Trip",
+      "text": "Trip"
+    },
+    {
+      "value": "_VehicleAvailability",
+      "text": "Vehicle Availability"
+    },
+    {
+      "value": "_VehicleBattery",
+      "text": "Vehicle Battery"
+    },
+    {
+      "value": "_VehicleBatteryChange",
+      "text": "Vehicle Battery Change"
+    },
+    {
+      "value": "_VehicleBatteryStatus",
+      "text": "Vehicle Battery Status"
+    },
+    {
+      "value": "_VehicleCondition",
+      "text": "Vehicle Condition"
+    },
+    {
+      "value": "_VehicleType",
+      "text": "Vehicle Type"
+    },
+    {
+      "value": "_LocationStatusOverTime",
+      "text": "Location Status Over Time"
+    },
+    {
+      "value": "_UsbDeviceName",
+      "text": "USB Device Name"
+    },
+    {
+      "value": "_UsbDeviceStatus",
+      "text": "USB Device Status"
+    },
+    {
+      "value": "_VehicleQuarantine",
+      "text": "Vehicle Quarantine"
+    },
+    {
+      "value": "_TripActivity",
+      "text": "Trip Activity"
+    }
+  ],
+  "factVehicle": [
+    {
+      "value": "_EngineStatus",
+      "text": "Engine Status"
+    },
+    {
+      "value": "_VehicleAvailability",
+      "text": "Availability"
+    },
+    {
+      "value": "_TimeThreshold",
+      "text": "Connection"
+    },
+    {
+      "value": "_VehicleCondition",
+      "text": "Condition"
+    },
+    {
+      "value": "_TripStatus",
+      "text": "Trip Status"
+    }
+  ],
+  "factTrackedItem": [
+    {
+      "value": "_TimeThreshold",
+      "text": "Connection"
+    }
+  ],
+  "factTrackedItemCrumb": [
+    {
+      "value": "_Ain01",
+      "text": "AIN 01"
+    },
+    {
+      "value": "_Ain02",
+      "text": "AIN 02"
+    },
+    {
+      "value": "_Area",
+      "text": "Area"
+    },
+    {
+      "value": "_AreaGroup",
+      "text": "Area Group"
+    },
+    {
+      "value": "_TrackedItemType",
+      "text": "Tracked Asset Type"
+    }
+  ]
+}

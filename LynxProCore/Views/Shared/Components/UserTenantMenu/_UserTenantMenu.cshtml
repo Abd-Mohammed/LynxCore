@@ -1,0 +1,22 @@
+﻿@model UserTenantMenuViewModel
+@using Lynx.Models
+
+@foreach (var userTenant in Model.Tenants)
+{
+    if (userTenant.Name.Equals(Model.ActiveName))
+    {
+        <a href="javascript:;" class="user-profile-reference selected">
+            <span>
+                @userTenant.DisplayName
+            </span>
+        </a>
+    }
+    else
+    {
+        <a href="@Url.Action("SwitchTenant", "Account", new { tenantName = userTenant.Name, area = "" })" class="user-profile-reference">
+            <span>
+                @userTenant.DisplayName
+            </span>
+        </a>
+    }
+}

@@ -1,0 +1,700 @@
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    color: #fff;
+    font-family: arial;
+}
+
+small {
+    font-size: 75%;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#map-canvas {
+    width: 100%;
+    position: relative;
+}
+
+.map-container {
+    position: relative;
+    height: 100%;
+}
+
+.top-content {
+    height: 230px;
+    background-color: #ffffff;
+}
+
+.header-left {
+    width: 80%;
+    height: 230px;
+    margin: 0 auto;
+    float: left;
+    background-color: #eae6e8;
+}
+
+.header-right {
+    height: 230px;
+    background: #ed1b24;
+    float: right;
+    width: 20%;
+}
+
+.header-right-top {
+    width: 100%;
+    height: 50%;
+}
+
+.header-right-bottom {
+    width: 100%;
+    height: 50%;
+    background-color: #57565b;
+}
+
+.details-label {
+    position: absolute;
+    white-space: nowrap;
+    text-align: center;
+}
+
+@media (max-width: 1023px) {
+    .top-content {
+        height: 260px;
+        background-color: #45b6f4;
+        border-top: 2px solid #2d3137;
+        padding: 0 20px;
+        font-family: verdana;
+        /* font-size: 1.3rem; */
+    }
+}
+
+.header-icon {
+    background: url(../images/maps-water/boat-icon.png) no-repeat left bottom;
+    height: 115px;
+    width: 75px;
+    background-color: #171d8f;
+    float: left;
+    padding: 10px;
+    text-align: center;
+    background-size: contain;
+    font-size: 12px;
+}
+
+.header-logo {
+    background: #ed1b24 url(../images/maps-water/rta-logo.png) no-repeat left center;
+    height: 100px;
+    width: 180px;
+    float: right;
+}
+
+.header-right-bottom > div {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    height: 57px;
+}
+
+    .header-right-bottom > div:last-child {
+        border-right: none;
+    }
+
+.lable-text {
+    margin-bottom: -2px;
+    font-size: 24px;
+}
+
+.value-text {
+    /* font-size: medium; */
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.header-right-bottom > div:nth-child(2n+1) {
+    background-color: #656469;
+}
+
+.header-right-bottom > div:nth-child(2n) {
+    background-color: #57565b;
+}
+
+.header-right-bottom > div:nth-child(2n+1) .info-icon {
+    width: 75px;
+    background-color: #858489;
+}
+
+.header-right-bottom > div:nth-child(2n) .info-icon {
+    width: 75px;
+    background-color: #7a797e;
+}
+
+.header-left-top {
+    background-color: #b8b6b9;
+    color: #171d8f;
+    width: 100%;
+    height: 50%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 0 70px;
+}
+
+.header-left-bottom {
+    width: 100%;
+    height: 50%;
+    background-color: #d2d0d1;
+    padding: 0 70px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    -ms-flex-align: start;
+    -webkit-align-items: start;
+    align-items: start;
+    position: relative;
+}
+
+.header-left-top .value-text {
+    font-size: 22px;
+}
+
+.range-slider .input-range-extra {
+    -webkit-appearance: none;
+    height: 10px;
+    border-radius: 5px;
+    outline: none;
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    margin: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+
+    .range-slider .input-range-extra::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 38px;
+        height: 38px;
+        box-shadow: -100vw 0 0 100vw #00b254;
+    }
+
+    .range-slider .input-range-extra::-moz-range-thumb {
+        width: 38px;
+        height: 38px;
+        box-shadow: -100vw 0 0 100vw #00b254;
+    }
+
+.range-slider.error .input-range-extra::-webkit-slider-thumb {
+    box-shadow: -100vw 0 0 100vw #ed1a24;
+}
+
+.range-slider.error .input-range-extra::-moz-range-thumb {
+    box-shadow: -100vw 0 0 100vw #ed1a24;
+}
+
+.range-slider.error .input-range::-webkit-slider-thumb {
+    background: #ed1a24 url(../images/maps-water/arrow-right-corner-wh.png) no-repeat center center;
+}
+
+.range-slider.error .input-range::-moz-range-thumb {
+    background: #ed1a24 url(../images/maps-water/arrow-right-corner-wh.png) no-repeat center center;
+}
+
+.range-slider .input-range::-webkit-slider-thumb:hover {
+    background: #fff url(../images/maps-water/arrow-right-corner-wh-h.png) no-repeat center center;
+}
+
+.range-slider .input-range:active::-webkit-slider-thumb {
+    background: #fff url(../images/maps-water/arrow-right-corner-wh-h.png) no-repeat center center;
+}
+
+.range-slider .input-range::-moz-range-thumb:hover {
+    background: #fff url(../images/maps-water/arrow-right-corner-wh-h.png) no-repeat center center;
+}
+
+.range-slider .input-range:active::-moz-range-thumb {
+    background: #fff url(../images/maps-water/arrow-right-corner-wh-h.png) no-repeat center center;
+}
+
+.range-slider .input-range-extra::-ms-fill-lower {
+    background: #00b254;
+}
+
+.range-slider.error .input-range-extra::-ms-fill-lower {
+    background: #ed1a24;
+}
+
+.range-slider .input-range-extra::-ms-track {
+    background: transparent;
+    color: transparent;
+}
+
+.range-slider.error .input-range::-ms-thumb {
+    background: #ed1a24 url(../images/maps-water/arrow-right-corner-wh.png) no-repeat center center;
+}
+
+@supports (-ms-ime-align:auto) {
+    .range-slider .input-range {
+        margin-top: -15px;
+        height: 40px;
+    }
+}
+
+::-ms-ticks-after {
+    display: none;
+}
+
+::-ms-ticks-before {
+    display: none;
+}
+
+.range-slider .range-value {
+    display: inline-block;
+    position: absolute;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 3px;
+    background: #171d8f;
+    padding: 5px 10px;
+    margin-left: 17px;
+    left: 100%;
+    top: 11px;
+}
+
+    .range-slider .range-value:after {
+        position: absolute;
+        top: 8px;
+        left: -7px;
+        width: 0;
+        height: 0;
+        border-top: 7px solid transparent;
+        border-right: 7px solid #171d8f;
+        border-bottom: 7px solid transparent;
+        content: '';
+    }
+/* ::-moz-range-track {
+  background: #00b254;
+  border: 0;
+} */
+input::-moz-focus-inner {
+    border: 0;
+}
+
+.range-slider input.input-range {
+}
+/* .range-slider.error input.input-range { */
+/* background: #ed1a24; */
+/* } */
+.range-slider {
+    width: 100%;
+    position: relative;
+    padding-top: 27px;
+}
+/* .range-slider:after{
+    content: '';
+    display: inline-block !important;
+    position: absolute;
+    top: 7px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    background-color: #eae6e8;
+    border: 8px solid #fff;
+    border-radius:100%;
+    z-index:0;
+}
+.range-slider:before{
+    content: '';
+    display: inline-block !important;
+    position: absolute;
+    top: 7px;
+    right: -1px;
+    width: 22px;
+    height: 22px;
+    background-color: #171d8f;
+    border: 8px solid #fff;
+    border-radius:100%;
+    z-index: 1;
+}
+ */
+.table-center {
+    display: table;
+    padding: 0 30px;
+    min-width: 350px;
+}
+
+    .table-center > div {
+        display: table-cell;
+        padding: 0 5px;
+    }
+
+        .table-center > div.lable-text.error {
+            background-color: #ed1a24;
+            color: #fff;
+            font-weight: normal;
+        }
+
+.range-slider.error:before {
+    border: 8px solid #ed1a24;
+}
+
+.header-left-top-error-route {
+    background: #c7c5c7 url(../images/maps-water/error-route.png) no-repeat center center;
+    color: #171d8f;
+    width: 100%;
+    height: 50%;
+}
+
+.header-left-top-error-location {
+    background: #c7c5c7 url(../images/maps-water/error-location.png) no-repeat center center;
+    color: #171d8f;
+    width: 100%;
+    height: 50%;
+}
+
+.header-left-top-compeleted-route {
+    background: #c7c5c7 url(../images/maps-water/completed-route.png) no-repeat center center;
+    color: #171d8f;
+    width: 100%;
+    height: 50%;
+}
+
+ul.tickmarks-bot li {
+    list-style: none;
+    margin-top: 28px;
+    position: relative;
+    color: #171d8f;
+    max-width: 250px;
+}
+
+    ul.tickmarks-bot li > div span, ul.tickmarks-bot li > div small {
+        display: table-cell;
+    }
+
+ul.tickmarks-top li {
+    list-style: none;
+    margin-top: 0px;
+    position: relative;
+    color: #171d8f;
+    max-width: 250px;
+    height: 100%;
+    /* width: 100px; */
+}
+
+    ul.tickmarks-top li > div {
+        position: absolute;
+        max-width: 300px;
+        left: 50%;
+        bottom: 42px;
+        font-size: 40px;
+        display: table;
+        transform: translatex(-50%);
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    ul.tickmarks-top li span {
+    }
+
+.gray-bg {
+    position: absolute;
+    background-color: #ccc8c9;
+    height: 58px;
+    width: 100%;
+    margin-left: -70px;
+}
+
+.speed-icon {
+    background: #c7c5c7 url(../images/maps-water/speed-icon.svg) no-repeat center center;
+}
+
+.location-icon {
+    background: #c7c5c7 url(../images/maps-water/location-icon.svg) no-repeat center center;
+}
+
+.time-icon {
+    background: #c7c5c7 url(../images/maps-water/time-icon.svg) no-repeat center center;
+}
+
+.info-data {
+    padding: 2px 5px;
+}
+
+.info-list-follow {
+    position: absolute;
+    top: 229px;
+    right: 0;
+    background-color: #656469;
+    height: 57px;
+    width: 20%;
+}
+
+    .info-list-follow .info-icon {
+        width: 75px;
+        height: 57px;
+        background-color: #858489;
+        float: left;
+    }
+
+    .info-list-follow .info-data {
+        float: left;
+    }
+
+/* by Ansari */
+.header-left-bottom-Error {
+    width: 100%;
+    height: 50%;
+    background-color: #eae6e8;
+    color: #171d8f;
+    padding: 0 40px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    -webkit-justify-content: space-around;
+    text-align: center;
+}
+
+    .header-left-bottom-Error span {
+        font-size: 30px;
+        font-weight: bold;
+    }
+/*by MS*/
+ul.tickmarks-top li > div {
+    font-size: 30px;
+}
+
+.lable-text {
+    margin-bottom: 2px;
+    font-size: 17px;
+    color: #d3d3d3;
+}
+
+.speed-icon {
+    background-size: 57%;
+}
+
+.location-icon {
+    background-size: 52%;
+}
+
+.time-icon {
+    background-size: 50%;
+}
+
+.header-icon {
+    padding: 10px 7px;
+    text-align: left;
+    font-size: 10px;
+}
+
+.info-data {
+    padding: 2px 5px 2px 14px;
+}
+
+.range-slider .input-range-extra {
+    height: 13px;
+    margin-top: -1px;
+}
+
+ul.tickmarks-bot li:after {
+    background-color: rgba(0, 0, 0, .15);
+}
+
+.range-slider .input-range {
+    -webkit-appearance: none;
+    height: 10px;
+    border-radius: 5px;
+    outline: none;
+    position: absolute;
+    width: 100%;
+    background: transparent;
+    margin: 0;
+    z-index: 1;
+    margin-top: -29px;
+}
+
+ul.tickmarks-bot {
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 17px;
+}
+
+    ul.tickmarks-bot li:after {
+        content: '';
+        display: inline-block !important;
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        width: 12px;
+        height: 12px;
+        /* background-color: #eae6e8; */
+        border: 11px solid #fff;
+        border-radius: 100%;
+        transform: translatex(-50%);
+        background-color: rgba(0, 0, 0, .25);
+    }
+
+ul.tickmarks-top li:last-child > div {
+    transform: translateX(calc(-100% + 49px));
+}
+
+
+
+ul.tickmarks-top li:first-child > div {
+    transform: translateX(-55px);
+}
+
+ul.tickmarks-top {
+    padding: 0 17px;
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+ul.tickmarks-bot li > div {
+    position: absolute;
+    max-width: 250px;
+    left: 50%;
+    top: 20px;
+    font-size: 30px;
+    display: table;
+    transform: translatex(-62%);
+    font-weight: bold;
+    min-width: 130px;
+    text-align: center;
+}
+
+    ul.tickmarks-bot li > div span {
+        position: absolute;
+        left: 83%;
+        top: 13px;
+        font-size: 14px;
+    }
+
+ul.tickmarks-bot li:before {
+    content: '';
+    display: inline-block !important;
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    width: 2px;
+    height: 15px;
+    background-color: #ffffff;
+    transform: translatex(-50%);
+}
+
+ul.tickmarks-top li:after {
+    content: '';
+    display: inline-block !important;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    width: 2px;
+    height: 16px;
+    background-color: #ffffff;
+    transform: translatex(-50%);
+}
+/*--*/
+
+.range-slider .input-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    background: #00b254 url(../images/maps-water/arrow-right-corner-wh.png) no-repeat center center;
+    cursor: pointer;
+    -webkit-transition: background .15s ease-in-out;
+    transition: background .15s ease-in-out;
+    z-index: 999;
+}
+
+.range-slider .input-range::-moz-range-thumb {
+    width: 43px;
+    height: 43px;
+    border: 0;
+    border-radius: 50%;
+    background: #00b254 url(../images/maps-water/arrow-right-corner-wh.png) no-repeat center center;
+    cursor: pointer;
+    -webkit-transition: background .15s ease-in-out;
+    transition: background .15s ease-in-out;
+}
+
+.range-slider .input-range::-ms-thumb {
+    width: 43px;
+    height: 43px;
+    border: 0;
+    border-radius: 50%;
+    background: #00b254 url(../images/maps-water/arrow-right-corner-wh.png) no-repeat center center;
+    cursor: pointer;
+    -webkit-transition: background .15s ease-in-out;
+    transition: background .15s ease-in-out;
+}
+
+input[type=range]::-moz-range-track {
+    background-color: transparent;
+}
+
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #1f2327 inset !important;
+    -webkit-text-fill-color: #b5bec7 !important;
+}

@@ -1,0 +1,22 @@
+﻿[
+  {
+    "text": "Distance Differences",
+    "value": "_DistanceDifferences"
+  },
+  {
+    "text": "Distance",
+    "value": "_TripDistance"
+  },
+  {
+    "text": "Duration",
+    "value": "_TripDuration"
+  },
+  {
+    "text": "Zone Location",
+    "value": "_TripZoneLocation"
+  },
+  {
+    "text": "Zone Group Location",
+    "value": "_TripZoneGroupLocation"
+  }
+]

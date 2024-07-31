@@ -1,0 +1,34 @@
+[
+  {
+    "text": "Arial",
+    "value": "Arial,Helvetica,sans-serif"
+  },
+  {
+    "text": "Courier New",
+    "value": "Courier New,Courier,monospace"
+  },
+  {
+    "text": "Georgia",
+    "value": "Georgia,serif"
+  },
+  {
+    "text": "Lucida Console",
+    "value": "Lucida Console,Monaco,monospace"
+  },
+  {
+    "text": "Times New Roman",
+    "value": "Times New Roman,Times,serif"
+  },
+  {
+    "text": "Trebuchet MS",
+    "value": "Trebuchet MS,Helvetica,sans-serif"
+  },
+  {
+    "text": "Dubai",
+    "value": "dubai"
+  },
+  {
+    "text": "Frutiger",
+    "value": "frutiger"
+  }
+]

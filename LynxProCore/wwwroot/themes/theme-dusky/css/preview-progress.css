@@ -1,0 +1,729 @@
+﻿
+
+.marker-info-popup {
+    font-size: 90%;
+}
+
+.vdp-datepicker input{
+    border-style: solid !important;
+    cursor: pointer !important;
+    width: 100% !important;
+}
+
+.vdp-datepicker .input-group{
+    width: 100% !important;
+}
+
+.vdp-datepicker__calendar {
+    background-color: #2a2c31 !important;
+    border: 1px solid #1e2125 !important;
+}
+
+table.marker-info-popup {
+    border-collapse: separate;
+    border-spacing: 4px;
+}
+
+    table.marker-info-popup tr.red td {
+        border-bottom: 2px solid #773131;
+    }
+
+    table.marker-info-popup tr.green td {
+        border-bottom: 2px solid #245d29;
+    }
+
+    table.marker-info-popup tr.orange td {
+        border-bottom: 2px solid #73552d;
+    }
+
+    table.marker-info-popup tr.red {
+        background: -moz-linear-gradient(top, rgba(144,12,12,0) 70%, rgba(144,12,12,0.3) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(144,12,12,0) 70%,rgba(144,12,12,0.3) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(144,12,12,0) 70%,rgba(144,12,12,0.3) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00900c0c', endColorstr='#4d900c0c',GradientType=0 ); /* IE6-9 */
+    }
+
+    table.marker-info-popup tr.green {
+        background: -moz-linear-gradient(top, rgba(12,144,12,0) 70%, rgba(12,144,12,0.3) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(12,144,12,0) 70%,rgba(12,144,12,0.3) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(12,144,12,0) 70%,rgba(12,144,12,0.3) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0c900c0c', endColorstr='#0c900c0c',GradientType=0 ); /* IE6-9 */
+    }
+
+    table.marker-info-popup tr.orange {
+        background: -moz-linear-gradient(top, rgba(185,124,12,0) 70%, rgba(185,124,12,0.3) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(185,124,12,0) 70%,rgba(185,124,12,0.3) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(185,124,12,0) 70%,rgba(185,124,12,0.3) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#90550c0c', endColorstr='#90550c0c',GradientType=0 ); /* IE6-9 */
+    }
+
+    table.marker-info-popup td {
+        padding: 7px 10px;
+        background: rgba(255,255,255,0.05);
+    }
+
+    table.marker-info-popup th {
+        padding: 7px 10px;
+        background: rgba(255,255,255,0.12);
+    }
+
+.fade-line {
+    position: absolute;
+    width: 100%;
+    height: 34px;
+    opacity: .1;
+    z-index: 0;
+    left: 0;
+    bottom: 0;
+    background: aliceblue;
+    background: -moz-linear-gradient(top, rgba(69,182,175,0) 0%, rgba(69,182,175,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(69,182,175,0) 0%,rgba(69,182,175,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(69,182,175,0) 0%,rgba(69,182,175,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0045b6af', endColorstr='#45b6af',GradientType=0 ); /* IE6-9 */
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    outline: none;
+}
+
+input[type="date"].form-control {
+    cursor: pointer;
+}
+
+.table-bordered td, .table-bordered th {
+    padding: 4px 10px;
+}
+
+#main-app {
+    flex-direction: column;
+}
+
+label {
+    color: #d5d7db;
+}
+
+.map-side-content {
+    flex-shrink: 0;
+    width: 530px;
+    margin-left: 10px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+}
+
+.sidebar-content-list-inner .card-body:hover .card-hov-block {
+    display: block;
+}
+
+.sidebar-content-list-inner .card-side-actions {
+    width: 80px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sidebar-content-list-inner .card-body {
+    flex-grow: 1
+}
+
+.sidebar-content-list-inner .card-side-actions a {
+    height: 100%;
+    padding: 0 12px;
+    line-height: 52px;
+    background-color: #36383e;
+}
+
+    .sidebar-content-list-inner .card-side-actions a:hover {
+        background-color: #474950;
+    }
+
+.popover {
+    z-index: 999999;
+}
+
+.sidebar-content-list {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+}
+
+.map-side-content .sidebar-content-list {
+    background: #2d2f34;
+}
+
+.map-side-drawer-1 {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 40px;
+}
+
+.map-side-drawer-2 {
+    width: 0;
+    position: absolute;
+    left: -9999px;
+    top: 40px;
+}
+
+    .map-side-drawer-2.open {
+        width: 100%;
+        left: 0;
+    }
+
+.map-side-drawer-1.close {
+    left: -9999px;
+    width: 0;
+}
+
+.card {
+    margin-bottom: 25px;
+    border-radius: 4px !important;
+}
+
+.card-body {
+    padding: 10px 15px;
+}
+
+.margin-bottom-0 {
+    margin-bottom: 0 !important;
+}
+
+.large-icon {
+    width: 40px;
+    margin-right: 15px;
+}
+
+.vehicle-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    background-size: contain;
+}
+
+.nissan {
+    background: url(../images/map/vehicles-logos/NISSAN.png);
+    background-size: contain;
+}
+
+.gmc {
+    background: url(../images/map/vehicles-logos/GMC.png);
+    background-size: contain;
+}
+
+.ford {
+    background: url(../images/map/vehicles-logos/FORD.png);
+    background-size: contain;
+}
+
+.toyota {
+    background: url(../images/map/vehicles-logos/TOYOTA.png);
+    background-size: contain;
+}
+
+.honda {
+    background: url(../images/map/vehicles-logos/HONDA.png);
+    background-size: contain;
+}
+
+.mitsubishi {
+    background: url(../images/map/vehicles-logos/MITSUBISHI.png);
+    background-size: contain;
+}
+
+.prcnt-20 {
+    width: 20%;
+}
+
+.prcnt-30 {
+    width: 30%;
+}
+
+.prcnt-50 {
+    width: 50%;
+}
+
+.card-list-btm-records {
+    font-size: 12px;
+    color: #999999;
+    margin: 10px 0 -10px;
+}
+
+    .card-list-btm-records > div {
+        margin: 0 2px
+    }
+
+        .card-list-btm-records > div > span {
+            padding: 0 3px
+        }
+
+            .card-list-btm-records > div > span:last-child {
+                background-color: #44464b;
+            }
+
+.card-list-top-records {
+    font-size: 11px;
+    color: #999999;
+    margin: -10px -10px 10px;
+    justify-content: space-between;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.card-list-top-icons {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+    .card-list-top-icons > span {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+    }
+
+.card-list-top-records > div > span {
+    background-color: #44464b;
+    padding: 0 2px;
+}
+
+.card-list-content > div {
+    font-size: 12px;
+    width: 50%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.small-icon-fragile {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: url(../images/map/fragile-icon.svg) no-repeat center center;
+}
+
+.small-icon-time {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: url(../images/map/m-p-time-red.svg) no-repeat center center;
+}
+
+.Location-start {
+    padding-left: 25px;
+    background: url(../images/map/marker-start.svg) no-repeat left center;
+}
+
+.Location-end {
+    padding-left: 25px;
+    background: url(../images/map/marker-end.svg) no-repeat left center;
+}
+
+.sidebar-content-list-inner {
+    overflow-y: auto;
+}
+
+.card-hov-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding-top: 3%;
+    background-color: rgba(255, 255, 255, 0.3);
+    display: none;
+}
+
+    .card-hov-block .btn-sm {
+        font-size: 12px;
+    }
+
+    .card-hov-block .btn i {
+        margin-top: 3px;
+    }
+
+.sidebar-content-list-inner .card:hover .card-hov-block {
+    display: block;
+}
+
+.card-hov-block .circled-button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50% !important;
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 2px solid #fff;
+    padding: 0;
+    line-height: 30px;
+    box-shadow: 0 0 5px 4px #00000026;
+    text-align: center;
+}
+
+    .card-hov-block .circled-button i {
+    }
+
+.popover {
+    max-width: 400px;
+    border-radius: 9px !important;
+    font-size: 90%;
+}
+
+.popover-content {
+}
+
+    .popover-content table {
+        width: 100%;
+    }
+
+        .popover-content table th {
+            font-weight: normal;
+            color: #999999;
+            text-align: right;
+            padding: 2px 6px;
+            border: 1px solid #f2f2f2;
+            border-width: 0 1px 1px 0;
+        }
+
+        .popover-content table td {
+            padding: 2px 6px;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+.close-private {
+    display: inline-block;
+    cursor: pointer;
+    float: left;
+    width: 23px;
+    height: 21px;
+    background: url(../images/map/arrow-left-mid.svg) no-repeat left center;
+    margin-left: 15px;
+}
+
+.sidebar-content-list .form {
+    background-color: #2a2c31;
+}
+
+.form-group.with-button select {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.accordion.more-data .panel .panel-title .accordion-toggle.accordion-toggle-styled {
+    background: none;
+}
+
+.accordion.more-data .panel-title {
+    font-size: 13px;
+}
+
+.accordion.more-data .panel .panel-title .accordion-toggle {
+    padding: 10px 5px 5px;
+    color: #71bcef;
+    text-decoration: none;
+}
+
+.accordion.more-data .panel-body {
+    border: none !important;
+}
+
+.accordion.more-data .panel-default > .panel-heading {
+    color: #5abafa;
+    background-color: #2a2c31;
+}
+
+.accordion.more-data .panel {
+    background: none;
+}
+
+    .accordion.more-data .panel .panel-title .accordion-toggle.accordion-toggle-styled span.open-close-arrow {
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+        margin: 0 5px;
+        background: url(../images/map/tirangle-blue-up.png) no-repeat;
+        position: relative;
+    }
+
+    .accordion.more-data .panel .panel-title .accordion-toggle.accordion-toggle-styled:before {
+        content: "";
+        position: absolute;
+        width: 99%;
+        height: 1px;
+        background-color: #5abafa;
+        top: 58%;
+    }
+
+    .accordion.more-data .panel .panel-title .accordion-toggle.accordion-toggle-styled .text-bg {
+        background-color: #2a2c31;
+        position: relative;
+        padding-right: 15px;
+    }
+
+    .accordion.more-data .panel .panel-title .accordion-toggle.accordion-toggle-styled.collapsed span.open-close-arrow {
+        transform: rotate(90deg);
+    }
+
+.accordion.more-data a.accordion-toggle {
+}
+
+.map-side-content {
+    background-color: #2a2c31;
+    border: 1px solid #1b1b1d;
+    color: #d5d7db;
+}
+
+.card {
+    border: 1px solid #232529;
+    color: #d5d7db;
+    background: #2a2c31;
+}
+
+    .card i {
+        color: #ffffff;
+    }
+
+.single-item-details {
+    padding: 9px 9px 0;
+    overflow: auto;
+}
+
+.single-item-top {
+    background-color: #2a2c31;
+}
+
+.card-list-time {
+    text-align: center;
+    margin: -10px 0 4px;
+    opacity: .6;
+    font-size: 85%;
+}
+
+.single-item-body {
+    background-color: #313338;
+    padding-bottom: 10px;
+}
+
+.block-waiting {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #212121ba;
+}
+
+    .block-waiting .box.loading {
+        top: 50%;
+        left: 50%;
+        margin: 0;
+        transform: translate(-50%, -50%);
+    }
+
+.chained-list {
+    width: 95%;
+}
+
+    .chained-list li {
+        list-style: none;
+        position: relative;
+        min-height: 50px;
+        align-items: flex-end;
+        -webkit-align-items: flex-end;
+        -moz-box-align: flex-end;
+        -ms-flex-align: flex-end;
+        justify-content: space-between;
+        -webkit-justify-content: space-between;
+        border-bottom: 1px solid #44464c;
+        padding-bottom: 5px;
+    }
+
+        .chained-list li:before, .chained-list li:after {
+            content: "";
+            display: inline-block;
+            position: absolute;
+        }
+
+        .chained-list li:before {
+            border: 1px dashed #d5d7db;
+            height: 69%;
+            left: -25px;
+            bottom: 32px;
+        }
+
+        .chained-list li:after {
+            width: 12px;
+            height: 12px;
+            border: 1px solid #d5d7db;
+            border-radius: 50% !important;
+            left: -30px;
+            bottom: 18px;
+        }
+
+        .chained-list li:first-child:before {
+            display: none;
+        }
+
+        .chained-list li:last-child:after {
+            border-radius: 50% 50% 50% 0 !important;
+            transform: rotate(-45deg);
+            content: "o";
+            line-height: 3px;
+            font-size: 8px;
+            padding-left: 3px;
+            padding-top: 2px;
+        }
+
+        .chained-list li.stat-not-started:after {
+            background-color: #666666;
+        }
+
+        .chained-list li.stat-processing:after {
+            background-color: #bb6f10;
+        }
+
+        .chained-list li.stat-fail:after {
+            background-color: #941b1b;
+        }
+
+        .chained-list li.stat-complete:after {
+            background-color: #1b941f;
+        }
+
+.single-itemse-parator {
+    height: 1px;
+    background-color: #333;
+    margin: 8px 0;
+}
+
+.knob-outer {
+    width: 120px;
+    position: relative;
+    font-size: 14px;
+    line-height: 0;
+    margin: 10px 16px;
+    font-weight: 600;
+}
+
+    .knob-outer input.knob {
+        font-weight: unset !important;
+        margin-top: 30px !important;
+    }
+
+.progress-green .knob-outer {
+    color: #589b24;
+}
+
+.progress-green table td span.badge-stripe {
+    background-color: #3c3e44;
+    padding: 3px 12px 3px 5px;
+    border-radius: 4px !important;
+    position: relative;
+    margin-right: -14px;
+}
+
+    .progress-green table td span.badge-stripe:before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #589b24;
+        border-radius: 0 5px 5px 0;
+        width: 4px;
+    }
+
+.knob-outer .progress-text {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.single-item-title {
+    padding: 15px 22px 8px;
+}
+
+.progress-description {
+    flex-grow: 1;
+    margin: 10px;
+    align-self: center;
+}
+
+    .progress-description table th, .progress-description table td {
+        padding: 5px 11px;
+    }
+
+    .progress-description table td {
+        padding: 5px 11px;
+        text-align: right;
+    }
+
+    .progress-description table {
+        width: 100%;
+    }
+
+table.tree-table {
+    width: 100%;
+}
+
+    table.tree-table th {
+        font-weight: normal;
+        color: #999999;
+        text-align: right;
+        padding: 5px 13px;
+        border: 1px solid #3a3c41;
+        border-width: 0 1px 1px 0;
+    }
+
+    table.tree-table td {
+        padding: 5px 13px;
+        color: #999999;
+        border-bottom: 1px solid #3a3c41;
+    }
+
+.activity {
+    cursor: pointer
+}
+
+    .activity:hover {
+        background-color: #3b3c40;
+    }
+
+.progress-green table td span.badge-stripe:before {
+    background-color: #589b24;
+}
+
+.progress-red table td span.badge-stripe:before {
+    background-color: #c73131;
+}
+
+.progress-blue table td span.badge-stripe:before {
+    background-color: #53aac1;
+}
+
+.progress-green .knob-outer {
+    color: #589b24;
+}
+
+.progress-red .knob-outer {
+    color: #c73131;
+}
+
+.progress-blue .knob-outer {
+    color: #53aac1;
+}

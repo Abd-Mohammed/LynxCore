@@ -1,0 +1,245 @@
+/*--------------------------------------------------
+    [TRANSITION]
+----------------------------------------------------*/
+/* Cubic Bezier Transition */
+/***
+Error Pages
+***/
+/* 404 page option #1 */
+.page-404 {
+    text-align: center;
+}
+
+    .page-404 .number {
+        position: relative;
+        top: 35px;
+        display: inline-block;
+        letter-spacing: -10px;
+        margin-top: 0px;
+        margin-bottom: 10px;
+        line-height: 128px;
+        font-size: 128px;
+        font-weight: 300;
+        color: #d96b00;
+        text-align: right;
+    }
+
+    .page-404 .details {
+        margin-left: 40px;
+        display: inline-block;
+        padding-top: 0px;
+        text-align: left;
+        color: #d5d7db;
+    }
+
+/* 500 page option #1 */
+.page-500 {
+    text-align: center;
+}
+
+    .page-500 .number {
+        display: inline-block;
+        letter-spacing: -10px;
+        line-height: 128px;
+        font-size: 128px;
+        font-weight: 300;
+        color: #d96b00;
+        text-align: right;
+    }
+
+    .page-500 .details {
+        margin-left: 40px;
+        display: inline-block;
+        text-align: left;
+        color: #d5d7db;
+    }
+
+/* 404 page option #2*/
+.page-404-full-page {
+    overflow-x: hidden;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fafafa !important;
+}
+
+    .page-404-full-page .details input {
+        background-color: #ffffff;
+    }
+
+    .page-404-full-page .page-404 {
+        margin-top: 100px;
+    }
+
+/* 500 page option #2*/
+.page-500-full-page {
+    overflow-x: hidden;
+    padding: 20px;
+    background-color: #fafafa !important;
+}
+
+    .page-500-full-page .details input {
+        background-color: #ffffff;
+    }
+
+    .page-500-full-page .page-500 {
+        margin-top: 100px;
+    }
+
+/* 404 page option #3*/
+.page-404-3 {
+    background: #000 !important;
+}
+
+    .page-404-3 .page-inner img {
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        position: absolute;
+    }
+
+    .page-404-3 .error-404 {
+        color: #fff;
+        text-align: left;
+        padding: 70px 20px 0;
+    }
+
+    .page-404-3 h1 {
+        color: #fff;
+        font-size: 130px;
+        line-height: 160px;
+    }
+
+    .page-404-3 h2 {
+        color: #fff;
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+
+    .page-404-3 p {
+        color: #fff;
+        font-size: 16px;
+    }
+
+@media (max-width: 480px) {
+    .page-404 .number,
+    .page-500 .number,
+    .page-404 .details,
+    .page-500 .details {
+        text-align: center;
+        margin-left: 0px;
+    }
+
+    .page-404-full-page .page-404 {
+        margin-top: 30px;
+    }
+
+    .page-404-3 .error-404 {
+        text-align: left;
+        padding-top: 10px;
+    }
+
+    .page-404-3 .page-inner img {
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        position: fixed;
+    }
+}
+
+/* CUSTOM */
+
+.error-container {
+    display: table;
+    text-align: left;
+    margin: 0 auto;
+    color: #d0d7dc;
+}
+
+.img-er-404 {
+    width: 410px;
+    height: 318px;
+    background: url(../images/errors/error-404.png) no-repeat center;
+}
+
+.error-container .details .btn {
+    float: right;
+    margin: 6px 37px 0 0;
+}
+/* --------------Error 401-------------- */
+.img-er-401 {
+    margin: 40px 0 0px;
+    width: 493px;
+    height: 97px;
+    background: url(../images/errors/error-401.png) no-repeat center;
+}
+
+.error-container .details-401 .btn {
+    margin: 6px 0;
+}
+
+.details-401 h3 {
+    opacity: 0.75;
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+.details-401 p {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+/* --------------Error 500-------------- */
+.img-er-500 {
+    margin: 40px 0 0px;
+    width: 410px;
+    height: 196px;
+    background: url(../images/errors/error-500.png) no-repeat center;
+}
+
+.error-container .details-500 .btn {
+    margin: 6px 0;
+}
+
+.details-500 h3 {
+    opacity: 0.75;
+    font-weight: bold;
+    font-size: 33px;
+    margin-top: 9px;
+    margin-bottom: 19px;
+}
+
+.details-500 p {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+/*---------------- PaymentRequired 402 ----------------*/
+.img-er-402 {
+    width: 244px;
+    height: 435px;
+    background: url(../images/errors/error-402.png) no-repeat center;
+    display: table;
+    margin: 0 auto;
+}
+
+.link-orange {
+    color: #fb8613;
+}
+
+    .link-orange:hover {
+        color: #fb8613;
+    }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #1f2327 inset !important;
+    -webkit-text-fill-color: #b5bec7 !important;
+}

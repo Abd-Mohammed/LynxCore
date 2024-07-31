@@ -1,0 +1,9 @@
+﻿@font-face {
+    font-family: 'dubai';
+    src: url('dubai-regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'frutiger';
+    src: url('frutiger.ttf') format('truetype');
+}
