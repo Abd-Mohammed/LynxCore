@@ -130,7 +130,7 @@
                 <section>
                     <div class="side-details-title">
                         <h4 style="color:#CD6B02;">
-                            [[[[Extra Charges
+                            Extra Charges
                         </h4>
                     </div>
                     <button type="button" class="btn primary-alt btn-small pull-right" onclick="addExtraChargesField()">
@@ -145,25 +145,20 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <input type="hidden" name="ExtraCharges.Index" value="@i" />
-                                            @Html.LabelForModel("[[[[Name", htmlAttributes: new { @class = "control-label" })
+                                            @Html.LabelForModel("Name", htmlAttributes: new { @class = "control-label" })
                                             <span class="text-danger">*</span>
-                                            @Html.Editor("ExtraCharges[" + i + "].Name", new
-                                                {
-                                                    htmlAttributes = new
-                                                    {
-                                                        @class = "form-control",
-                                                        data_val = "true",
-                                                        aria_required = "true",
-                                                        data_val_maxlength = "The field Name must be a string type with a maximum length of '10'.",
-                                                        data_val_maxlength_max = "10",
-                                                        data_val_required = "[[[[Field is required",
-                                                        aria_describedby = "ExtraCharges[" + i + "].Name",
-                                                        id = "ExtraCharges[" + i + "].Name",
-                                                        type = "text",
-                                                        @Value = Model.ExtraCharges.ElementAt(i).Name,
-                                                        required = "true"
-                                                    }
-                                                })
+                                            <input asp-for="ExtraCharges[i].Name" 
+                                                   class="form-control" 
+                                                   data-val="true" 
+                                                   aria-required="true" 
+                                                   data-val-maxlength="The field Name must be a string type with a maximum length of '10'."
+                                                   data-val-maxlength-max="10"
+                                                   data-val-required="Field is required" 
+                                                   aria-describedby="ExtraCharges[i].Name"
+                                                   id="ExtraCharges[i].Name"
+                                                   type="text" 
+                                                   value="@Model.ExtraCharges.ElementAt(i).Name" 
+                                                   required="true" />
                                             @Html.ValidationMessage("ExtraCharges[" + i + "].Name", new
                                                 {
                                                     @class = "text-danger",
@@ -173,26 +168,22 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            @Html.LabelForModel("[[[[Fee", htmlAttributes: new { @class = "control-label" })
+                                            @Html.LabelForModel("Fee", htmlAttributes: new { @class = "control-label" })
                                             <span class="text-danger">*</span>
-                                            @Html.Editor("ExtraCharges[" + i + "].Fee", new
-                                                {
-                                                    htmlAttributes = new
-                                                    {
-                                                        @class = "form-control",
-                                                        data_val = "true",
-                                                        aria_required = "true",
-                                                        data_val_required = "[[[[Field is required",
-                                                        aria_describedby = "ExtraCharges[" + i + "].Fee",
-                                                        id = "ExtraCharges[" + i + "].Fee",
-                                                        type = "number",
-                                                        data_val_regex = "[[[[The field Fee must be zero or a positive value with up to three decimal",
-                                                        data_val_regex_pattern = @"^\d+(\.\d{1,3})?$",
-                                                        @Value = Model.ExtraCharges.ElementAt(i).Fee.ToString("0.000"),
-                                                        min = "0",
-                                                        max = "1000"
-                                                    }
-                                                })
+                                            <input asp-for="ExtraCharges[i].Fee"
+                                                   class="form-control" 
+                                                   data-val="true" 
+                                                   aria-required="true"
+                                                   data-val-maxlength="The field Fee must be zero or a positive value with up to three decimal"
+                                                   data-val-maxlength-max="10"
+                                                   data-val-required="Field is required" 
+                                                   aria-describedby="ExtraCharges[i].Fee"
+                                                   id="ExtraCharges[i].Fee"
+                                                   type="text"
+                                                   min = "0"
+                                                   max = "1000"
+                                                   value= "@Model.ExtraCharges.ElementAt(i).Fee"
+                                                   required="true" />
 
                                             @Html.ValidationMessage("ExtraCharges[" + i + "].Fee", new
                                                 {
@@ -210,7 +201,7 @@
                 <section style="margin-top: 40px;">
                     <div class="side-details-title">
                         <h4 style="color:#CD6B02;">
-                            [[[[Transit Charges
+                           Transit Charges
                         </h4>
                     </div>
                     <span class="help-block" style="display: block;">[[[[Transit fees only apply between master cities.</span>
@@ -228,7 +219,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <input type="hidden" name="TransitCharges.Index" value="@i" />
-                                            @Html.LabelForModel("[[[[City", htmlAttributes: new { @class = "control-label" })
+                                            @Html.LabelForModel("City", htmlAttributes: new { @class = "control-label" })
                                             @Html.DropDownList("TransitCharges[" + i + "].CityId", selectList, "All", new
                                                 {
                                                     @class = "form-control",
@@ -245,7 +236,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            @Html.LabelForModel("[[[[Fee", htmlAttributes: new { @class = "control-label" })
+                                            @Html.LabelForModel("Fee", htmlAttributes: new { @class = "control-label" })
                                             <span class="text-danger">*</span>
                                             @Html.Editor("TransitCharges[" + i + "].Fee", new
                                                 {

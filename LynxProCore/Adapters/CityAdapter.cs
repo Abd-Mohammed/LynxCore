@@ -20,7 +20,7 @@ public class CityAdapter
         _timeout = TimeSpan.FromMinutes(2);
     }
 
-    public async Task<CityResponse> GetCitiesAsync(string cityName = null, int? pageNumber = null, int? pageSize = null, string sortOrder = null)
+    public async Task<CityResponse> GetCitiesAsync(string cityName = null, int? pageNumber = null, int? pageSize = null, string sortOrder = null, CancellationToken cancellationToken = default)
     {
         var requestUri = $"{RidesharingBaseUrl}cities?name={cityName}&pageNumber={pageNumber}&pageSize={pageSize}&sortOrder={sortOrder}";
         var cityResponse = new CityResponse();
@@ -32,14 +32,14 @@ public class CityAdapter
             client.Timeout = _timeout;
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", AccessToken);
 
-            var response = await client.GetAsync(requestUri);
+            var response = await client.GetAsync(requestUri, cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 cityResponse.ResultStatus = JObject.Parse(await response.Content.ReadAsStringAsync())["title"].ToString();
                 return cityResponse;
             }
 
-            var responceBody = await response.Content.ReadAsStringAsync();
+            var responceBody = await response.Content.ReadAsStringAsync(cancellationToken);
             cityResponse = JsonConvert.DeserializeObject<CityResponse>(responceBody);
             cityResponse.IsSuccess = true;
 
@@ -51,7 +51,7 @@ public class CityAdapter
         }
     }
 
-    public async Task<GoCityResponse> GetCityAsync(int id)
+    public async Task<GoCityResponse> GetCityAsync(int id, CancellationToken cancellationToken = default)
     {
         var requestUri = $"{RidesharingBaseUrl}cities/{id}";
         var city = new GoCityResponse();
@@ -62,14 +62,14 @@ public class CityAdapter
             client.Timeout = _timeout;
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", AccessToken);
 
-            var response = await client.GetAsync(requestUri);
+            var response = await client.GetAsync(requestUri, cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 city.ResultStatus = JObject.Parse(await response.Content.ReadAsStringAsync())["title"].ToString();
                 return city;
             }
 
-            var responceBody = await response.Content.ReadAsStringAsync();
+            var responceBody = await response.Content.ReadAsStringAsync(cancellationToken);
             var jCity = JObject.Parse(responceBody);
             city = JsonConvert.DeserializeObject<GoCityResponse>(jCity["city"].ToString());
             city.IsSuccess = true;
@@ -82,7 +82,7 @@ public class CityAdapter
         }
     }
 
-    public async Task<BaseResponse> UpdateCityAsync(int id, CreateCity city)
+    public async Task<BaseResponse> UpdateCityAsync(int id, CreateCity city, CancellationToken cancellationToken = default)
     {
         var requestUri = $"{RidesharingBaseUrl}cities/{id}";
         var responseBase = new BaseResponse();
@@ -93,7 +93,7 @@ public class CityAdapter
             client.Timeout = _timeout;
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", AccessToken);
 
-            var response = await client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(city), Encoding.UTF8, "application/json"));
+            var response = await client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(city), Encoding.UTF8, "application/json"), cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 responseBase.ResultStatus = JObject.Parse(await response.Content.ReadAsStringAsync())["title"].ToString();
@@ -109,7 +109,7 @@ public class CityAdapter
         }
     }
 
-    public async Task<BaseResponse> DeleteCityAsync(int id)
+    public async Task<BaseResponse> DeleteCityAsync(int id, CancellationToken cancellationToken = default)
     {
         var requestUri = $"{RidesharingBaseUrl}cities/{id}";
         var responseBase = new BaseResponse();
@@ -120,7 +120,7 @@ public class CityAdapter
             client.Timeout = _timeout;
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", AccessToken);
 
-            var response = await client.DeleteAsync(requestUri);
+            var response = await client.DeleteAsync(requestUri, cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 responseBase.ResultStatus = JObject.Parse(await response.Content.ReadAsStringAsync())["detail"].ToString();
@@ -136,7 +136,7 @@ public class CityAdapter
         }
     }
 
-    public async Task<GoCityResponse> CreateCityAsync(CreateCity city)
+    public async Task<GoCityResponse> CreateCityAsync(CreateCity city, CancellationToken cancellationToken = default)
     {
         var requestUri = $"{RidesharingBaseUrl}cities";
         var createdCity = new GoCityResponse();
@@ -147,14 +147,14 @@ public class CityAdapter
             client.Timeout = _timeout;
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", AccessToken);
 
-            var response = await client.PostAsync(requestUri, new StringContent(JsonConvert.SerializeObject(city), Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync(requestUri, new StringContent(JsonConvert.SerializeObject(city), Encoding.UTF8, "application/json"), cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 createdCity.ResultStatus = JObject.Parse(await response.Content.ReadAsStringAsync())["title"].ToString();
                 return createdCity;
             }
 
-            var responceBody = await response.Content.ReadAsStringAsync();
+            var responceBody = await response.Content.ReadAsStringAsync(cancellationToken);
             createdCity = JsonConvert.DeserializeObject<GoCityResponse>(responceBody);
             createdCity.IsSuccess = true;
 

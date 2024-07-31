@@ -25,7 +25,7 @@ public class RideTypeAdapter
     }
 
 
-    public async Task<RideTypeResponse> GetRideTypesAsync(int? pageNumber = null, int? pageSize = null, string sortOrder = null, string name = null)
+    public async Task<RideTypeResponse> GetRideTypesAsync(int? pageNumber = null, int? pageSize = null, string sortOrder = null, string name = null, CancellationToken cancellationToken = default)
     {
         var requestUri = $"{RidesharingBaseUrl}ridetypes?pageNumber={pageNumber}&pageSize={pageSize}&sortOrder={sortOrder}&name={name}";
         var rideTypeResponse = new RideTypeResponse();
@@ -35,14 +35,14 @@ public class RideTypeAdapter
             client.Timeout = _timeout;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", AccessToken);
 
-            var response = await client.GetAsync(requestUri);
+            var response = await client.GetAsync(requestUri, cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 rideTypeResponse.ResultStatus = JObject.Parse(await response.Content.ReadAsStringAsync())["title"].ToString();
                 return rideTypeResponse;
             }
 
-            var responceBody = await response.Content.ReadAsStringAsync();
+            var responceBody = await response.Content.ReadAsStringAsync(cancellationToken);
             rideTypeResponse = JsonConvert.DeserializeObject<RideTypeResponse>(responceBody);
             rideTypeResponse.IsSuccess = true;
 
@@ -54,7 +54,7 @@ public class RideTypeAdapter
         }
     }
 
-    public async Task<BaseResponse> CreateAsync(RideTypeViewModel rideTypeViewModel)
+    public async Task<BaseResponse> CreateAsync(RideTypeViewModel rideTypeViewModel, CancellationToken cancellationToken = default)
     {
         var requestUri = $"{RidesharingBaseUrl}RideTypes";
         var responseBase = new BaseResponse();
@@ -77,7 +77,7 @@ public class RideTypeAdapter
                     FuelCost = rideTypeViewModel.FuelCost,
                 },
                 PassengerCount = rideTypeViewModel.PassengerCount
-            }), Encoding.UTF8, "application/json"));
+            }), Encoding.UTF8, "application/json"), cancellationToken);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -95,7 +95,7 @@ public class RideTypeAdapter
         }
     }
 
-    public async Task<BaseResponse> UpdateAsync(RideTypeViewModel rideTypeViewModel)
+    public async Task<BaseResponse> UpdateAsync(RideTypeViewModel rideTypeViewModel, CancellationToken cancellationToken = default)
     {
         var requestUri = $"{RidesharingBaseUrl}RideTypes/{rideTypeViewModel.RideTypeId}";
         var responseBase = new BaseResponse();
@@ -117,7 +117,7 @@ public class RideTypeAdapter
                     FuelCost = rideTypeViewModel.FuelCost,
                 },
                 PassengerCount = rideTypeViewModel.PassengerCount
-            }), Encoding.UTF8, "application/json"));
+            }), Encoding.UTF8, "application/json"), cancellationToken);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -134,7 +134,7 @@ public class RideTypeAdapter
         }
     }
 
-    public async Task<RideTypeResponse> GetAsync(string sortOrder = null, string name = null, int? pageNumber = 1, int? pageSize = 10)
+    public async Task<RideTypeResponse> GetAsync(string sortOrder = null, string name = null, int? pageNumber = 1, int? pageSize = 10, CancellationToken cancellationToken = default)
     {
         var requestUri = $"{RidesharingBaseUrl}RideTypes?pageNumber={pageNumber}&pageSize={pageSize}&name={name}&sortOrder={sortOrder}";
         var rideTypesResponse = new RideTypeResponse();
@@ -144,14 +144,14 @@ public class RideTypeAdapter
             client.Timeout = _timeout;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", AccessToken);
 
-            var response = await client.GetAsync(requestUri);
+            var response = await client.GetAsync(requestUri, cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 rideTypesResponse.ResultStatus = JObject.Parse(await response.Content.ReadAsStringAsync())["title"].ToString();
                 return rideTypesResponse;
             }
 
-            var responceBody = await response.Content.ReadAsStringAsync();
+            var responceBody = await response.Content.ReadAsStringAsync(cancellationToken);
             rideTypesResponse = JsonConvert.DeserializeObject<RideTypeResponse>(responceBody);
             rideTypesResponse.IsSuccess = true;
 
@@ -164,7 +164,7 @@ public class RideTypeAdapter
         }
     }
 
-    public async Task<GoRideTypeResponse> GetById(int id)
+    public async Task<GoRideTypeResponse> GetById(int id, CancellationToken cancellationToken = default)
     {
         var requestUri = $"{RidesharingBaseUrl}RideTypes/{id}";
         var rideType = new GoRideTypeResponse();
@@ -174,14 +174,14 @@ public class RideTypeAdapter
             client.Timeout = _timeout;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", AccessToken);
 
-            var response = await client.GetAsync(requestUri);
+            var response = await client.GetAsync(requestUri, cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 rideType.ResultStatus = JObject.Parse(await response.Content.ReadAsStringAsync())["title"].ToString();
                 return rideType;
             }
 
-            var responceBody = await response.Content.ReadAsStringAsync();
+            var responceBody = await response.Content.ReadAsStringAsync(cancellationToken);
             var jObject = JObject.Parse(responceBody);
             rideType = JsonConvert.DeserializeObject<GoRideTypeResponse>(jObject["rideType"].ToString());
             rideType.IsSuccess = true;
@@ -194,7 +194,7 @@ public class RideTypeAdapter
         }
     }
 
-    public async Task<BaseResponse> Delete(int id)
+    public async Task<BaseResponse> Delete(int id, CancellationToken cancellationToken = default)
     {
         var requestUri = $"{RidesharingBaseUrl}RideTypes/{id}";
         var responseBase = new BaseResponse();
@@ -204,7 +204,7 @@ public class RideTypeAdapter
             client.Timeout = _timeout;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", AccessToken);
 
-            var response = await client.DeleteAsync(requestUri);
+            var response = await client.DeleteAsync(requestUri, cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 responseBase.ResultStatus = JObject.Parse(await response.Content.ReadAsStringAsync())["detail"].ToString();

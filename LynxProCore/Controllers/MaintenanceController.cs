@@ -68,7 +68,7 @@ public class MaintenanceController : MainControllerBase
 
     public IActionResult Create()
     {
-        setViewData();
+        SetViewData();
         return View();
     }
 
@@ -90,7 +90,7 @@ public class MaintenanceController : MainControllerBase
         }
 
         BootstrapAlert(AlertFactory.AlertType.Error, "Filed to add maintenance service.");
-        setViewData();
+        SetViewData();
         return View(maintenanceViewModel);
     }
 
@@ -138,7 +138,7 @@ public class MaintenanceController : MainControllerBase
         return Json(allVehicles.Select(v => new { VehicleId = v.VehicleId, Name = v.Name }));
     }
 
-    private void setViewData()
+    private void SetViewData()
     {
         ViewData["MaxDate"] = DateTime.UtcNow;
         var maintenanceService = new List<MaintenanceServiceType>

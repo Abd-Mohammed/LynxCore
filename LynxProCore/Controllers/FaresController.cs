@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Kendo.Mvc.UI;
+﻿using Kendo.Mvc.UI;
 using Lynx.BusinessLogic;
 using Lynx.Utils.ComponentModel;
 using Lynx.Utils.Globalization;
@@ -9,47 +8,38 @@ using LynxProCore.Helpers;
 using LynxProCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Globalization;
 using Currency = Lynx.Models.Currency;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Telerik.SvgIcons;
-using Microsoft.AspNetCore.Hosting;
+
 
 namespace LynxProCore.Controllers;
 
-public class FaresController : MainControllerBase
+public class FaresController(
+    FareAdapter fareAdapter,
+    CityAdapter cityAdapter,
+    RideTypeAdapter rideTypeAdapter,
+    IWebHostEnvironment webHostEnvironment) : MainControllerBase
 {
-    private readonly FareAdapter _fareAdapter;
-    private readonly CityAdapter _cityAdapter;
-    private readonly RideTypeAdapter _rideTypeAdapter;
     private readonly string _colorsJsonPath = "~/wwwroot/json/color-picker-colors.json";
-    private readonly IWebHostEnvironment _webHostEnvironment;
-
-    public FaresController(FareAdapter fareAdapter, CityAdapter cityAdapter, RideTypeAdapter rideTypeAdapter, IWebHostEnvironment webHostEnvironment)
-    {
-        _fareAdapter = fareAdapter;
-        _cityAdapter = cityAdapter;
-        _rideTypeAdapter = rideTypeAdapter;
-        _webHostEnvironment = webHostEnvironment;
-    }
 
     [HttpGet("Container/Fares")]
-    public ActionResult Index()
+    public IActionResult Index()
     {
         return View();
     }
-    public async Task<IActionResult> Read([DataSourceRequest] DataSourceRequest request)
+    public async Task<IActionResult> Read([DataSourceRequest] DataSourceRequest request, CancellationToken cancellationToken)
     {
         var orderBy = ExtractSort(request.Sorts);
         var cityName = ExtractFilter(request.Filters, "City.Name");
-        var cityFares = await _fareAdapter.GetFaresAsync(cityName, request.Page, request.PageSize, orderBy);
+        var cityFares = await fareAdapter.GetFaresAsync(cityName, request.Page, request.PageSize, orderBy, cancellationToken);
         if (!cityFares.IsSuccess)
         {
             return Json(new DataSourceResult());
         }
 
-        return Json(new DataSourceResult()
+        return Json(new DataSourceResult
         {
             Data = cityFares.Fares.Select(c => new
             {
@@ -66,9 +56,9 @@ public class FaresController : MainControllerBase
         });
     }
 
-    public async Task<ActionResult> Details(int id)
+    public async Task<IActionResult> Details(int id, CancellationToken cancellationToken)
     {
-        var cityFare = await _fareAdapter.GetFareAsync(id);
+        var cityFare = await fareAdapter.GetFareAsync(id, cancellationToken);
         if (!cityFare.IsSuccess)
         {
             return NotFound();
@@ -78,15 +68,15 @@ public class FaresController : MainControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult> Create()
+    public async Task<IActionResult> Create(CancellationToken cancellationToken)
     {
-        await MakeViewDataAsync();
+        await MakeViewDataAsync(cancellationToken: cancellationToken);
 
         return View(new FareViewModel());
     }
 
     [HttpPost]
-    public async Task<ActionResult> Create(FareViewModel model)
+    public async Task<IActionResult> Create(FareViewModel model, CancellationToken cancellationToken)
     {
         ModelState.Remove("City");
         ModelState.Remove("CreatedBy");
@@ -94,10 +84,11 @@ public class FaresController : MainControllerBase
         ModelState.Remove("ModifiedBy");
         ModelState.Remove("ExtraCharges");
         ModelState.Remove("TransitCharges");
+        ModelState.Remove("RideType");
 
         if (!ModelState.IsValid)
         {
-            await MakeViewDataAsync();
+            await MakeViewDataAsync(cancellationToken: cancellationToken);
 
             return View(model);
         }
@@ -106,8 +97,8 @@ public class FaresController : MainControllerBase
         {
             if (CheckPeriodOverlaps(model.Schedules))
             {
-                BootstrapAlert(AlertFactory.AlertType.Warning, "[[[[Could not add fare, the Fare schedules periods are overlapped]]]]");
-                await MakeViewDataAsync();
+                BootstrapAlert(AlertFactory.AlertType.Warning, "Could not add fare, the Fare schedules periods are overlapped");
+                await MakeViewDataAsync(cancellationToken: cancellationToken);
 
                 return View(model);
             }
@@ -115,68 +106,68 @@ public class FaresController : MainControllerBase
 
         if (model.ExtraCharges?.GroupBy(a => a.Name).Count() != model.ExtraCharges?.Count())
         {
-            BootstrapAlert(AlertFactory.AlertType.Warning, "[[[[Could not add fare, extra charge names must be unique.]]]]");
-            await MakeViewDataAsync();
+            BootstrapAlert(AlertFactory.AlertType.Warning, "Could not add fare, extra charge names must be unique.");
+            await MakeViewDataAsync(cancellationToken: cancellationToken);
 
             return View(model);
         }
 
         if (model.TransitCharges?.Any(a => a.CityId == model.CityId) ?? false)
         {
-            BootstrapAlert(AlertFactory.AlertType.Warning, "[[[[Could not add fare, transit origin and destination should be different.]]]]");
-            await MakeViewDataAsync();
+            BootstrapAlert(AlertFactory.AlertType.Warning, "Could not add fare, transit origin and destination should be different.");
+            await MakeViewDataAsync(cancellationToken: cancellationToken);
 
             return View(model);
         }
 
-        var extraCharges = model.ExtraCharges?.ToList() ?? new List<ExtraChargeViewModel>();
-        var transitCharges = model.TransitCharges?.ToList() ?? new List<TransitChargeViewModel>();
-        var transitChargesWithoutCity = transitCharges.Where(s => s.CityId == null).Count();
-        if ((transitCharges.GroupBy(tc => tc.CityId).Count() != transitCharges.Count())
-            || (transitChargesWithoutCity > 0 && transitChargesWithoutCity < transitCharges.Count()))
+        var extraCharges = model.ExtraCharges?.ToList() ?? [];
+        var transitCharges = model.TransitCharges?.ToList() ?? [];
+        var transitChargesWithoutCity = transitCharges.Count(s => s.CityId is null);
+        if ((transitCharges.GroupBy(tc => tc.CityId).Count() != transitCharges.Count)
+            || (transitChargesWithoutCity > 0 && transitChargesWithoutCity < transitCharges.Count))
         {
-            BootstrapAlert(AlertFactory.AlertType.Warning, "[[[[Could not add fare ,due to conflict in transit charges.]]]]");
-            await MakeViewDataAsync();
+            BootstrapAlert(AlertFactory.AlertType.Warning, "Could not add fare ,due to conflict in transit charges.");
+            await MakeViewDataAsync(cancellationToken: cancellationToken);
 
             return View(model);
         }
 
-        var fare = await _fareAdapter.CreateFareAsync(ToViewModel(model, extraCharges, transitCharges));
+        var fare = await fareAdapter.CreateFareAsync(ToViewModel(model, extraCharges, transitCharges), cancellationToken);
         if (fare.IsSuccess)
         {
-            BootstrapAlert(AlertFactory.AlertType.Success, "[[[[Fare has been added.]]]]");
+            BootstrapAlert(AlertFactory.AlertType.Success, "Fare has been added.");
             return RedirectToAction("Index");
         }
 
         switch (fare.ResultStatus)
         {
             case "OVERLAPPED_FARE":
-                BootstrapAlert(AlertFactory.AlertType.Warning, "[[[[Could not add fare, fare overlaps with other fares by city, ride type or schedule periods.]]]]");
+                BootstrapAlert(AlertFactory.AlertType.Warning, "Could not add fare, fare overlaps with other fares by city, ride type or schedule periods.");
                 break;
             case "INVALID_TRANSIT":
-                BootstrapAlert(AlertFactory.AlertType.Warning, "[[[[Could not add fare ,No match found for transit city.]]]]");
+                BootstrapAlert(AlertFactory.AlertType.Warning, "Could not add fare ,No match found for transit city.");
                 break;
             default:
-                BootstrapAlert(AlertFactory.AlertType.Error, "[[[[Failed to add fare.]]]]");
+                BootstrapAlert(AlertFactory.AlertType.Error, "Failed to add fare.");
                 break;
         }
 
 
-        await MakeViewDataAsync();
+        await MakeViewDataAsync(cancellationToken: cancellationToken);
 
         return View(model);
     }
 
     [HttpGet]
-    public async Task<ActionResult> Edit(int id)
+    public async Task<IActionResult> Edit(int id, CancellationToken cancellationToken)
     {
-        var cityFare = await _fareAdapter.GetFareAsync(id);
+        var cityFare = await fareAdapter.GetFareAsync(id, cancellationToken);
         if (!cityFare.IsSuccess)
         {
             return NotFound();
         }
 
-        await MakeViewDataAsync();
+        await MakeViewDataAsync(cancellationToken: cancellationToken);
 
         var viewModel = ToViewModel(cityFare);
 
@@ -184,7 +175,7 @@ public class FaresController : MainControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult> Edit(FareViewModel model)
+    public async Task<IActionResult> Edit(FareViewModel model, CancellationToken cancellationToken)
     {
         ModelState.Remove("City");
         ModelState.Remove("CreatedBy");
@@ -201,7 +192,7 @@ public class FaresController : MainControllerBase
                 if (CheckPeriodOverlaps(model.Schedules))
                 {
                     BootstrapAlert(AlertFactory.AlertType.Warning, "Could not edit fare, the Fare schedules periods are overlapped]]]]");
-                    await MakeViewDataAsync();
+                    await MakeViewDataAsync(cancellationToken: cancellationToken);
 
                     return View(model);
                 }
@@ -210,7 +201,7 @@ public class FaresController : MainControllerBase
             if (model.ExtraCharges?.GroupBy(a => a.Name).Count() != model.ExtraCharges?.Count())
             {
                 BootstrapAlert(AlertFactory.AlertType.Warning, "Could not edit fare, extra charge names must be unique.]]]]");
-                await MakeViewDataAsync();
+                await MakeViewDataAsync(cancellationToken: cancellationToken);
 
                 return View(model);
             }
@@ -218,24 +209,24 @@ public class FaresController : MainControllerBase
             if (model.TransitCharges?.Any(a => a.CityId == model.CityId) ?? false)
             {
                 BootstrapAlert(AlertFactory.AlertType.Warning, "Could not update fare, transit origin and destination should be different.]]]]");
-                await MakeViewDataAsync();
+                await MakeViewDataAsync(cancellationToken: cancellationToken);
 
                 return View(model);
             }
 
             var extraCharges = model.ExtraCharges?.ToList() ?? new List<ExtraChargeViewModel>();
             var transitCharges = model.TransitCharges?.ToList() ?? new List<TransitChargeViewModel>();
-            var transitChargesWithoutCity = transitCharges.Where(s => s.CityId == null).Count();
+            var transitChargesWithoutCity = transitCharges.Count(s => s.CityId == null);
             if ((transitCharges.GroupBy(tc => tc.CityId).Count() != transitCharges.Count())
                 || (transitChargesWithoutCity > 0 && transitChargesWithoutCity < transitCharges.Count()))
             {
                 BootstrapAlert(AlertFactory.AlertType.Warning, "Could not update fare ,due to conflict in transit charges.]]]]");
-                await MakeViewDataAsync();
+                await MakeViewDataAsync(cancellationToken: cancellationToken);
 
                 return View(model);
             }
 
-            var fare = await _fareAdapter.UpdateFareAsync(model.CityFareId, ToViewModel(model, extraCharges, transitCharges));
+            var fare = await fareAdapter.UpdateFareAsync(model.CityFareId, ToViewModel(model, extraCharges, transitCharges), cancellationToken);
             if (fare.IsSuccess)
             {
                 BootstrapAlert(AlertFactory.AlertType.Success, "[[[[Fare has been updated.]]]]");
@@ -256,29 +247,29 @@ public class FaresController : MainControllerBase
                     break;
             }
         }
-        await MakeViewDataAsync();
+        await MakeViewDataAsync(cancellationToken: cancellationToken);
 
         return View(model);
     }
 
-    public async Task<ActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
     {
-        var cityFare = await _fareAdapter.GetFareAsync(id);
+        var cityFare = await fareAdapter.GetFareAsync(id, cancellationToken);
 
         if (!cityFare.IsSuccess)
         {
             return NotFound();
         }
 
-        return PartialView("_Delete", new FareViewModel() { CityFareId = cityFare.Id, });
+        return PartialView("_Delete", new FareViewModel { CityFareId = cityFare.Id, });
     }
 
     [HttpPost]
     [ActionName("Delete")]
     [ValidateAntiForgeryToken]
-    public async Task<ActionResult> DeleteConfirmed(int id)
+    public async Task<IActionResult> DeleteConfirmed(int id, CancellationToken cancellationToken)
     {
-        var response = await _fareAdapter.DeleteFareAsync(id);
+        var response = await fareAdapter.DeleteFareAsync(id, cancellationToken);
         if (response.IsSuccess)
         {
             BootstrapAlert(AlertFactory.AlertType.Success, "Fare has been deleted.");
@@ -295,12 +286,12 @@ public class FaresController : MainControllerBase
         return RedirectToAction("Index");
     }
 
-    private async Task MakeViewDataAsync(string currentCode = null)
+    private async Task MakeViewDataAsync(string currentCode = null, CancellationToken cancellationToken = default)
     {
         var colors = GetColors();
         ViewData["Colors"] = colors.GetValue("dark")?.ToObject<List<string>>();
 
-        var cityResponse = await _cityAdapter.GetCitiesAsync(null, sortOrder: "Name");
+        var cityResponse = await cityAdapter.GetCitiesAsync(null, sortOrder: "Name", cancellationToken: cancellationToken);
         if (cityResponse.IsSuccess)
         {
             ViewData["citiesList"] = new SelectList(cityResponse.Cities, "Id", "Name");
@@ -323,7 +314,7 @@ public class FaresController : MainControllerBase
             ViewData["RawMasterCities"] = new List<TransitChargeViewModel>();
         }
 
-        ViewData["DayOfWeek"] = new SelectList(Enum.GetValues(typeof(System.DayOfWeek)).Cast<System.DayOfWeek>(), System.DayOfWeek.Sunday);
+        ViewData["DayOfWeek"] = new SelectList(Enum.GetValues(typeof(DayOfWeek)).Cast<System.DayOfWeek>(), System.DayOfWeek.Sunday);
 
         var currencies = new List<Currency>
         {
@@ -365,7 +356,7 @@ public class FaresController : MainControllerBase
         };
         ViewData["currenciesList"] = new SelectList(currencies.Select(c => new { c.Code, Name = $"{c.Name} ({c.Code})" }), "Code", "Name");
 
-        var rideTypeResponse = await _rideTypeAdapter.GetRideTypesAsync(sortOrder: "name");
+        var rideTypeResponse = await rideTypeAdapter.GetRideTypesAsync(sortOrder: "name", cancellationToken: cancellationToken);
         if (rideTypeResponse.IsSuccess)
         {
             ViewData["rideTypesList"] = new SelectList(rideTypeResponse.RideTypes, "Id", "Name");
@@ -376,7 +367,7 @@ public class FaresController : MainControllerBase
         }
     }
 
-    private FareViewModel ToViewModel(GoFareResponse fare)
+    private static FareViewModel ToViewModel(GoFareResponse fare)
     {
         var fareViewModel = new FareViewModel
         {
@@ -405,7 +396,7 @@ public class FaresController : MainControllerBase
                 DayOfWeek = GetModelsDayOfWeek((int)s.DayOfWeek),
                 From = s.From,
                 To = s.To
-            }).ToList() : new List<FareScheduleRequest>(),
+            }).ToList() : [],
             CreatedBy = fare.CreatedBy,
             ModifiedBy = fare.ModifiedBy,
             CreatedDate = fare.CreatedDate,
@@ -415,7 +406,7 @@ public class FaresController : MainControllerBase
         return fareViewModel;
     }
 
-    private DayOfWeek GetModelsDayOfWeek(int index)
+    private static DayOfWeek GetModelsDayOfWeek(int index)
     {
         if (index == 0)
         {
@@ -424,7 +415,7 @@ public class FaresController : MainControllerBase
         return (DayOfWeek)index;
     }
 
-    private System.DayOfWeek GetSystemDayOfWeek(int index)
+    private static DayOfWeek GetSystemDayOfWeek(int index)
     {
         if (index == 7)
         {
@@ -434,7 +425,7 @@ public class FaresController : MainControllerBase
         return (System.DayOfWeek)index;
     }
 
-    private CreateFareRequest ToViewModel(FareViewModel cityFare, List<ExtraChargeViewModel> extraCharges, List<TransitChargeViewModel> transitCharges)
+    private static CreateFareRequest ToViewModel(FareViewModel cityFare, List<ExtraChargeViewModel> extraCharges, List<TransitChargeViewModel> transitCharges)
     {
         var fare = new CreateFareRequest
         {
@@ -446,21 +437,21 @@ public class FaresController : MainControllerBase
             MinimumFare = cityFare.MinimumFare,
             WaitTimeChargePerMinute = cityFare.WaitTimeChargePerMinute,
             WaitTimeThreshold = cityFare.WaitTimeThreshold,
-            Settings = new Settings()
+            Settings = new Settings
             {
                 Color = cityFare.Color,
-                Schedules = new List<FareScheduleResponse>()
+                Schedules = []
 
             },
             CityId = cityFare?.CityId ?? 0,
             RideTypeId = cityFare.RideTypeId,
-            ExtraCharges = new List<ExtraChargeResponse>(),
-            TransitCharges = new List<TransitChargeRequest>()
+            ExtraCharges = [],
+            TransitCharges = []
         };
 
         foreach (var extracharge in extraCharges)
         {
-            fare.ExtraCharges.Add(new ExtraChargeResponse()
+            fare.ExtraCharges.Add(new ExtraChargeResponse
             {
                 Fee = extracharge.Fee,
                 Name = extracharge.Name,
@@ -469,34 +460,33 @@ public class FaresController : MainControllerBase
 
         foreach (var transitCharge in transitCharges)
         {
-            fare.TransitCharges.Add(new TransitChargeRequest()
+            fare.TransitCharges.Add(new TransitChargeRequest
             {
                 Fee = transitCharge.Fee,
                 CityId = transitCharge.CityId
             });
         }
 
-        if (cityFare.Schedules != null)
+        if (cityFare.Schedules is null)
         {
-            foreach (var fareSchedule in cityFare.Schedules)
-            {
-                fare.Settings.Schedules.Add(new FareScheduleResponse()
-                {
-                    DayOfWeek = GetSystemDayOfWeek((int)fareSchedule.DayOfWeek),
-                    From = Convert.ToDateTime(fareSchedule.From).ToString("HH:mm:ss"),
-                    To = Convert.ToDateTime(fareSchedule.To).ToString("HH:mm:ss")
-                });
+            return fare;
+        }
 
-            }
+        foreach (var fareSchedule in cityFare.Schedules)
+        {
+            fare.Settings.Schedules.Add(new FareScheduleResponse
+            {
+                DayOfWeek = GetSystemDayOfWeek((int)fareSchedule.DayOfWeek),
+                From = Convert.ToDateTime(fareSchedule.From).ToString("HH:mm:ss"),
+                To = Convert.ToDateTime(fareSchedule.To).ToString("HH:mm:ss")
+            });
+
         }
 
         return fare;
     }
 
-    public ActionResult GetSchedules(int index)
-    {
-        return PartialView("_Schedules", new FareScheduleRequest() { Index = index });
-    }
+    public IActionResult GetSchedules(int index) => PartialView("_Schedules", new FareScheduleRequest() { Index = index });
 
     private async Task<string> GetDefaultCurrencyCode(string currentCode, bool isEditMode)
     {
@@ -527,36 +517,24 @@ public class FaresController : MainControllerBase
         return currentCode;
     }
 
-
-    private bool CheckPeriodOverlaps(List<FareScheduleRequest> fareSchedulePeriods)
+    private static bool CheckPeriodOverlaps(List<FareScheduleRequest> fareSchedulePeriods)
     {
         var fareScheduleSamePeriods = fareSchedulePeriods.GroupBy(a => a.DayOfWeek);
-        foreach (var periods in fareScheduleSamePeriods)
-        {
-            var period = periods.Select(a => a);
-            if (period.Count() > 1)
-            {
-                TimeSpanRange timeSpanRange;
-                timeSpanRange = new TimeSpanRange(ConvertToTimespan(period.First().From), ConvertToTimespan(period.First().To));
-                if (timeSpanRange.IntersectsOrEqual(new TimeSpanRange(ConvertToTimespan(period.Last().From), ConvertToTimespan(period.Last().To)), true))
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
+
+        return (from periods in fareScheduleSamePeriods
+                select periods.Select(a => a) into period
+                where period.Count() > 1
+                let timeSpanRange = new TimeSpanRange(ConvertToTimespan(period.First().From), ConvertToTimespan(period.First().To))
+                where timeSpanRange.IntersectsOrEqual(new TimeSpanRange(ConvertToTimespan(period.Last().From), ConvertToTimespan(period.Last().To)), true)
+                select period).Any();
     }
 
-    private JObject GetColors()
+    private JObject GetColors() => JsonConvert.DeserializeObject<JObject>(System.IO.File.ReadAllText(Path.Combine(webHostEnvironment.WebRootPath, "json", "color-picker-colors.json")))!;
+
+    private static TimeSpan ConvertToTimespan(string text)
     {
-        return JsonConvert.DeserializeObject<JObject>(System.IO.File.ReadAllText(Path.Combine(_webHostEnvironment.WebRootPath, "json", "color-picker-colors.json")));
-    }
-    private TimeSpan ConvertToTimespan(string text)
-    {
-        DateTime dateTime = DateTime.ParseExact(text,
-                                "h:mm tt", CultureInfo.InvariantCulture);
+        var dateTime = DateTime.ParseExact(text, "h:mm tt", CultureInfo.InvariantCulture);
+
         return dateTime.TimeOfDay;
     }
-
-
 }
